@@ -1,0 +1,11 @@
+{
+  "name": "ahmad-fadzil-portfolio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node tools/serve.mjs",
+    "check": "node --check dist/app.js && node --check dist/scene.js && node --check tools/serve.mjs && node --check dist/cube-state.js",
+    "build": "node tools/build.mjs",
+    "test": "node --test tools/cube.test.mjs"
+  }
+}
