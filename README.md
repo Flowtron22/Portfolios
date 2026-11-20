@@ -36,6 +36,14 @@ Content is rewritten from the supplied Flix application documents. Actual role t
 
 Google Fonts supplies DM Sans and Barlow Condensed, with system fallbacks. Three.js is hosted locally so the scene needs no CDN. Project links open the supplied public browser prototypes, which may differ from local development versions.
 
+## Solo: Art and Games
+
+`#/solo` and `#/solo/art` show 35 images of 3D environments, sculpts, props and production artwork copied from https://urekagames.wordpress.com/. `#/solo/games` retains the four playable game projects. The source page also includes 2D logos, illustrations and posters, which are excluded from the 3D collection.
+
+`dist/art.js` records each source URL, descriptive title, category and original dimensions. Source images have no captions, so the gallery uses descriptive labels rather than invented project credits or dates. Existing signatures, studio marks and artwork credits remain in the images. The Art introduction includes production artwork rather than claiming every image is a solo commercial project.
+
+`dist/assets/art` contains a full-image JPEG (up to 1920 pixels on the longest edge) and a lightweight thumbnail per artwork. Both preserve the complete image and its aspect ratio. The native dialog viewer supports Previous/Next, keyboard left/right, Escape and focus restoration. Original image links lead to the WordPress originals. Downloaded originals and the import inventory are retained locally under ignored `.local/`.
+
 ## Play the hero cube
 
 Drag the cube to rotate your view. Click/tap a visible face to turn it, or use the R/L/U/D/F/B buttons (right, left, upper, bottom, front, back). Turns are clockwise when looking directly at that face. Toggle Inverse for counterclockwise turns, or hold Shift while clicking. With the cube stage focused, R/L/U/D/F/B keys also turn faces; Shift reverses them. Scramble performs 20 legal turns, Undo reverses the most recent turn, and Reset restores the solved state. Player moves are counted separately from scrambling. The puzzle resets when you leave the overview.
