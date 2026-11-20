@@ -43,5 +43,11 @@ function contact(){return `<section class="contact"><h1>Contact</h1><p>For roles
 function missing(){return `<section class="error"><span class="eyebrow">Page not found</span><h1>Page not found.</h1>${button('#/','Return to overview',true)}</section>`;}
 let cleanup;
 async function render(){cleanup?.();cleanup=null;const parts=(location.hash.slice(1)||'/').split('/').filter(Boolean);const page=parts[0]||'home';main.innerHTML=({home,work,solo:()=>solo(parts[1]),cv,contact}[page]||(()=>page==='project'?project(parts[1]):missing()))();document.querySelectorAll('[data-nav]').forEach(a=>{if(a.dataset.nav===(page==='project'?'solo':page))a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});document.title=`${page==='home'?'Game Direction & Creative Leadership':page==='project'?(projects.find(p=>p.id===parts[1])?.name||'Project'):({work:'Work',solo:parts[1]==='games'?'Solo Games':'Solo Art',cv:'CV',contact:'Contact'}[page]||'Page not found')} — Ahmad Fadzil`;window.scrollTo(0,0);document.getElementById('print-cv')?.addEventListener('click',()=>window.print());if(page==='solo')cleanup=initArtViewer(main);if(page==='home'){try{const {createScene}=await import('./scene.js');if(document.getElementById('scene'))cleanup=createScene(document.getElementById('scene'));}catch(e){console.warn('3D scene unavailable',e);document.getElementById('motion')?.remove();}}}
+const menuButton=document.getElementById('menu-toggle'),siteHeader=document.querySelector('header');
+function closeMenu(){siteHeader.classList.remove('menu-open');menuButton.setAttribute('aria-expanded','false');menuButton.textContent='Menu';}
+menuButton.addEventListener('click',()=>{const open=menuButton.getAttribute('aria-expanded')!=='true';siteHeader.classList.toggle('menu-open',open);menuButton.setAttribute('aria-expanded',String(open));menuButton.textContent=open?'Close':'Menu';});
+document.getElementById('main-nav').addEventListener('click',event=>{if(event.target.closest('a'))closeMenu();});
+siteHeader.addEventListener('keydown',event=>{if(event.key==='Escape'&&menuButton.getAttribute('aria-expanded')==='true'){closeMenu();menuButton.focus();}});
+matchMedia('(min-width: 701px)').addEventListener('change',closeMenu);
 document.querySelector('.skip').addEventListener('click',e=>{e.preventDefault();main.focus();main.scrollIntoView();});
-window.addEventListener('hashchange',()=>{render();main.focus({preventScroll:true});});render();
+window.addEventListener('hashchange',()=>{closeMenu();render();main.focus({preventScroll:true});});render();

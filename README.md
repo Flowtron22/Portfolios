@@ -28,6 +28,7 @@ Import this GitHub repository into Vercel. Use Framework Preset **Other**, Build
 
 - dist/app.js: professional copy, career history, project links and detail views.
 - dist/style.css: responsive layout, colours and typography.
+- dist/mobile.css: portrait phone layout, menu, touch targets, cube controls and artwork viewer.
 - dist/scene.js: locally vendored Three.js cube renderer, pointer/keyboard input and reduced-motion behaviour.
 - dist/cube-state.js: exact quarter-turn cube state and solved-state detection.
 - dist/assets/: actual screenshots of the four supplied browser projects, supplied original CV PDF, favicon and Three.js files/license.
@@ -49,3 +50,9 @@ Google Fonts supplies DM Sans and Barlow Condensed, with system fallbacks. Three
 Drag the cube to rotate your view. Click/tap a visible face to turn it, or use the R/L/U/D/F/B buttons (right, left, upper, bottom, front, back). Turns are clockwise when looking directly at that face. Toggle Inverse for counterclockwise turns, or hold Shift while clicking. With the cube stage focused, R/L/U/D/F/B keys also turn faces; Shift reverses them. Scramble performs 20 legal turns, Undo reverses the most recent turn, and Reset restores the solved state. Player moves are counted separately from scrambling. The puzzle resets when you leave the overview.
 
 Work and CV use the same company-grouped career history, latest first. Todak lists production leadership (2025–Present) before creative direction (Apr 2022–2024); each role lists its projects as separate bullet points. Earlier employers have individual entries. The decorative Mastra banner, footer, CV eyebrow/location and Pandora callout have been removed.
+
+## Portrait phones
+
+Phone navigation collapses into a Menu button below 701 px. It closes after selecting a page or pressing Escape. The mobile stylesheet uses fluid headings, stacked content, safe-area insets and controls at least 44 px high. Cube controls use separate face/action rows with an automatic container height, so they do not clip on narrow screens. On touch devices, vertical gestures over the cube can scroll the page; taps turn faces and horizontal drags rotate the view. The artwork viewer keeps navigation and Close within the viewport.
+
+Verified in browser viewports at 320, 375, 390 and 430 px wide, plus the desktop layout. Phone viewport checks do not replace physical-device testing.
