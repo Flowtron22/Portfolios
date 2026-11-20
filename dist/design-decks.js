@@ -21,6 +21,11 @@ const slideTitles = {
   "29": ["Combat Design in", "Tell, threat, recovery", "Several defensible answers", "An enemy has a job", "A tool has a job", "Playtest a two‐threat encounter"],
   "30": ["Metroidvania Map", "The map opens over time", "A barrier worth remembering", "Teach an ability near a useful route", "Make a return trip pay off", "Test the room graph"],
   "31": ["Good Puzzle", "One problem and a visible set of tools", "Tune the deduction", "Failure and recovery", "Co‐op puzzles", "A one‐room test"],
+  "34": ["ENVIRONMENTAL", "WHAT IS ENVIRONMENTAL STORYTELLING?", "MISE-EN-SCÈNE – “PLACING ON STAGE”", "HELPFUL TIPS", "HELPFUL TIPS", "HELPFUL TIPS", "EXAMPLE: HALF LIFE", "EXAMPLE: BIOSHOCK", "EXAMPLE: FALLOUT", "EXAMPLE: METRO", "EXAMPLE: DARK SOULS", "DISCUSSION"],
+  "35": ["IMMERSIVE SIMS", "WHAT IS AN IMMERSIVE SIM?", "WHAT IS AN IMMERSIVE SIM?", "EXAMPLES MANY PEOPLE AGREE ON", "EXAMPLES DEPENDING ON WHO YOU ASK", "HELPFUL DESIGNER TIPS", "Some titles are purely Immersive Sim ("],
+  "36": ["MINIMALISM IN DESIGN", "WHAT IS MINIMALISM?", "DEFINITELY NOT THIS", "EXAMPLE: SUPER HEXAGON", "EXAMPLE: MIRRORS EDGE", "EXAMPLE: THOMAS WAS ALONE", "EXAMPLE: JOURNEY", "EXAMPLE: SHADOW OF THE COLOSSUS", "OTHER EXAMPLES", "HELPFUL DESIGNER TIPS", "DISCUSSION"],
+  "37": ["STYLE OF TUTORIALIZING", "HOW DO YOU TEACH A PLAYER?", "FIVE TUTORIAL DESIGN PRINCIPLES", "TEACHING COMPLEX CONCEPTS", "EXAMPLE: HALF-LIFE SERIES", "EXAMPLE: PORTAL SERIES", "EXAMPLE: CALL OF DUTY: MODERN", "EXAMPLE: FAR CRY 3: BLOOD DRAGON", "EXAMPLE: NIER: AUTOMATA", "DISCUSSION"],
+  "38": ["CONTROLLED REPETITION", "WHAT DO WE MEAN BY “REPETITION?”", "“REPETITION” VS “GRIND”", "HOW DO YOU CONTROL REPETITION?", "EXAMPLE: SUPER MARIO FRANCHISE", "EXAMPLE: HITMAN FRANCHISE", "EXAMPLE: “SOULS” TITLES", "EXAMPLE: ANGRY BIRDS FRANCHISE", "EXAMPLE: “TIME LOOP” GAMES", "DISCUSSION"],
 };
 
 export const designDecks = Object.fromEntries(Object.entries(slideTitles).map(([topic, titles]) => {

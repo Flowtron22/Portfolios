@@ -74,6 +74,21 @@ const figuresByTopic = {
   '31': [
     ['sudoku-example', 'A Sudoku grid with several starting numbers and empty cells', 'The visible starting numbers determine which deductions the player can make first.']
   ],
+  '34': [
+    ['rapture-entrance', 'Two BioShock scenes show a New Year sign and a statue framed by a banner', 'The signage and staging tell players when events took place and what Rapture wanted people to believe.']
+  ],
+  '35': [
+    ['systemic-interaction', 'An immersive sim example shows a keypad beside a glazed door with a figure behind it', 'Readable objects give players information before they decide how to proceed.']
+  ],
+  '36': [
+    ['mirrors-edge-cues', 'Red surfaces mark a route across pale rooftops in Mirror’s Edge', 'A consistent accent colour helps the route stand out at speed.']
+  ],
+  '37': [
+    ['portal-tutorial', 'Portal scenes show a button beside a door and a short input prompt', 'The space can demonstrate a rule, while a prompt can explain an input when needed.']
+  ],
+  '38': [
+    ['time-loop-examples', 'Three time-loop games show a club, a small apartment and a courtyard', 'A familiar location can support a new plan when another pass reveals what changes over time.']
+  ],
 };
 
 export function topicFigures(number) {

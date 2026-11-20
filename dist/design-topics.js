@@ -319,4 +319,74 @@ export const designTopics = [
         'Add one complication at a time. Note the difference between time spent reasoning and time spent repeating known actions.',
         'Watch a second attempt after a dead end. Check that the feedback and recovery let the player revise their plan.')
     ]),
+
+  topic('34', 'environmental-storytelling', 'Environmental Storytelling', 'Narrative & Experience', 'Practical guide',
+    'Design spaces that let players infer what happened through objects, composition, sound and traces of change.', [
+      section('Write the event before placing the props',
+        'I start with a sequence of events. Who used the space? What changed? What would a visitor still be able to see? Imagine a station shut down in a hurry. A half-packed bag suggests someone intended to leave. An abandoned cup beside a ringing phone suggests they left before finishing what they were doing. Put those clues where they could plausibly have been left.',
+        'Decide what every player needs to infer and what a curious player can investigate. A barricaded entrance might explain why the route is blocked. Scrapes on the floor and a spare key inside the ticket booth can explain how the barricade went up. The details reward a closer look without making exploration compulsory.'),
+      section('Stage the first clue from the player’s view',
+        'Treat lighting, sound and objects as parts of the same scene. In BioShock, the banner and statue at the entrance to Rapture give the city an ideology before the player knows much about it. The signs make more sense because they are staged together. Check what a player can see at the actual camera height and walking speed.',
+        'Sound can tell the player that a room is still occupied before they turn a corner. Place the cue so it helps them form a theory. A conversation heard through a wall carries different information from a siren that can be heard throughout the district.'),
+      exercise('Test a room without the dialogue',
+        'Write down the event and the three details that point to it.',
+        'Walk players through the space without explaining its history. Ask what happened and which detail led them to that reading.',
+        'Move or strengthen the clue that explains a required action. Leave optional details for players who choose to look around.')
+    ]),
+
+  topic('35', 'immersive-sim-design', 'Designing Immersive Sims', 'Systems Design', 'Practical guide',
+    'Build situations that support several solutions through consistent rules and tools players can combine.', [
+      section('Give the player a goal and a space to read',
+        'I start with a concrete objective, such as retrieving a log from a locked office. The hall contains a guard, a window onto a maintenance ledge and a power panel. A player can talk their way in, take the ledge or open a powered door from the panel. Each approach uses something the player can notice and reason about.',
+        'The important part is what carries over to another room. If cutting power opens a class of doors in one corridor, the same kind of door elsewhere should follow the same rule. Use a visibly different mechanism when a door behaves differently. In a systemic game, a familiar prop is part of what the player has learned.'),
+      section('Plan for rules to interact',
+        'The player may cut the power to move in darkness, then discover that this also stops the lift. That consequence can create a new decision if the lift and the door remain readable. I sketch a small table of what each action affects, including alarms, access routes and NPC responses. It helps find combinations that produce interesting choices and ones that leave no viable route.',
+        'Check encounters at the end of a mission as well. A forced fight can penalise a player who spent the rest of the level building for stealth. Test whether the same tools used on the way in still have a meaningful role at the climax.'),
+      exercise('Prototype one room with three approaches',
+        'Teach each rule in a small interaction. Give different solutions real differences in cost, risk or information.',
+        'Watch someone discover a route you did not describe. Ask how they predicted it would work.',
+        'Try the room after spending each limited tool and changing routes halfway through. Check that the player can understand and recover from a bad choice.')
+    ]),
+
+  topic('36', 'minimalism-in-design', 'Minimalism in Game Design', 'Narrative & Experience', 'Practical guide',
+    'Use fewer competing cues to make the information players need stand out at the right moment.', [
+      section('Decide what the player needs for the next move',
+        'I write the decision first. If the player needs to know which rooftop they can reach, colour and shape can make a landing readable at a glance. In Mirror’s Edge, red objects stand out against pale buildings and help connect a route while the player is moving. Reserve a distinctive colour for cues that carry a consistent meaning.',
+        'In Super Hexagon, the walls and gaps dominate the view because they are the information the player needs under time pressure. In a slower game, a silhouette or a distant light can do similar work. The right amount of information depends on how much time the player has to interpret it.'),
+      section('Check what each cue contributes',
+        'A health indicator earns its place when it helps decide whether to stay in danger. A flashing objective marker can compete with the same decision if the destination is already visible. I remove one cue at a time and replay the scene. If people lose an important distinction, restore it or give that information a better place.',
+        'Try meaning through motion and shape as well as colour. A handle that rattles when it can be pulled provides information without a new icon. Pair a signal with a second readable cue when missing it would block progress.'),
+      exercise('Run a subtraction pass',
+        'List the cues on screen and the decision each one supports.',
+        'Hide the weakest cue, then watch a first-time player make the same decision at normal speed.',
+        'Test the revised scene in greyscale and at small display sizes. Restore any distinction players can no longer read.')
+    ]),
+
+  topic('37', 'teaching-through-play', 'Teaching Through Play', 'Systems Design', 'Practical guide',
+    'Introduce mechanics through safe attempts, reinforce them in new contexts, and make hints easy to use.', [
+      section('Teach the first decision the player actually needs',
+        'I start with a question the level can ask through play. In Portal, a button and a nearby door make it possible to see whether standing on the button changes the exit. The player can test the relationship in a small space before they have to solve a longer puzzle.',
+        'A useful first exercise has a visible target, a safe way to try and an immediate response. Use a short prompt when the input itself is hard to discover. Place it where the player can act on it, and let them try again without replaying the setup.'),
+      section('Build complexity one decision at a time',
+        'After the player uses a rule once, change the situation while keeping the rule intact. Let a player jump a narrow gap, make the next landing less direct, and later ask them to choose between two landings. A sequence that only repeats the first jump can measure familiarity without showing whether the player can apply it.',
+        'Watch first-time players with different levels of experience. A missed prompt may be an issue with timing or focus. If they understood the instruction but cannot execute it, adjust the practice space or the recovery window. Those are different problems and need different fixes.'),
+      exercise('Check whether the lesson transferred',
+        'Teach the action in a safe spot and make one retry quick.',
+        'Ask the player to use it in a different room without the original prompt.',
+        'Record what they try before helping. Add a reminder if they forgot the action, or change the scene if it hides the reason to use it.')
+    ]),
+
+  topic('38', 'controlled-repetition', 'Controlled Repetition in Games', 'Systems Design', 'Practical guide',
+    'Keep repeat visits and retries engaging by changing the decisions players bring back to a familiar situation.', [
+      section('Find what changes on the next attempt',
+        'I write down what the player carries forward. It might be route knowledge, a new tool, improved timing or an alternate objective. A repeat visit in Hitman can let the player act on a routine they noticed the first time. The layout stays familiar, but that knowledge gives them a different plan.',
+        'A familiar challenge can also reward mastery. A short retry after a failed jump lets the player apply what they just learned. If they must repeat a long stretch they already understand, move the restart closer or give the approach a decision worth making again.'),
+      section('Use variety that affects play',
+        'A time loop can make the same room useful at several points. A character arrives later, a door opens briefly or an earlier discovery gives the player a new reason to visit. Show when something has changed so the player can revise their route deliberately.',
+        'Track when a reward is covering for an uneventful repeat. A new loadout or optional challenge can change the way the player approaches an encounter. Extra currency may make it worth doing, but it cannot create a fresh decision on its own.'),
+      exercise('Play the same sequence three times',
+        'On the first run, record what the player learns. On the second, note whether that knowledge changes their plan.',
+        'Add one new condition on the third run. Check whether the player can anticipate and respond to it.',
+        'Time the stretches with no new decisions. Shorten required repeats and keep optional returns where players have a reason to choose them.')
+    ]),
 ];
