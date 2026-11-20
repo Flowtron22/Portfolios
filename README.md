@@ -64,3 +64,9 @@ The Art page is an image-only masonry collage: three columns on desktop and two 
 Gallery curation: removed the Sculptober overview, modular stone ruins sheet, stylized landscape study, tank material study and tank topology image. Added five supplied images: dragon head views, horned mask character views, golem-house island diorama, and painted/unpainted Mastra bust photos. New additions lead the collage; their original PNG files are preserved alongside JPEG thumbnails. The gallery contained 35 images after those replacements.
 
 Further curation removed the portrait sculpt, stylized girl sculpt and single-view dragon head. The three-view dragon image remains. The current gallery contains 32 images.
+
+## Design writing
+
+The Design tab beside Art and Games is available at `#/solo/design`. `dist/design.js` holds the article catalogue and renders subject-grouped listings and individual readers at `#/solo/design/<slug>`. Entries support a title, subject, content type, summary and sections with paragraphs, bullets or numbered steps. Text is escaped before rendering. The catalogue is intentionally empty until the user supplies approved source documents; no sample articles are published.
+
+The top gallery row now prioritizes the painted Mastra bust, unpainted Mastra bust and Davy Jones sculpt. A responsive masonry grid preserves this order across the top and keeps images uncropped. The granny sculpt uses the newly supplied original PNG.

@@ -4,4 +4,5 @@ const required=['dist/index.html','dist/style.css','dist/mobile.css','dist/app.j
 for(const file of required)await fs.access(file);
 for(const art of artworks){for(const file of [art.image,art.thumbnail])await fs.access('dist/'+file);}
 await fs.access('dist/art-gallery.js');
+await fs.access('dist/design.js');
 console.log('Static portfolio ready in dist/ — all required files present.');

@@ -7,11 +7,14 @@ export const artViewer=()=>`<dialog class="art-viewer" aria-labelledby="art-view
 export function initArtViewer(container){
  const dialog=container.querySelector('.art-viewer');if(!dialog)return()=>{};
  let selected=0,opener=null;
+ const grid=container.querySelector('.art-grid');let lastWidth=0;
+ function layout(){const width=grid.getBoundingClientRect().width;if(width===lastWidth)return;lastWidth=width;const gap=parseFloat(getComputedStyle(grid).rowGap)||0;grid.querySelectorAll('[data-art]').forEach(card=>{const art=artworks[Number(card.dataset.art)],height=card.getBoundingClientRect().width*art.height/art.width;card.style.gridRowEnd='span '+Math.ceil((height+gap)/(1+gap));});}
+ const resize=new ResizeObserver(layout);resize.observe(grid);layout();
  const image=dialog.querySelector('#art-viewer-image'),title=dialog.querySelector('#art-viewer-title'),counter=dialog.querySelector('#art-viewer-count'),source=dialog.querySelector('#art-viewer-source');
  function show(index){selected=(index+artworks.length)%artworks.length;const art=artworks[selected];image.src=art.image;image.alt=art.title;title.textContent=art.title;counter.textContent=`${selected+1} of ${artworks.length}`;source.href=art.source;}
  function click(event){const card=event.target.closest('[data-art]');if(card){opener=card;show(Number(card.dataset.art));dialog.showModal();document.body.classList.add('art-viewer-open');return;}const action=event.target.closest('[data-viewer]')?.dataset.viewer;if(action==='close')dialog.close();if(action==='previous')show(selected-1);if(action==='next')show(selected+1);if(event.target===dialog){const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close();}}
  function keyboard(event){if(!dialog.open)return;if(event.key==='ArrowLeft'){event.preventDefault();show(selected-1);}if(event.key==='ArrowRight'){event.preventDefault();show(selected+1);}}
  function close(){document.body.classList.remove('art-viewer-open');if(opener?.isConnected)opener.focus({preventScroll:true});}
  container.addEventListener('click',click);dialog.addEventListener('keydown',keyboard);dialog.addEventListener('close',close);
- return()=>{container.removeEventListener('click',click);dialog.removeEventListener('keydown',keyboard);dialog.removeEventListener('close',close);if(dialog.open)dialog.close();document.body.classList.remove('art-viewer-open');};
+ return()=>{resize.disconnect();container.removeEventListener('click',click);dialog.removeEventListener('keydown',keyboard);dialog.removeEventListener('close',close);if(dialog.open)dialog.close();document.body.classList.remove('art-viewer-open');};
 }

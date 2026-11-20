@@ -1,5 +1,35 @@
 export const artworks = [
   {
+    "id": "art-48",
+    "title": "Mastra bust — painted",
+    "category": "Sculpting",
+    "image": "assets/art/art-48.png",
+    "thumbnail": "assets/art/art-48-thumb.jpg",
+    "source": "assets/art/art-48.png",
+    "width": 683,
+    "height": 911
+  },
+  {
+    "id": "art-49",
+    "title": "Mastra bust — unpainted",
+    "category": "Sculpting",
+    "image": "assets/art/art-49.png",
+    "thumbnail": "assets/art/art-49-thumb.jpg",
+    "source": "assets/art/art-49.png",
+    "width": 683,
+    "height": 911
+  },
+  {
+    "id": "art-40",
+    "title": "Davy Jones sculpt",
+    "category": "Sculpting",
+    "image": "assets/art/art-40.jpg",
+    "thumbnail": "assets/art/art-40-thumb.jpg",
+    "source": "https://urekagames.wordpress.com/wp-content/uploads/2020/12/31_2.png",
+    "width": 528,
+    "height": 842
+  },
+  {
     "id": "art-45",
     "title": "Dragon head — three views",
     "category": "Sculpting",
@@ -28,26 +58,6 @@ export const artworks = [
     "source": "assets/art/art-47.png",
     "width": 1025,
     "height": 1030
-  },
-  {
-    "id": "art-48",
-    "title": "Mastra bust — painted",
-    "category": "Sculpting",
-    "image": "assets/art/art-48.png",
-    "thumbnail": "assets/art/art-48-thumb.jpg",
-    "source": "assets/art/art-48.png",
-    "width": 683,
-    "height": 911
-  },
-  {
-    "id": "art-49",
-    "title": "Mastra bust — unpainted",
-    "category": "Sculpting",
-    "image": "assets/art/art-49.png",
-    "thumbnail": "assets/art/art-49-thumb.jpg",
-    "source": "assets/art/art-49.png",
-    "width": 683,
-    "height": 911
   },
   {
     "id": "art-01",
@@ -91,13 +101,13 @@ export const artworks = [
   },
   {
     "id": "art-05",
-    "title": "Hooded character sculpt",
+    "title": "Granny sculpt",
     "category": "Sculpting",
-    "image": "assets/art/art-05.jpg",
+    "image": "assets/art/art-05.png",
     "thumbnail": "assets/art/art-05-thumb.jpg",
-    "source": "https://urekagames.wordpress.com/wp-content/uploads/2020/12/03.png",
-    "width": 682,
-    "height": 829
+    "source": "assets/art/art-05.png",
+    "width": 641,
+    "height": 811
   },
   {
     "id": "art-06",
@@ -288,16 +298,6 @@ export const artworks = [
     "source": "https://urekagames.wordpress.com/wp-content/uploads/2020/12/ss.png",
     "width": 1430,
     "height": 901
-  },
-  {
-    "id": "art-40",
-    "title": "Tentacled creature sculpt",
-    "category": "Sculpting",
-    "image": "assets/art/art-40.jpg",
-    "thumbnail": "assets/art/art-40-thumb.jpg",
-    "source": "https://urekagames.wordpress.com/wp-content/uploads/2020/12/31_2.png",
-    "width": 528,
-    "height": 842
   },
   {
     "id": "art-41",
