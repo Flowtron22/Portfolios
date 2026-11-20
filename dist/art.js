@@ -180,26 +180,6 @@ export const artworks = [
     "height": 824
   },
   {
-    "id": "art-14",
-    "title": "Portrait sculpt",
-    "category": "Sculpting",
-    "image": "assets/art/art-14.jpg",
-    "thumbnail": "assets/art/art-14-thumb.jpg",
-    "source": "https://urekagames.wordpress.com/wp-content/uploads/2020/12/24.png",
-    "width": 924,
-    "height": 830
-  },
-  {
-    "id": "art-15",
-    "title": "Dragon head sculpt",
-    "category": "Sculpting",
-    "image": "assets/art/art-15.jpg",
-    "thumbnail": "assets/art/art-15-thumb.jpg",
-    "source": "https://urekagames.wordpress.com/wp-content/uploads/2020/12/30_1.png",
-    "width": 852,
-    "height": 796
-  },
-  {
     "id": "art-16",
     "title": "Bonyan Forest — clearing",
     "category": "Environments",
@@ -308,16 +288,6 @@ export const artworks = [
     "source": "https://urekagames.wordpress.com/wp-content/uploads/2020/12/ss.png",
     "width": 1430,
     "height": 901
-  },
-  {
-    "id": "art-38",
-    "title": "Stylized girl sculpt",
-    "category": "Sculpting",
-    "image": "assets/art/art-38.jpg",
-    "thumbnail": "assets/art/art-38-thumb.jpg",
-    "source": "https://urekagames.wordpress.com/wp-content/uploads/2020/12/27_2.png",
-    "width": 722,
-    "height": 824
   },
   {
     "id": "art-40",

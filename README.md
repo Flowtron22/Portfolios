@@ -61,4 +61,6 @@ The mobile opening prioritizes the portrait/name, a compact role heading and the
 
 The Art page is an image-only masonry collage: three columns on desktop and two on phones, with natural aspect ratios, narrow gaps and no card borders, padding, titles or categories. Art/Games navigation and full-image viewer controls remain available.
 
-Gallery curation: removed the Sculptober overview, modular stone ruins sheet, stylized landscape study, tank material study and tank topology image. Added five supplied images: dragon head views, horned mask character views, golem-house island diorama, and painted/unpainted Mastra bust photos. New additions lead the collage; their original PNG files are preserved alongside JPEG thumbnails. The gallery contains 35 images.
+Gallery curation: removed the Sculptober overview, modular stone ruins sheet, stylized landscape study, tank material study and tank topology image. Added five supplied images: dragon head views, horned mask character views, golem-house island diorama, and painted/unpainted Mastra bust photos. New additions lead the collage; their original PNG files are preserved alongside JPEG thumbnails. The gallery contained 35 images after those replacements.
+
+Further curation removed the portrait sculpt, stylized girl sculpt and single-view dragon head. The three-view dragon image remains. The current gallery contains 32 images.
