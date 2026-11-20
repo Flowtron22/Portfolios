@@ -41,7 +41,7 @@ Google Fonts supplies DM Sans and Barlow Condensed, with system fallbacks. Three
 
 `#/solo` and `#/solo/art` show 35 images of 3D environments, sculpts, props and production artwork copied from https://urekagames.wordpress.com/. `#/solo/games` retains the four playable game projects. The source page also includes 2D logos, illustrations and posters, which are excluded from the 3D collection.
 
-`dist/art.js` records each source URL, descriptive title, category and original dimensions. Source images have no captions, so the gallery uses descriptive labels rather than invented project credits or dates. Existing signatures, studio marks and artwork credits remain in the images. The Art introduction includes production artwork rather than claiming every image is a solo commercial project.
+`dist/art.js` records each source URL, descriptive title, category and original dimensions. Source images have no captions. Descriptive labels are retained as accessible image names rather than visible titles or invented project credits. Existing signatures, studio marks and artwork credits remain in the images. The Art introduction includes production artwork rather than claiming every image is a solo commercial project.
 
 `dist/assets/art` contains a full-image JPEG (up to 1920 pixels on the longest edge) and a lightweight thumbnail per artwork. Both preserve the complete image and its aspect ratio. The native dialog viewer supports Previous/Next, keyboard left/right, Escape and focus restoration. Original image links lead to the WordPress originals. Downloaded originals and the import inventory are retained locally under ignored `.local/`.
 
@@ -58,3 +58,5 @@ Phone navigation collapses into a Menu button below 701 px. It closes after sele
 Verified in browser viewports at 320, 375, 390 and 430 px wide, plus the desktop layout. Phone viewport checks do not replace physical-device testing.
 
 The mobile opening prioritizes the portrait/name, a compact role heading and the playable cube. The summary and portfolio links follow the cube. Face and action buttons occupy two compact rows. At 320×568, 375×667, 390×844 and 430×932 browser viewport sizes, the portrait and complete cube controls fit on the initial screen.
+
+The Art page is an image-only masonry collage: three columns on desktop and two on phones, with natural aspect ratios, narrow gaps and no card borders, padding, titles or categories. Art/Games navigation and full-image viewer controls remain available.
