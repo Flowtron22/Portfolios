@@ -56,3 +56,5 @@ Work and CV use the same company-grouped career history, latest first. Todak lis
 Phone navigation collapses into a Menu button below 701 px. It closes after selecting a page or pressing Escape. The mobile stylesheet uses fluid headings, stacked content, safe-area insets and controls at least 44 px high. Cube controls use separate face/action rows with an automatic container height, so they do not clip on narrow screens. On touch devices, vertical gestures over the cube can scroll the page; taps turn faces and horizontal drags rotate the view. The artwork viewer keeps navigation and Close within the viewport.
 
 Verified in browser viewports at 320, 375, 390 and 430 px wide, plus the desktop layout. Phone viewport checks do not replace physical-device testing.
+
+The mobile opening prioritizes the portrait/name, a compact role heading and the playable cube. The summary and portfolio links follow the cube. Face and action buttons occupy two compact rows. At 320×568, 375×667, 390×844 and 430×932 browser viewport sizes, the portrait and complete cube controls fit on the initial screen.
