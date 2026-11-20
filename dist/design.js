@@ -1,3 +1,4 @@
+import {designDecks} from './design-decks.js';
 import {designTopics} from './design-topics.js';
 
 const mapSlides = 'assets/design/multiplayer-maps';
@@ -11,10 +12,6 @@ export const designArticles = [
     subject: 'Level Design',
     kind: 'Practical guide',
     author: 'Ahmad Fadzil',
-    presentation: {
-      cover: mapSlide(1, 'Title slide with a green geometric design', ''),
-      pdf: `${mapSlides}/original-slides.pdf`
-    },
     summary: 'How I would block out a multiplayer map and test its routes, spawns, sightlines and objectives before committing to the final art.',
     sections: [
       {
@@ -95,10 +92,20 @@ function renderFigure({src, alt, caption}) {
   </figure>`;
 }
 
-function renderPresentation({cover, pdf}) {
-  return `<section aria-label="Presentation slides">
-    ${renderFigure(cover)}
-    <a class="button" href="${escape(pdf)}" target="_blank" rel="noopener noreferrer">View the 32-slide presentation (PDF)</a>
+function renderPresentation({pdf, slides}) {
+  return `<section class="design-presentation" aria-label="Presentation slides">
+    <details>
+      <summary>Browse slides <span>${slides.length}</span></summary>
+      <ol class="design-deck-grid">
+        ${slides.map(({thumbnail, title}, index) => `<li>
+          <a href="${escape(pdf)}#page=${index + 1}" target="_blank" rel="noopener noreferrer" aria-label="Open slide ${index + 1} in PDF. ${escape(title)}">
+            <img src="${escape(thumbnail)}" alt="" loading="lazy" decoding="async">
+            <span>${String(index + 1).padStart(2, '0')}</span>
+          </a>
+        </li>`).join('')}
+      </ol>
+    </details>
+    <a class="button" href="${escape(pdf)}" target="_blank" rel="noopener noreferrer">View full PDF</a>
   </section>`;
 }
 
@@ -114,9 +121,12 @@ export function designIndex() {
         ${designArticles.filter(article => article.subject === subject)
           .sort((a, b) => Number(a.number) - Number(b.number))
           .map(article => `<li><a href="#/solo/design/${encodeURIComponent(article.slug)}">
-            <span class="design-kind">Topic ${escape(article.number)} · ${escape(article.kind)}</span>
-            <h3>${escape(article.title)}</h3>
-            <p>${escape(article.summary)}</p>
+            <img class="design-card-preview" src="${escape(designDecks[article.number].slides[0].thumbnail)}" alt="" loading="lazy" decoding="async">
+            <div class="design-card-copy">
+              <span class="design-kind">Topic ${escape(article.number)} · ${escape(article.kind)}</span>
+              <h3>${escape(article.title)}</h3>
+              <p>${escape(article.summary)}</p>
+            </div>
           </a></li>`).join('')}
       </ul>
     </section>`).join('')}
@@ -132,7 +142,7 @@ export function designArticle(slug){
     <h1>${escape(article.title)}</h1>
     ${article.author ? `<p class="design-kind">By ${escape(article.author)}</p>` : ''}
     <p class="design-intro">${escape(article.summary)}</p>
-    ${article.presentation ? renderPresentation(article.presentation) : ''}
+    ${renderPresentation(designDecks[article.number])}
     ${article.sections.map(section => `<section>
       <h2>${escape(section.heading)}</h2>
       ${(section.paragraphs || []).map(p => `<p>${escape(p)}</p>`).join('')}
