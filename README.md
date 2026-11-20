@@ -39,11 +39,11 @@ Google Fonts supplies DM Sans and Barlow Condensed, with system fallbacks. Three
 
 ## Solo: Art and Games
 
-`#/solo` and `#/solo/art` show 35 images of 3D environments, sculpts, props and production artwork copied from https://urekagames.wordpress.com/. `#/solo/games` retains the four playable game projects. The source page also includes 2D logos, illustrations and posters, which are excluded from the 3D collection.
+`#/solo` and `#/solo/art` show a curated collection of 3D environments, sculpts, props and production artwork from https://urekagames.wordpress.com/ and supplied images. `#/solo/games` retains the four playable game projects. The source page also includes 2D logos, illustrations and posters, which are excluded from the 3D collection.
 
 `dist/art.js` records each source URL, descriptive title, category and original dimensions. Source images have no captions. Descriptive labels are retained as accessible image names rather than visible titles or invented project credits. Existing signatures, studio marks and artwork credits remain in the images. The Art introduction includes production artwork rather than claiming every image is a solo commercial project.
 
-`dist/assets/art` contains a full-image JPEG (up to 1920 pixels on the longest edge) and a lightweight thumbnail per artwork. Both preserve the complete image and its aspect ratio. The native dialog viewer supports Previous/Next, keyboard left/right, Escape and focus restoration. Original image links lead to the WordPress originals. Downloaded originals and the import inventory are retained locally under ignored `.local/`.
+`dist/assets/art` contains a full image and a lightweight thumbnail per artwork. Imported WordPress images use JPEGs up to 1920 pixels on the longest edge; newly supplied images retain their original PNGs. Both preserve the complete image and its aspect ratio. The native dialog viewer supports Previous/Next, keyboard left/right, Escape and focus restoration. Original image links lead to the WordPress originals. Downloaded originals and the import inventory are retained locally under ignored `.local/`.
 
 ## Play the hero cube
 
@@ -60,3 +60,5 @@ Verified in browser viewports at 320, 375, 390 and 430 px wide, plus the desktop
 The mobile opening prioritizes the portrait/name, a compact role heading and the playable cube. The summary and portfolio links follow the cube. Face and action buttons occupy two compact rows. At 320×568, 375×667, 390×844 and 430×932 browser viewport sizes, the portrait and complete cube controls fit on the initial screen.
 
 The Art page is an image-only masonry collage: three columns on desktop and two on phones, with natural aspect ratios, narrow gaps and no card borders, padding, titles or categories. Art/Games navigation and full-image viewer controls remain available.
+
+Gallery curation: removed the Sculptober overview, modular stone ruins sheet, stylized landscape study, tank material study and tank topology image. Added five supplied images: dragon head views, horned mask character views, golem-house island diorama, and painted/unpainted Mastra bust photos. New additions lead the collage; their original PNG files are preserved alongside JPEG thumbnails. The gallery contains 35 images.

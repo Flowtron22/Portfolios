@@ -1,5 +1,55 @@
 export const artworks = [
   {
+    "id": "art-45",
+    "title": "Dragon head — three views",
+    "category": "Sculpting",
+    "image": "assets/art/art-45.png",
+    "thumbnail": "assets/art/art-45-thumb.jpg",
+    "source": "assets/art/art-45.png",
+    "width": 2048,
+    "height": 1080
+  },
+  {
+    "id": "art-46",
+    "title": "Horned mask character — two views",
+    "category": "Sculpting",
+    "image": "assets/art/art-46.png",
+    "thumbnail": "assets/art/art-46-thumb.jpg",
+    "source": "assets/art/art-46.png",
+    "width": 1322,
+    "height": 871
+  },
+  {
+    "id": "art-47",
+    "title": "Golem house island diorama",
+    "category": "Environments",
+    "image": "assets/art/art-47.png",
+    "thumbnail": "assets/art/art-47-thumb.jpg",
+    "source": "assets/art/art-47.png",
+    "width": 1025,
+    "height": 1030
+  },
+  {
+    "id": "art-48",
+    "title": "Mastra bust — painted",
+    "category": "Sculpting",
+    "image": "assets/art/art-48.png",
+    "thumbnail": "assets/art/art-48-thumb.jpg",
+    "source": "assets/art/art-48.png",
+    "width": 683,
+    "height": 911
+  },
+  {
+    "id": "art-49",
+    "title": "Mastra bust — unpainted",
+    "category": "Sculpting",
+    "image": "assets/art/art-49.png",
+    "thumbnail": "assets/art/art-49-thumb.jpg",
+    "source": "assets/art/art-49.png",
+    "width": 683,
+    "height": 911
+  },
+  {
     "id": "art-01",
     "title": "Rockland world study",
     "category": "Environments",
@@ -170,16 +220,6 @@ export const artworks = [
     "height": 1040
   },
   {
-    "id": "art-18",
-    "title": "Modular stone ruins",
-    "category": "Props",
-    "image": "assets/art/art-18.jpg",
-    "thumbnail": "assets/art/art-18-thumb.jpg",
-    "source": "https://urekagames.wordpress.com/wp-content/uploads/2014/09/SculptZ.png",
-    "width": 1995,
-    "height": 840
-  },
-  {
     "id": "art-19",
     "title": "Ancient Forest",
     "category": "Environments",
@@ -218,16 +258,6 @@ export const artworks = [
     "source": "https://urekagames.wordpress.com/wp-content/uploads/2018/12/bbb_rooms_2.png",
     "width": 2048,
     "height": 1080
-  },
-  {
-    "id": "art-24",
-    "title": "Sculptober 2020 collection",
-    "category": "Sculpting",
-    "image": "assets/art/art-24.jpg",
-    "thumbnail": "assets/art/art-24-thumb.jpg",
-    "source": "https://urekagames.wordpress.com/wp-content/uploads/2020/12/sculptober2020.png",
-    "width": 4841,
-    "height": 3778
   },
   {
     "id": "art-26",
@@ -280,16 +310,6 @@ export const artworks = [
     "height": 901
   },
   {
-    "id": "art-37",
-    "title": "Stylized landscape study",
-    "category": "Environments",
-    "image": "assets/art/art-37.jpg",
-    "thumbnail": "assets/art/art-37-thumb.jpg",
-    "source": "https://urekagames.wordpress.com/wp-content/uploads/2020/12/1231231246.png",
-    "width": 1887,
-    "height": 1003
-  },
-  {
     "id": "art-38",
     "title": "Stylized girl sculpt",
     "category": "Sculpting",
@@ -328,25 +348,5 @@ export const artworks = [
     "source": "https://urekagames.wordpress.com/wp-content/uploads/2014/09/screenshot000.png",
     "width": 1080,
     "height": 1080
-  },
-  {
-    "id": "art-43",
-    "title": "Stylized tank — material study",
-    "category": "Props",
-    "image": "assets/art/art-43.jpg",
-    "thumbnail": "assets/art/art-43-thumb.jpg",
-    "source": "https://urekagames.wordpress.com/wp-content/uploads/2014/09/screenshot001.png",
-    "width": 1080,
-    "height": 1080
-  },
-  {
-    "id": "art-44",
-    "title": "Stylized tank — topology",
-    "category": "Props",
-    "image": "assets/art/art-44.jpg",
-    "thumbnail": "assets/art/art-44-thumb.jpg",
-    "source": "https://urekagames.wordpress.com/wp-content/uploads/2020/12/screenshot0002.jpg",
-    "width": 887,
-    "height": 935
   }
 ];
