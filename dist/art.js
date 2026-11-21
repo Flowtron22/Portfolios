@@ -1,13 +1,24 @@
 export const artworks = [
   {
-    "id": "metahuman-rangda",
-    "title": "MetaHuman Rangda",
+    "id": "rangda-firelight",
+    "title": "Rangda — firelit close-up",
     "category": "Characters",
-    "image": "assets/art/metahuman-rangda.png",
-    "thumbnail": "assets/art/metahuman-rangda.png",
-    "source": "assets/art/metahuman-rangda.png",
+    "image": "assets/art/rangda-firelight.png",
+    "thumbnail": "assets/art/rangda-firelight.png",
+    "source": "assets/art/rangda-firelight.png",
     "width": 1920,
     "height": 804,
+    "featured": true
+  },
+  {
+    "id": "rangda-stone-carvings",
+    "title": "Rangda — beside the stone carvings",
+    "category": "Characters",
+    "image": "assets/art/rangda-stone-carvings.png",
+    "thumbnail": "assets/art/rangda-stone-carvings.png",
+    "source": "assets/art/rangda-stone-carvings.png",
+    "width": 1920,
+    "height": 629,
     "featured": true
   },
   {
