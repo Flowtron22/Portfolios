@@ -1,5 +1,16 @@
 export const artworks = [
   {
+    "id": "metahuman-rangda",
+    "title": "MetaHuman Rangda",
+    "category": "Characters",
+    "image": "assets/art/metahuman-rangda.png",
+    "thumbnail": "assets/art/metahuman-rangda.png",
+    "source": "assets/art/metahuman-rangda.png",
+    "width": 1920,
+    "height": 804,
+    "featured": true
+  },
+  {
     "id": "art-48",
     "title": "Mastra bust — painted",
     "category": "Sculpting",
@@ -240,46 +251,6 @@ export const artworks = [
     "height": 1021
   },
   {
-    "id": "art-22",
-    "title": "BoBoiBoy room environment",
-    "category": "Environments",
-    "image": "assets/art/art-22.jpg",
-    "thumbnail": "assets/art/art-22-thumb.jpg",
-    "source": "https://urekagames.wordpress.com/wp-content/uploads/2018/12/bbb_rooms_2.png",
-    "width": 2048,
-    "height": 1080
-  },
-  {
-    "id": "art-26",
-    "title": "BoBoiBoy Cactus Village Oasis",
-    "category": "Environments",
-    "image": "assets/art/art-26.jpg",
-    "thumbnail": "assets/art/art-26-thumb.jpg",
-    "source": "https://urekagames.wordpress.com/wp-content/uploads/2018/12/cactus_village_oasis_2.png",
-    "width": 2048,
-    "height": 1080
-  },
-  {
-    "id": "art-28",
-    "title": "BoBoiBoy camping site",
-    "category": "Environments",
-    "image": "assets/art/art-28.jpg",
-    "thumbnail": "assets/art/art-28-thumb.jpg",
-    "source": "https://urekagames.wordpress.com/wp-content/uploads/2014/09/camping_site.png",
-    "width": 1024,
-    "height": 540
-  },
-  {
-    "id": "art-29",
-    "title": "Floating island environment",
-    "category": "Environments",
-    "image": "assets/art/art-29.jpg",
-    "thumbnail": "assets/art/art-29-thumb.jpg",
-    "source": "https://urekagames.wordpress.com/wp-content/uploads/2015/03/04.jpg",
-    "width": 1920,
-    "height": 1080
-  },
-  {
     "id": "art-31",
     "title": "Modular environment tiles",
     "category": "Environments",
@@ -288,16 +259,6 @@ export const artworks = [
     "source": "https://urekagames.wordpress.com/wp-content/uploads/2020/12/tiles.png",
     "width": 1435,
     "height": 819
-  },
-  {
-    "id": "art-32",
-    "title": "Rocky island environment",
-    "category": "Environments",
-    "image": "assets/art/art-32.jpg",
-    "thumbnail": "assets/art/art-32-thumb.jpg",
-    "source": "https://urekagames.wordpress.com/wp-content/uploads/2020/12/ss.png",
-    "width": 1430,
-    "height": 901
   },
   {
     "id": "art-41",

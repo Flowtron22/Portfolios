@@ -1,6 +1,6 @@
 import {artworks} from './art.js';
 
-export function artCards(){return artworks.map((art,index)=>`<button class="art-card" type="button" data-art="${index}" aria-label="Open ${art.title}"><span class="art-thumb"><img src="${art.thumbnail}" alt="${art.title}" width="${art.width}" height="${art.height}" loading="lazy" decoding="async"></span></button>`).join('');}
+export function artCards(){return artworks.map((art,index)=>`<button class="art-card${art.featured ? ' art-card-featured' : ''}" type="button" data-art="${index}" aria-label="Open ${art.title}"><span class="art-thumb"><img src="${art.thumbnail}" alt="${art.title}" width="${art.width}" height="${art.height}" loading="${art.featured ? 'eager' : 'lazy'}" decoding="async"></span></button>`).join('');}
 
 export const artViewer=()=>`<dialog class="art-viewer" aria-labelledby="art-viewer-title"><div class="art-viewer-header"><h2 class="sr-only" id="art-viewer-title"></h2><button type="button" data-viewer="close" autofocus>Close</button></div><div class="art-viewer-stage"><img alt="" id="art-viewer-image"></div><div class="art-viewer-footer"><button type="button" data-viewer="previous">Previous</button><output id="art-viewer-count" aria-live="polite"></output><button type="button" data-viewer="next">Next</button><a id="art-viewer-source" target="_blank" rel="noopener noreferrer">Original image</a></div></dialog>`;
 
