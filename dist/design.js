@@ -109,35 +109,105 @@ function renderPresentation({pdf, slides}) {
   </section>`;
 }
 
-export function designIndex() {
-  const subjects = [...new Set(designArticles.map(article => article.subject))];
+const articleLink = slug => `#/solo/library/${encodeURIComponent(slug)}`;
+const mainSubject = article => article.librarySubject ?? 'Design';
+
+function filterOptions(values) {
+  return values.map(value => `<option value="${escape(value)}">${escape(value)}</option>`).join('');
+}
+
+function libraryCard(article) {
+  return `<li data-library-card data-subject="${escape(mainSubject(article))}" data-format="${escape(article.kind)}">
+    <a href="${articleLink(article.slug)}">
+      <img class="design-card-preview" src="${escape(designDecks[article.number].slides[0].thumbnail)}" alt="" loading="lazy" decoding="async">
+      <div class="design-card-copy">
+        <span class="design-kind">Topic ${escape(article.number)} · ${escape(article.kind)}</span>
+        <h4>${escape(article.title)}</h4>
+        <p>${escape(article.summary)}</p>
+      </div>
+    </a>
+  </li>`;
+}
+
+export function libraryIndex() {
+  const subjects = [...new Set(designArticles.map(mainSubject))];
+  const formats = [...new Set(designArticles.map(article => article.kind))].sort();
+  const entries = [...designArticles].sort((a, b) => Number(a.number) - Number(b.number));
 
   return `<section class="design-index">
-    <h1>Design</h1>
-    <p class="design-intro">Game design case studies, practical guides and tutorials.</p>
-    ${subjects.map(subject => `<section class="design-subject">
-      <h2>${escape(subject)}</h2>
-      <ul class="design-articles">
-        ${designArticles.filter(article => article.subject === subject)
-          .sort((a, b) => Number(a.number) - Number(b.number))
-          .map(article => `<li><a href="#/solo/design/${encodeURIComponent(article.slug)}">
-            <img class="design-card-preview" src="${escape(designDecks[article.number].slides[0].thumbnail)}" alt="" loading="lazy" decoding="async">
-            <div class="design-card-copy">
-              <span class="design-kind">Topic ${escape(article.number)} · ${escape(article.kind)}</span>
-              <h3>${escape(article.title)}</h3>
-              <p>${escape(article.summary)}</p>
-            </div>
-          </a></li>`).join('')}
-      </ul>
-    </section>`).join('')}
+    <h1>Library</h1>
+    <p class="design-intro">Case studies, guides and tutorials on design and production.</p>
+    <div class="library-filters" role="group" aria-label="Filter library">
+      <div class="library-field"><label for="library-subject">Subject</label>
+        <select id="library-subject" name="subject"><option value="">All subjects</option>${filterOptions(subjects)}</select>
+      </div>
+      <div class="library-field"><label for="library-format">Format</label>
+        <select id="library-format" name="format"><option value="">All formats</option>${filterOptions(formats)}</select>
+      </div>
+      <p class="library-count" role="status"></p>
+    </div>
+    <div class="library-results">
+      ${subjects.map(subject => {
+        const articles = entries.filter(article => mainSubject(article) === subject);
+        const subtopics = [...new Set(articles.map(article => article.subject))];
+        return `<section class="library-subject" data-library-group>
+          <h2>${escape(subject)}</h2>
+          ${subtopics.map(subtopic => `<div class="design-subject" data-library-group>
+            ${subtopic === subject ? '' : `<h3>${escape(subtopic)}</h3>`}
+            <ul class="design-articles">${articles.filter(article => article.subject === subtopic).map(libraryCard).join('')}</ul>
+          </div>`).join('')}
+        </section>`;
+      }).join('')}
+      <p class="design-empty" hidden>No entries match both filters.</p>
+    </div>
   </section>`;
+}
+
+export function initLibraryFilters(root, query) {
+  const filters = root.querySelector('.library-filters');
+  if (!filters) return;
+
+  const subject = filters.querySelector('[name="subject"]');
+  const format = filters.querySelector('[name="format"]');
+  const params = new URLSearchParams(query);
+  for (const select of [subject, format]) {
+    select.value = params.get(select.name) ?? '';
+    if (select.selectedIndex === -1) select.selectedIndex = 0;
+  }
+
+  const cards = [...root.querySelectorAll('[data-library-card]')];
+  const groups = root.querySelectorAll('[data-library-group]');
+  const count = filters.querySelector('.library-count');
+  const empty = root.querySelector('.design-empty');
+
+  function applyFilters() {
+    let matches = 0;
+    for (const card of cards) {
+      card.hidden = Boolean((subject.value && subject.value !== card.dataset.subject) ||
+        (format.value && format.value !== card.dataset.format));
+      if (!card.hidden) matches++;
+    }
+    for (const group of groups) group.hidden = !group.querySelector('[data-library-card]:not([hidden])');
+    count.textContent = `${matches} ${matches === 1 ? 'entry' : 'entries'}`;
+    empty.hidden = matches > 0;
+  }
+
+  filters.addEventListener('change', () => {
+    applyFilters();
+    const active = new URLSearchParams();
+    for (const select of [subject, format]) {
+      if (select.value) active.set(select.name, select.value);
+    }
+    history.replaceState(history.state, '', `#/solo/library${active.size ? `?${active}` : ''}`);
+  });
+  applyFilters();
 }
 
 export function designArticle(slug){
   const article = designArticles.find(a => a.slug === slug);
-  if (!article) return '<section class="design-index"><h1>Article not found</h1><a class="text-link" href="#/solo/design">All design articles</a></section>';
+  if (!article) return '<section class="design-index"><h1>Article not found</h1><a class="text-link" href="#/solo/library">Back to library</a></section>';
   return `<article class="design-reading">
-    <a class="breadcrumb" href="#/solo/design">All design articles</a>
+    <a class="breadcrumb" href="#/solo/library">Back to library</a>
     <span class="eyebrow">${escape(article.subject)} / Topic ${escape(article.number)} · ${escape(article.kind)}</span>
     <h1>${escape(article.title)}</h1>
     ${article.author ? `<p class="design-kind">By ${escape(article.author)}</p>` : ''}

@@ -1,12 +1,13 @@
 import {topicFigures} from './design-topic-figures.js';
 
-function topic(number, slug, title, subject, kind, summary, sections) {
+function topic(number, slug, title, subject, kind, summary, sections, librarySubject = 'Design') {
   sections[1].figures = topicFigures(number);
   return {
     number,
     slug: `topic-${number}-${slug}`,
     title,
     subject,
+    librarySubject,
     kind,
     author: 'Ahmad Fadzil',
     summary,
@@ -91,7 +92,7 @@ export const designTopics = [
         'Define the shortest version you would ask a stranger to play from start to finish.',
         'Build it with input, sound and the first-use explanation. Ask a tester to record where they stop or get lost.',
         'Price the work to repeat that quality across the planned game. Cut a branch or mode if the schedule leaves too little time for a full playthrough and fixes.')
-    ]),
+    ], 'Production'),
 
   topic('11', 'breath-of-the-wild-exploration', 'Exploration Design in Breath of the Wild', 'Level Design', 'Case study',
     'How sightlines, routes and local discoveries support a journey the player chooses for themselves.', [
@@ -175,7 +176,7 @@ export const designTopics = [
         'Check that each beat has a clear objective, action and transition. Capture one plain run with no developer shortcuts.',
         'Identify the biggest design risk, technical dependency and presentation question. Assign each one an owner and a next check.',
         'Run through the same path after the changes. Verify checkpointing, gameplay objects and the intended pace before approving the handoff.')
-    ]),
+    ], 'Production'),
 
   topic('18', 'level-creation-tips', '10 Tips for Building 3D Levels', 'Level Design', 'Practical guide',
     'Ten checks for readable routes, smooth traversal, camera framing and early lighting in an action-adventure blockout.', [
