@@ -1,3 +1,4 @@
+import {libraryCollections} from './library-content.js';
 import {designDecks} from './design-decks.js';
 import {designTopics} from './design-topics.js';
 
@@ -106,32 +107,64 @@ function renderPresentation({pdf, slides}) {
   </section>`;
 }
 
-const articleLink = slug => `#/solo/library/${encodeURIComponent(slug)}`;
-function libraryCard(article) {
+const libraryRoot = '#/solo/library';
+const collectionLink = collection => collection === 'design' ? libraryRoot : `${libraryRoot}/${collection}`;
+const articleLink = (collection, slug) => `${collectionLink(collection)}/${encodeURIComponent(slug)}`;
+const collections = {
+  design: {title: 'Design', groups: [{entries: [...designArticles].sort((a, b) => Number(a.number) - Number(b.number))}]},
+  ...libraryCollections
+};
+
+export const libraryEntryCount = Object.values(collections).reduce((count, {groups}) =>
+  count + groups.reduce((total, {entries}) => total + entries.length, 0), 0);
+
+function libraryTabs(active) {
+  return `<nav class="library-sections" aria-label="Library sections">
+    ${Object.entries(collections).map(([key, {title}]) =>
+      `<a href="${collectionLink(key)}"${active === key ? ' aria-current="page"' : ''}>${escape(title)}</a>`).join('')}
+  </nav>`;
+}
+
+function libraryCard(collection, article, grouped) {
+  const cover = designDecks[article.number]?.slides[0].thumbnail;
+  const heading = grouped ? 'h3' : 'h2';
   return `<li>
-    <a href="${articleLink(article.slug)}">
-      <img class="design-card-preview" src="${escape(designDecks[article.number].slides[0].thumbnail)}" alt="" loading="lazy" decoding="async">
+    <a href="${articleLink(collection, article.slug)}">
+      ${cover ? `<img class="design-card-preview" src="${escape(cover)}" alt="" loading="lazy" decoding="async">` : ''}
       <div class="design-card-copy">
-        <h2>${escape(article.title)}</h2>
+        <${heading}>${escape(article.title)}</${heading}>
         <p>${escape(article.summary)}</p>
       </div>
     </a>
   </li>`;
 }
 
-export function libraryIndex() {
-  const entries = [...designArticles].sort((a, b) => Number(a.number) - Number(b.number));
-  return `<ul class="design-articles">${entries.map(libraryCard).join('')}</ul>`;
+function collectionIndex(key, {title, groups}) {
+  return `<div class="solo-page-heading"><h1>${escape(title)}</h1></div>
+    ${groups.map(group => {
+      const cards = `<ul class="design-articles">${group.entries.map(article => libraryCard(key, article, Boolean(group.title))).join('')}</ul>`;
+      return group.title ? `<section class="library-group"><h2>${escape(group.title)}</h2>${cards}</section>` : cards;
+    }).join('')}`;
 }
 
-export function designArticle(slug){
-  const article = designArticles.find(a => a.slug === slug);
-  if (!article) return '<section class="solo-page-heading"><h1>Article not found</h1><a class="text-link" href="#/solo/library">Back to library</a></section>';
+export function libraryPage(sectionOrSlug, entrySlug) {
+  const isCollection = Object.hasOwn(collections, sectionOrSlug);
+  const key = isCollection ? sectionOrSlug : 'design';
+  const slug = isCollection ? entrySlug : sectionOrSlug;
+  const collection = collections[key];
+  const article = slug ? collection.groups.flatMap(group => group.entries).find(article => article.slug === slug) : null;
+  const content = slug ? renderArticle(article, collectionLink(key)) : collectionIndex(key, collection);
+  return libraryTabs(key) + content;
+}
+
+function renderArticle(article, backLink) {
+  if (!article) return `<div class="solo-page-heading"><h1>Article not found</h1><a class="text-link" href="${backLink}">Back to library</a></div>`;
+  const deck = designDecks[article.number];
   return `<article class="design-reading">
-    <a class="breadcrumb" href="#/solo/library">Back to library</a>
+    <a class="breadcrumb" href="${backLink}">Back to library</a>
     <h1>${escape(article.title)}</h1>
     <p class="design-intro">${escape(article.summary)}</p>
-    ${renderPresentation(designDecks[article.number])}
+    ${deck ? renderPresentation(deck) : ''}
     ${article.sections.map(section => `<section>
       <h2>${escape(section.heading)}</h2>
       ${(section.paragraphs || []).map(p => `<p>${escape(p)}</p>`).join('')}

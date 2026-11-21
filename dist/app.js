@@ -1,4 +1,4 @@
-import {designArticles,libraryIndex,designArticle} from './design.js';
+import {libraryEntryCount,libraryPage} from './design.js';
 import {artworks} from './art.js';
 import {artCards,artViewer,initArtViewer} from './art-gallery.js';
 const projects=[
@@ -33,27 +33,26 @@ function home(){return `<section class="hero"><div class="hero-copy"><div class=
  <section class="section cta"><div><h2>Discuss a project</h2><p>For creative direction, game development and production enquiries.</p></div>${button('#/contact','Contact me',true)}</section>`;}
 function work(){return heading('Professional work','Work & experience.','Selected contributions across studio leadership, game development and animation production.')+'<div class="page-content">'+experience.map(c=>'<article class="work-row company-work"><div><h2>'+c.company+'</h2></div><div>'+roleDetails(c.roles)+'</div></article>').join('')+'<div class="actions">'+button('https://www.artstation.com/z_e_a_l','Explore ArtStation',true)+button('#/cv','View full CV')+'</div></div>';}
 const isLibrary = section => section === 'library' || section === 'design';
-function solo(section = 'art', slug) {
+function solo(section = 'art', subsection, slug) {
   const active = section === 'games' ? 'games' : isLibrary(section) ? 'library' : 'art';
   const pages = {
     art: {label: 'Art', title: 'Art', count: artworks.length},
     games: {label: 'Games', title: 'Solo Dev', count: projects.length, description: 'Game development R&D and playable prototypes.'},
-    library: {label: 'Library', title: 'Design', count: designArticles.length}
+    library: {label: 'Library', count: libraryEntryCount}
   };
   const tabs = `<nav class="solo-sections" aria-label="Solo subsections">
     ${Object.entries(pages).map(([key, {label, count}]) =>
       `<a href="#/solo/${key}"${active === key ? ' aria-current="page"' : ''}>${label} <span>${count}</span></a>`).join('')}
   </nav>`;
 
-  if (active === 'library' && slug) {
-    return `<section class="page-content solo-page">${tabs}${designArticle(slug)}</section>`;
+  if (active === 'library') {
+    return `<section class="page-content solo-page">${tabs}${libraryPage(subsection, slug)}</section>`;
   }
 
   const {title, description} = pages[active];
   const content = {
     art: () => `<div class="art-grid">${artCards()}</div>${artViewer()}`,
-    games: () => `<div class="grid">${projects.map(card).join('')}</div>`,
-    library: libraryIndex
+    games: () => `<div class="grid">${projects.map(card).join('')}</div>`
   };
   return `<section class="page-content solo-page">
     ${tabs}
@@ -69,7 +68,7 @@ function cv(){return heading('','Ahmad Fadzil','Ahmad Fadzil Bin Ahmad Nasharudd
 function contact(){return `<section class="contact"><h1>Contact</h1><p>For roles, collaborations and project enquiries, contact me by email.</p><a class="contact-email" href="mailto:ahmadfadzil22@gmail.com">ahmadfadzil22@gmail.com</a><div class="contact-links"><a class="text-link" href="https://www.artstation.com/z_e_a_l" target="_blank" rel="noopener noreferrer">ArtStation</a><a class="text-link" href="assets/Ahmad-Fadzil-CV.pdf" download>Download CV</a><a class="text-link" href="#/solo/games">Games</a></div></section>`;}
 function missing(){return `<section class="error"><span class="eyebrow">Page not found</span><h1>Page not found.</h1>${button('#/','Return to overview',true)}</section>`;}
 let cleanup;
-async function render(){cleanup?.();cleanup=null;const [route]=(location.hash.slice(1)||'/').split('?');const parts=route.split('/').filter(Boolean);const page=parts[0]||'home';main.innerHTML=({home,work,solo:()=>solo(parts[1],parts[2]),cv,contact}[page]||(()=>page==='project'?project(parts[1]):missing()))();document.querySelectorAll('[data-nav]').forEach(a=>{if(a.dataset.nav===(page==='project'?'solo':page))a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});document.title=`${page==='home'?'Game Direction & Creative Leadership':page==='project'?(projects.find(p=>p.id===parts[1])?.name||'Project'):({work:'Work',solo:isLibrary(parts[1])?'Library':parts[1]==='games'?'Solo Dev':'Art',cv:'CV',contact:'Contact'}[page]||'Page not found')} — Ahmad Fadzil`;window.scrollTo(0,0);document.getElementById('print-cv')?.addEventListener('click',()=>window.print());if(page==='solo')cleanup=initArtViewer(main);if(page==='home'){try{const {createScene}=await import('./scene.js');if(document.getElementById('scene'))cleanup=createScene(document.getElementById('scene'));}catch(e){console.warn('3D scene unavailable',e);document.getElementById('motion')?.remove();}}}
+async function render(){cleanup?.();cleanup=null;const [route]=(location.hash.slice(1)||'/').split('?');const parts=route.split('/').filter(Boolean);const page=parts[0]||'home';main.innerHTML=({home,work,solo:()=>solo(parts[1],parts[2],parts[3]),cv,contact}[page]||(()=>page==='project'?project(parts[1]):missing()))();document.querySelectorAll('[data-nav]').forEach(a=>{if(a.dataset.nav===(page==='project'?'solo':page))a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});document.title=`${page==='home'?'Game Direction & Creative Leadership':page==='project'?(projects.find(p=>p.id===parts[1])?.name||'Project'):({work:'Work',solo:isLibrary(parts[1])?'Library':parts[1]==='games'?'Solo Dev':'Art',cv:'CV',contact:'Contact'}[page]||'Page not found')} — Ahmad Fadzil`;window.scrollTo(0,0);document.getElementById('print-cv')?.addEventListener('click',()=>window.print());if(page==='solo')cleanup=initArtViewer(main);if(page==='home'){try{const {createScene}=await import('./scene.js');if(document.getElementById('scene'))cleanup=createScene(document.getElementById('scene'));}catch(e){console.warn('3D scene unavailable',e);document.getElementById('motion')?.remove();}}}
 const menuButton=document.getElementById('menu-toggle'),siteHeader=document.querySelector('header');
 function closeMenu(){siteHeader.classList.remove('menu-open');menuButton.setAttribute('aria-expanded','false');menuButton.textContent='Menu';}
 menuButton.addEventListener('click',()=>{const open=menuButton.getAttribute('aria-expanded')!=='true';siteHeader.classList.toggle('menu-open',open);menuButton.setAttribute('aria-expanded',String(open));menuButton.textContent=open?'Close':'Menu';});
