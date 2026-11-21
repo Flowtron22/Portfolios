@@ -1,15 +1,11 @@
 import {topicFigures} from './design-topic-figures.js';
 
-function topic(number, slug, title, subject, kind, summary, sections, librarySubject = 'Design') {
+function topic(number, slug, title, summary, sections) {
   sections[1].figures = topicFigures(number);
   return {
     number,
     slug: `topic-${number}-${slug}`,
     title,
-    subject,
-    librarySubject,
-    kind,
-    author: 'Ahmad Fadzil',
     summary,
     sections
   };
@@ -24,7 +20,7 @@ function exercise(heading, ...steps) {
 }
 
 export const designTopics = [
-  topic('02', 'animal-crossing-design', 'Designing Daily Life in Animal Crossing', 'Systems Design', 'Case study',
+  topic('02', 'animal-crossing-design', 'Designing Daily Life in Animal Crossing',
     'How real-time routines, villagers and player-made spaces make an island worth returning to.', [
       section('Give the player a place to live',
         'The island works as a place because the game gives players several reasons to be there. One visit can be about fishing, another about moving a path or looking for a recipe. I would build the first hour around two activities that feed each other, such as gathering materials for a piece of furniture that changes how a room looks. That gives an ordinary action a visible consequence.',
@@ -38,7 +34,7 @@ export const designTopics = [
         'Try the build at different times of day and after missing several days. Check which routines become chores and which interruptions lead somewhere interesting.')
     ]),
 
-  topic('06', 'puzzle-design-in-games', 'Puzzle Design in Games', 'Puzzle Design', 'Practical guide',
+  topic('06', 'puzzle-design-in-games', 'Puzzle Design in Games',
     'A method for teaching a rule and using it to build a satisfying environmental puzzle.', [
       section('Start with a goal the player can see',
         'I start with a blocked exit or a device the player needs to activate. The goal should be visible before the solution is obvious. Then I pick a single interaction worth exploring, such as raising water to float a platform. Give the player a chance to move the mechanism and see the result from the controls.',
@@ -52,7 +48,7 @@ export const designTopics = [
         'Give them a quick way to restore the starting state. Check whether failure sends them back to thinking or back through a long sequence they have already solved.')
     ]),
 
-  topic('07', 'procedural-content-generation', 'Procedural Content Generation in Game Design', 'Systems Design', 'Practical guide',
+  topic('07', 'procedural-content-generation', 'Procedural Content Generation in Game Design',
     'How to set rules for a generator, preserve authored decisions and test the seeds it produces.', [
       section('Choose the part that should vary',
         'I decide what a repeat player should have to reconsider. In a dungeon, changing connections and encounter placement can demand a new route. Randomizing the stone colour may add variety without changing play. Set a variation budget around the decisions you want the player to make.',
@@ -66,7 +62,7 @@ export const designTopics = [
         'Play both ordinary and extreme results. If each run has the same decision in a different room, revise the modules before making more of them.')
     ]),
 
-  topic('09', 'gunplay-design', 'Designing Gunplay for Video Games', 'Combat Design', 'Practical guide',
+  topic('09', 'gunplay-design', 'Designing Gunplay for Video Games',
     'How timing, commitment and feedback give fictional weapons distinct roles in a shooter.', [
       section('Design the moment between input and outcome',
         'I map the sequence from the player’s decision to the result they can read. An instant shot puts the emphasis on aim and timing. A slow projectile lets the target move while the shot travels. A wind-up asks the player to commit while the opportunity might disappear. These timings change when a player wants to act and what the opponent can do in response.',
@@ -80,7 +76,7 @@ export const designTopics = [
         'See whether they change their timing in response. Tune the feedback separately from the mechanical values.')
     ]),
 
-  topic('10', 'indie-game-development', 'Scoping an Indie Game You Can Finish', 'Production', 'Practical guide',
+  topic('10', 'indie-game-development', 'Scoping an Indie Game You Can Finish',
     'How to prototype, schedule and teach a small game around the team’s strongest skills.', [
       section('Prove a small, complete experience',
         'I start with what the team can make repeatedly at a good standard. A short horror visual novel, for example, can deliver tension through framing, sound and a few consequential choices. Every additional branch means writing, implementation and testing, even when the art stays the same.',
@@ -92,9 +88,9 @@ export const designTopics = [
         'Define the shortest version you would ask a stranger to play from start to finish.',
         'Build it with input, sound and the first-use explanation. Ask a tester to record where they stop or get lost.',
         'Price the work to repeat that quality across the planned game. Cut a branch or mode if the schedule leaves too little time for a full playthrough and fixes.')
-    ], 'Production'),
+    ]),
 
-  topic('11', 'breath-of-the-wild-exploration', 'Exploration Design in Breath of the Wild', 'Level Design', 'Case study',
+  topic('11', 'breath-of-the-wild-exploration', 'Exploration Design in Breath of the Wild',
     'How sightlines, routes and local discoveries support a journey the player chooses for themselves.', [
       section('Let a trip begin with something visible',
         'I think of an expedition in Breath of the Wild as a short hike. The player spots a destination, checks the terrain, prepares for a hazard and sets out. Weather, stamina or an unexpectedly steep slope can change the plan. Those obstacles are useful when the player can read them and choose a different way forward.',
@@ -108,7 +104,7 @@ export const designTopics = [
         'If they lose direction, change the view or terrain first. Then replay with a weather or traversal constraint to see whether the route still supports improvisation.')
     ]),
 
-  topic('12', 'horror-game-design', 'Designing Tension in Horror Games', 'Narrative & Experience', 'Practical guide',
+  topic('12', 'horror-game-design', 'Designing Tension in Horror Games',
     'A playable way to build dread, vary its intensity and make the eventual reveal matter.', [
       section('Give the player time to form a theory',
         'A shock releases tension. The scene earns it earlier, while the player is still trying to explain what they heard or saw. I establish an ordinary rule first. A radio comes on when someone enters the room. Later it turns on while the doorway is empty. The change gives the player something specific to investigate or avoid.',
@@ -122,7 +118,7 @@ export const designTopics = [
         'Test the scene on a repeat run. Give the player something to do once the outcome is known.')
     ]),
 
-  topic('13', 'fighting-game-history-part-1', 'Fighting Game History, Part 1', 'Combat Design', 'Case study',
+  topic('13', 'fighting-game-history-part-1', 'Fighting Game History, Part 1',
     'What early arcade fighters can teach us about move roles, combos, momentum and arcade spectacle.', [
       section('Make a move list readable in a match',
         'Early games like Karate Champ put spacing and commitment at the centre of one-on-one play. Street Fighter’s attack strengths give the player a way to trade speed for reach or damage. I look at that arrangement as a menu of risks. A quick button can interrupt a nearby action while a slower one can cover more ground if the player has time.',
@@ -136,7 +132,7 @@ export const designTopics = [
         'Watch a new player replay the same situation. See whether they can explain what they could try next.')
     ]),
 
-  topic('14', 'online-game-economies', 'Player Motivation in Online Game Economies', 'Systems Design', 'Practical guide',
+  topic('14', 'online-game-economies', 'Player Motivation in Online Game Economies',
     'Map how resources enter, move and leave a game, then check whether rewards translate into progress players can see.', [
       section('Follow one resource from source to sink',
         'I draw where the resource enters play, where it changes hands and where it is spent or removed. Daily tasks and encounters produce materials. Crafting can create new items from those materials. A trade moves stock between players, and only a fee or consumed item removes stock from the overall economy.',
@@ -150,7 +146,7 @@ export const designTopics = [
         'Ask players to explain how they would get the missing material. Fix the gap if their only answer is to repeat an activity with no visible progress.')
     ]),
 
-  topic('15', 'fighting-game-history-part-2', 'Fighting Game History, Part 2', 'Combat Design', 'Case study',
+  topic('15', 'fighting-game-history-part-2', 'Fighting Game History, Part 2',
     'How 3D movement, stage boundaries and defensive systems opened new paths to winning a round.', [
       section('Depth can start with a few buttons',
         'Virtua Fighter makes guarding a dedicated action and gives the ring edge its own stakes. A player can be ahead on health and still lose by giving up position. That rule makes a retreat, a lateral move and a risky advance worth comparing. I look for stage geometry that changes a decision players already understand.',
@@ -164,7 +160,7 @@ export const designTopics = [
         'Check that players can recover from pressure in more than one way and can tell why an attempted defense failed.')
     ]),
 
-  topic('17', 'shadow-of-the-tomb-raider-level-production', 'Making Levels for Shadow of the Tomb Raider', 'Production', 'Case study',
+  topic('17', 'shadow-of-the-tomb-raider-level-production', 'Making Levels for Shadow of the Tomb Raider',
     'A level production workflow from the first paper plan to a stable, polished build.', [
       section('Define what each milestone has to prove',
         'I would start with a paper brief that names the player goal, the main beats and the mechanics the level needs. In the shell, prove the layout and scale. At first playable, run from entry to exit, even when art and presentation are still rough.',
@@ -176,9 +172,9 @@ export const designTopics = [
         'Check that each beat has a clear objective, action and transition. Capture one plain run with no developer shortcuts.',
         'Identify the biggest design risk, technical dependency and presentation question. Assign each one an owner and a next check.',
         'Run through the same path after the changes. Verify checkpointing, gameplay objects and the intended pace before approving the handoff.')
-    ], 'Production'),
+    ]),
 
-  topic('18', 'level-creation-tips', '10 Tips for Building 3D Levels', 'Level Design', 'Practical guide',
+  topic('18', 'level-creation-tips', '10 Tips for Building 3D Levels',
     'Ten checks for readable routes, smooth traversal, camera framing and early lighting in an action-adventure blockout.', [
       exercise('Make the route easy to read',
         'Give the player a direction from the entrance. Test whether they can pick out the onward path without following another player.',
@@ -196,7 +192,7 @@ export const designTopics = [
         'I record a first run through the blockout, then use the same route once the foreground details and final lighting arrive. If a new piece of art changes the way a player reads or crosses a space, the side-by-side runs help identify the cause.')
     ]),
 
-  topic('19', 'losing-in-pvp', 'Designing for the Losing Side in PvP', 'Systems Design', 'Practical guide',
+  topic('19', 'losing-in-pvp', 'Designing for the Losing Side in PvP',
     'How to keep a competitive match engaging when one side falls behind.', [
       section('Find when the match starts to feel decided',
         'I mark the point where a losing player stops forming a plan. It can happen before the scoreboard says the game is over. A team might lose a forward position and still spend several minutes filing through the same defended entrance. That remaining time gives both teams fewer interesting decisions.',
@@ -210,7 +206,7 @@ export const designTopics = [
         'Give the stronger team the same lead after the change. Verify that it still has an advantage and that both sides have decisions to make.')
     ]),
 
-  topic('20', 'creating-a-3d-layout', 'Creating a 3D Level Layout', 'Level Design', 'Tutorial',
+  topic('20', 'creating-a-3d-layout', 'Creating a 3D Level Layout',
     'Build a route from a beat sheet, test scale with the player controller and shape transitions before the art pass.', [
       section('Write what happens in each space',
         'I write an action for each beat, such as finding a warehouse exit, crossing a field or reaching a water tower. Then I sketch how effort rises and falls. A climb can prepare a reveal. A short connector can give the player a break after a fight. Pick one visual feature that ties the route together and can be seen more than once.'),
@@ -223,7 +219,7 @@ export const designTopics = [
         'Add rough lighting and silhouette changes once the route works. Rerun the sequence to see what the new presentation does to movement and attention.')
     ]),
 
-  topic('23', 'pve-shooter-level-design', 'PvE Shooter Level Design', 'Level Design', 'Practical guide',
+  topic('23', 'pve-shooter-level-design', 'PvE Shooter Level Design',
     'How to build a readable encounter with opposing fronts, useful cover, alternate routes and staged enemy waves.', [
       section('Lay out two fronts and a way to change the angle',
         'I begin with the position the player can reach first, the likely enemy front and the exposed space between them. Use full cover to break contact and low cover where awareness is important. Put the next useful piece within a move the player can judge. Rotate cover with the expected threats so safety is readable from the approach.',
@@ -237,7 +233,7 @@ export const designTopics = [
         'Replay the encounter with the intended enemy roles and weapons before committing the cover shapes to final art.')
     ]),
 
-  topic('24', 'it-takes-two-co-op', 'Co-op Gameplay in It Takes Two', 'Systems Design', 'Case study',
+  topic('24', 'it-takes-two-co-op', 'Co-op Gameplay in It Takes Two',
     'How complementary roles and bespoke levels turn a shared obstacle into something both players have to solve.', [
       section('Give each player a job the other can see',
         'The hammer and nail tools in It Takes Two give players different reasons to look at the same obstacle. One prepares the surface or route and the other takes advantage of it. I would test whether both players can describe what their partner is doing, especially when their cameras face different directions.',
@@ -251,7 +247,7 @@ export const designTopics = [
         'Ask each player what their partner did to make the final encounter work. Review any role that is hard to describe.')
     ]),
 
-  topic('27', 'open-world-storytelling', 'Storytelling in Open-World Games', 'Narrative & Experience', 'Practical guide',
+  topic('27', 'open-world-storytelling', 'Storytelling in Open-World Games',
     'How to connect a main story to optional exploration when players can change the order of events.', [
       section('Track the protagonist’s story and the world’s story',
         'I map the beats the main quest needs and the stories the world can tell through places, objects and characters. A bridge damaged in a storm can teach the player about a region before the main quest sends them there. A side quest can show who depends on the crossing and add a local consequence that survives the larger plot.',
@@ -265,7 +261,7 @@ export const designTopics = [
         'Play through a long detour. Review the dialogue, quest log and world cues when returning to the main route.')
     ]),
 
-  topic('28', 'super-mario-odyssey-level-design', 'Level Design in Super Mario Odyssey', 'Level Design', 'Case study',
+  topic('28', 'super-mario-odyssey-level-design', 'Level Design in Super Mario Odyssey',
     'How a capture ability changes the way players read and move through a level.', [
       section('Design a movement question around each capture',
         'In Super Mario Odyssey, an enemy can also be a new way to move. A capture can change how high the player reaches, what they can cross or how they move through water. I would put two visible uses for the new move in the same area. One teaches the basic action and the other rewards spotting an opportunity in the scenery.',
@@ -279,7 +275,7 @@ export const designTopics = [
         'Try the route with and without the capture. Check deliberate alternate paths, accidental skips and recovery after a missed move.')
     ]),
 
-  topic('29', 'combat-design', 'Combat Design in Games', 'Combat Design', 'Practical guide',
+  topic('29', 'combat-design', 'Combat Design in Games',
     'Build combat around attacks players can read, useful defensive choices and enemies with distinct jobs.', [
       section('Write the decision before the attack',
         'I sketch an enemy action as a cue, a threat and a recovery. A wide swing can ask the player to step back, interrupt early or commit to a dodge that gives them a better position. Compare the value of these responses and the risk of choosing the wrong timing. If one answer wins against every cue, the other options will rarely see play.',
@@ -293,7 +289,7 @@ export const designTopics = [
         'Ask the player to explain the last hit they took and one way they could prevent it on the next attempt.')
     ]),
 
-  topic('30', 'metroidvania-map-design', 'Metroidvania Map Design', 'Level Design', 'Tutorial',
+  topic('30', 'metroidvania-map-design', 'Metroidvania Map Design',
     'A room-graph method for mapping unlocks, remembered barriers and return routes.', [
       section('Draw the progression before the geography',
         'I begin with a graph of zones and connections. Label what each connection requires and when players can learn it. There may be several routes through the first area, while a later upgrade opens a connection that joins two zones. The graph lets me check progress before investing in room layouts.',
@@ -307,7 +303,7 @@ export const designTopics = [
         'Wait before asking someone to return to the early barrier. See whether they can remember it without a detailed waypoint.')
     ]),
 
-  topic('31', 'good-puzzle-design', 'Good Puzzle Design', 'Puzzle Design', 'Practical guide',
+  topic('31', 'good-puzzle-design', 'Good Puzzle Design',
     'How to tune clues, feedback and recovery so experimentation stays worthwhile.', [
       section('Decide what the player has to work out',
         'Write the problem and tools in two short sentences. I check whether playtesters can restate both before asking them to solve it. If the player is searching for a switch they did not know could move, that is a readability issue. If they know the switch exists and are working out its order, the puzzle is doing its job.',
@@ -321,7 +317,7 @@ export const designTopics = [
         'Watch a second attempt after a dead end. Check that the feedback and recovery let the player revise their plan.')
     ]),
 
-  topic('34', 'environmental-storytelling', 'Environmental Storytelling', 'Narrative & Experience', 'Practical guide',
+  topic('34', 'environmental-storytelling', 'Environmental Storytelling',
     'Design spaces that let players infer what happened through objects, composition, sound and traces of change.', [
       section('Write the event before placing the props',
         'I start with a sequence of events. Who used the space? What changed? What would a visitor still be able to see? Imagine a station shut down in a hurry. A half-packed bag suggests someone intended to leave. An abandoned cup beside a ringing phone suggests they left before finishing what they were doing. Put those clues where they could plausibly have been left.',
@@ -335,7 +331,7 @@ export const designTopics = [
         'Move or strengthen the clue that explains a required action. Leave optional details for players who choose to look around.')
     ]),
 
-  topic('35', 'immersive-sim-design', 'Designing Immersive Sims', 'Systems Design', 'Practical guide',
+  topic('35', 'immersive-sim-design', 'Designing Immersive Sims',
     'Build situations that support several solutions through consistent rules and tools players can combine.', [
       section('Give the player a goal and a space to read',
         'I start with a concrete objective, such as retrieving a log from a locked office. The hall contains a guard, a window onto a maintenance ledge and a power panel. A player can talk their way in, take the ledge or open a powered door from the panel. Each approach uses something the player can notice and reason about.',
@@ -349,7 +345,7 @@ export const designTopics = [
         'Try the room after spending each limited tool and changing routes halfway through. Check that the player can understand and recover from a bad choice.')
     ]),
 
-  topic('36', 'minimalism-in-design', 'Minimalism in Game Design', 'Narrative & Experience', 'Practical guide',
+  topic('36', 'minimalism-in-design', 'Minimalism in Game Design',
     'Use fewer competing cues to make the information players need stand out at the right moment.', [
       section('Decide what the player needs for the next move',
         'I write the decision first. If the player needs to know which rooftop they can reach, colour and shape can make a landing readable at a glance. In Mirror’s Edge, red objects stand out against pale buildings and help connect a route while the player is moving. Reserve a distinctive colour for cues that carry a consistent meaning.',
@@ -363,7 +359,7 @@ export const designTopics = [
         'Test the revised scene in greyscale and at small display sizes. Restore any distinction players can no longer read.')
     ]),
 
-  topic('37', 'teaching-through-play', 'Teaching Through Play', 'Systems Design', 'Practical guide',
+  topic('37', 'teaching-through-play', 'Teaching Through Play',
     'Introduce mechanics through safe attempts, reinforce them in new contexts, and make hints easy to use.', [
       section('Teach the first decision the player actually needs',
         'I start with a question the level can ask through play. In Portal, a button and a nearby door make it possible to see whether standing on the button changes the exit. The player can test the relationship in a small space before they have to solve a longer puzzle.',
@@ -377,7 +373,7 @@ export const designTopics = [
         'Record what they try before helping. Add a reminder if they forgot the action, or change the scene if it hides the reason to use it.')
     ]),
 
-  topic('38', 'controlled-repetition', 'Controlled Repetition in Games', 'Systems Design', 'Practical guide',
+  topic('38', 'controlled-repetition', 'Controlled Repetition in Games',
     'Keep repeat visits and retries engaging by changing the decisions players bring back to a familiar situation.', [
       section('Find what changes on the next attempt',
         'I write down what the player carries forward. It might be route knowledge, a new tool, improved timing or an alternate objective. A repeat visit in Hitman can let the player act on a routine they noticed the first time. The layout stays familiar, but that knowledge gives them a different plan.',
