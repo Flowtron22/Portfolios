@@ -4,6 +4,7 @@ import {artworks} from '../dist/art.js';
 import {designArticles} from '../dist/design.js';
 import {libraryCollections} from '../dist/library-content.js';
 import {librarySamples} from '../dist/library-samples.js';
+import {fullLibrarySections} from '../dist/library-article-index.js';
 const required=['dist/index.html','dist/style.css','dist/mobile.css','dist/app.js','dist/scene.js','dist/cube-state.js','dist/assets/three.module.js','dist/assets/three.core.js','dist/assets/police-n-thief.jpg','dist/assets/combat-patrol.jpg','dist/assets/potionpendium.jpg','dist/assets/quantum-loom.jpg','dist/assets/Ahmad-Fadzil-CV.pdf','dist/assets/ahmad-fadzil.png'];
 for(const file of required)await fs.access(file);
 for(const art of artworks){for(const file of [art.image,art.thumbnail])await fs.access('dist/'+file);}
@@ -27,4 +28,17 @@ for (const {groups} of Object.values(libraryCollections)) {
     }
   }
 }
+const inlineImages = new Set();
+for (const [key, slugs] of Object.entries(fullLibrarySections)) {
+  const entries = libraryCollections[key].groups.flatMap(({entries}) => entries.map(({slug}) => slug));
+  if (slugs.length !== entries.length || entries.some(slug => !slugs.includes(slug))) {
+    throw new Error(`Full article list does not match the ${key} collection`);
+  }
+  for (const slug of slugs) {
+    const {body, images} = await import(`../dist/library-articles/${slug}.js`);
+    if (!body || !images.length) throw new Error(`Missing article body or images for ${slug}`);
+    for (const image of images) inlineImages.add(image);
+  }
+}
+for (const image of inlineImages) await fs.access('dist/' + image);
 console.log('Static portfolio ready in dist/ — all required files present.');

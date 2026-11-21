@@ -1,7 +1,10 @@
 import {libraryCollections} from './library-content.js';
 import {librarySamples} from './library-samples.js';
+import {fullLibrarySections} from './library-article-index.js';
 import {designDecks} from './design-decks.js';
 import {designTopics} from './design-topics.js';
+
+const fullArticleSlugs = new Set(Object.values(fullLibrarySections).flat());
 
 const mapSlides = 'assets/design/multiplayer-maps';
 const mapSlide = (number, alt, caption) => ({src: `${mapSlides}/slide-${number}.jpg`, alt, caption});
@@ -165,7 +168,14 @@ function renderArticle(article, backLink) {
   return `<article class="design-reading">
     <a class="breadcrumb" href="${backLink}">Back to library</a>
     <h1>${escape(article.title)}</h1>
-    <p class="design-intro">${escape(article.summary)}</p>
+    ${fullArticleSlugs.has(article.slug)
+      ? `<section class="source-reading" data-library-article="${escape(article.slug)}" aria-busy="true"><p role="status">Loading article…</p></section>`
+      : renderArticleSummary(article, deck, sample)}
+  </article>`;
+}
+
+function renderArticleSummary(article, deck, sample) {
+  return `<p class="design-intro">${escape(article.summary)}</p>
     ${deck ? renderPresentation(deck) : ''}
     ${sample ? `<div class="library-sample">${renderFigure(sample)}</div>` : ''}
     ${article.sections.map(section => `<section>
@@ -174,6 +184,21 @@ function renderArticle(article, backLink) {
       ${section.bullets?.length ? `<ul>${section.bullets.map(p => `<li>${escape(p)}</li>`).join('')}</ul>` : ''}
       ${section.steps?.length ? `<ol${section.start ? ` start="${escape(section.start)}"` : ''}>${section.steps.map(p => `<li>${escape(p)}</li>`).join('')}</ol>` : ''}
       ${section.figures?.length ? `<div class="design-slides">${section.figures.map(renderFigure).join('')}</div>` : ''}
-    </section>`).join('')}
-  </article>`;
+    </section>`).join('')}`;
+}
+
+export async function loadLibraryArticle(container) {
+  const article = container.querySelector('[data-library-article]');
+  if (!article) return;
+  const {libraryArticle: slug} = article.dataset;
+  if (!fullArticleSlugs.has(slug)) return;
+  try {
+    const {body} = await import(`./library-articles/${slug}.js`);
+    if (article.isConnected) article.innerHTML = body;
+  } catch (error) {
+    if (article.isConnected) article.textContent = 'The article could not load. Refresh the page to try again.';
+    console.error('Library article unavailable', error);
+  } finally {
+    article.removeAttribute('aria-busy');
+  }
 }

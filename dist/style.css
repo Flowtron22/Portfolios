@@ -116,3 +116,16 @@
   .library-sections a{padding:7px 9px}
   .design-card-copy h3{font-size:17px}
 }
+
+.source-reading{overflow-wrap:anywhere}
+.source-reading h2,.source-reading h3,.source-reading h4,.source-reading h5,.source-reading h6{margin-block:32px 12px;line-height:1.3}
+.source-reading .source-figure{display:inline-block;vertical-align:middle;max-width:100%;margin-block:4px}
+.source-reading .source-figure img{display:block;width:min(100%,var(--source-width));height:auto}
+.source-panel{min-width:0}
+.source-divider{display:block;border-top:1px solid var(--line);margin-block:20px}
+.source-table{margin-block:20px;overflow-x:auto}
+.source-table table{width:100%;table-layout:fixed;border-collapse:collapse}
+.source-table td{border:1px solid var(--line);padding:12px;vertical-align:top;overflow-wrap:anywhere}
+.source-table td > :first-child{margin-top:0}
+.source-table td > :last-child{margin-bottom:0}
+@media (max-width:600px){.source-table td{padding:6px}.source-reading .source-figure{display:block}}
