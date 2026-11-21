@@ -1,3 +1,5 @@
+import {cookies} from './cookie-content.js';
+
 function entry(slug, title, summary, ...sections) {
   return {slug, title, summary, sections: sections.map(([heading, ...paragraphs]) => ({heading, paragraphs}))};
 }
@@ -166,5 +168,6 @@ export const libraryCollections = {
     {title: '3D Graphic Pipelines', entries: graphicsPipeline},
     {title: 'Shape Language Fundamentals', entries: shapeLanguage}
   ]},
-  'case-study': {title: 'Case Study', groups: [{entries: caseStudies}]}
+  'case-study': {title: 'Case Study', groups: [{entries: caseStudies}]},
+  cookies: {title: 'Cookies', groups: [{entries: cookies}]}
 };

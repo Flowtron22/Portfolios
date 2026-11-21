@@ -1,4 +1,7 @@
+import {cookieSamples} from './cookie-samples.js';
+
 export const librarySamples = {
+  ...cookieSamples,
   "affordances": {"src": "assets/library/affordances.jpg", "width": 600, "height": 389, "alt": "A flat door plate suggests pushing while a handle invites pulling"},
   "large-medium-small": {"src": "assets/library/large-medium-small.jpg", "width": 1280, "height": 393, "alt": "A textured rock beside a diagram separating its larger forms and smaller details"},
   "cel-shading": {"src": "assets/library/cel-shading.jpg", "width": 1280, "height": 597, "alt": "A character bust rendered with cel shading and with continuous shading"},

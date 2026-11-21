@@ -51,5 +51,19 @@ export const fullLibrarySections = {
     "keeping-vr-levels-consistent",
     "preparing-teams-for-vr-production",
     "testing-rendering-and-world-tools"
+  ],
+  "cookies": [
+    "red-oni-blue-oni",
+    "grid-for-modular-assets",
+    "mario",
+    "monster-hunter-world-treading-old-grounds",
+    "pac-man",
+    "principles-of-concept-design",
+    "procedural-generation-for-games",
+    "quick-time-events",
+    "realistic-vs-stylized",
+    "sonic-the-hedgehog",
+    "ninth-generation-closer-to-reality",
+    "ninth-generation-first-year"
   ]
 };
