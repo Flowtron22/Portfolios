@@ -1,4 +1,5 @@
 import {libraryCollections} from './library-content.js';
+import {librarySamples} from './library-samples.js';
 import {designDecks} from './design-decks.js';
 import {designTopics} from './design-topics.js';
 
@@ -81,10 +82,10 @@ export const designArticles = [
 
 const escape=text=>String(text??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 
-function renderFigure({src, alt, caption}) {
+function renderFigure({src, alt, caption, width = 1400, height = 788}) {
   return `<figure class="design-slide">
-    <a href="${escape(src)}" target="_blank" rel="noopener noreferrer" aria-label="Open slide full size. ${escape(alt)}">
-      <img src="${escape(src)}" alt="${escape(alt)}" width="1400" height="788" loading="lazy" decoding="async">
+    <a href="${escape(src)}" target="_blank" rel="noopener noreferrer" aria-label="Open image full size. ${escape(alt)}">
+      <img src="${escape(src)}" alt="${escape(alt)}" width="${width}" height="${height}" loading="lazy" decoding="async">
     </a>
     ${caption ? `<figcaption>${escape(caption)}</figcaption>` : ''}
   </figure>`;
@@ -126,7 +127,7 @@ function libraryTabs(active) {
 }
 
 function libraryCard(collection, article, grouped) {
-  const cover = designDecks[article.number]?.slides[0].thumbnail;
+  const cover = designDecks[article.number]?.slides[0].thumbnail ?? librarySamples[article.slug]?.src;
   const heading = grouped ? 'h3' : 'h2';
   return `<li>
     <a href="${articleLink(collection, article.slug)}">
@@ -160,11 +161,13 @@ export function libraryPage(sectionOrSlug, entrySlug) {
 function renderArticle(article, backLink) {
   if (!article) return `<div class="solo-page-heading"><h1>Article not found</h1><a class="text-link" href="${backLink}">Back to library</a></div>`;
   const deck = designDecks[article.number];
+  const sample = librarySamples[article.slug];
   return `<article class="design-reading">
     <a class="breadcrumb" href="${backLink}">Back to library</a>
     <h1>${escape(article.title)}</h1>
     <p class="design-intro">${escape(article.summary)}</p>
     ${deck ? renderPresentation(deck) : ''}
+    ${sample ? `<div class="library-sample">${renderFigure(sample)}</div>` : ''}
     ${article.sections.map(section => `<section>
       <h2>${escape(section.heading)}</h2>
       ${(section.paragraphs || []).map(p => `<p>${escape(p)}</p>`).join('')}

@@ -2,6 +2,8 @@ import {designDecks} from '../dist/design-decks.js';
 import fs from 'node:fs/promises';
 import {artworks} from '../dist/art.js';
 import {designArticles} from '../dist/design.js';
+import {libraryCollections} from '../dist/library-content.js';
+import {librarySamples} from '../dist/library-samples.js';
 const required=['dist/index.html','dist/style.css','dist/mobile.css','dist/app.js','dist/scene.js','dist/cube-state.js','dist/assets/three.module.js','dist/assets/three.core.js','dist/assets/police-n-thief.jpg','dist/assets/combat-patrol.jpg','dist/assets/potionpendium.jpg','dist/assets/quantum-loom.jpg','dist/assets/Ahmad-Fadzil-CV.pdf','dist/assets/ahmad-fadzil.png'];
 for(const file of required)await fs.access(file);
 for(const art of artworks){for(const file of [art.image,art.thumbnail])await fs.access('dist/'+file);}
@@ -14,6 +16,15 @@ for (const article of designArticles) {
   for (const slide of deck.slides) await fs.access('dist/' + slide.thumbnail);
   for (const section of article.sections) {
     for (const figure of section.figures || []) await fs.access('dist/' + figure.src);
+  }
+}
+for (const {groups} of Object.values(libraryCollections)) {
+  for (const {entries} of groups) {
+    for (const {slug} of entries) {
+      const sample = librarySamples[slug];
+      if (!sample) throw new Error(`Missing library sample for ${slug}`);
+      await fs.access('dist/' + sample.src);
+    }
   }
 }
 console.log('Static portfolio ready in dist/ — all required files present.');
