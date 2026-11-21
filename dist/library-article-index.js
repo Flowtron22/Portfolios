@@ -1,4 +1,27 @@
 export const fullLibrarySections = {
+  "concept": [
+    "affordances",
+    "large-medium-small",
+    "cel-shading",
+    "collision-detection",
+    "cover",
+    "destructible-environments",
+    "diegetic-ui",
+    "character-part-damage",
+    "dynamic-difficulty",
+    "storytelling-through-spaces",
+    "framing",
+    "game-design",
+    "inverse-kinematics",
+    "landmarks",
+    "level-streaming",
+    "photobashing",
+    "ragdoll-physics",
+    "signifiers",
+    "three-phases-of-animation",
+    "vsync",
+    "wall-running"
+  ],
   "brain-snacks": [
     "level-art-basics",
     "level-design-basics",
