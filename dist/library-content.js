@@ -165,6 +165,10 @@ const goodies = [{
   slug: 'urekatools-for-unity',
   title: 'UrekaTools for Unity',
   summary: 'Automate model imports and set up HDRP materials with EpicImport and EpicShade.',
+  download: {
+    src: 'assets/goodies/com.pedro.urekatools-1.2.12.tgz',
+    label: 'Download UrekaTools 1.2.12 (.tgz)'
+  },
   sections: [
     {
       heading: 'EpicImport',
@@ -191,6 +195,14 @@ const goodies = [{
     {
       heading: 'Requirements',
       paragraphs: ['UrekaTools 1.2.12 is built for Unity 6 (6000.0 or later) with HDRP 17 or later.']
+    },
+    {
+      heading: 'Installation',
+      steps: [
+        'In Unity, open Window → Package Manager.',
+        'Open the + menu, choose Install package from tarball, and select the downloaded .tgz file.',
+        'To start importing models, open UrekaTools → EpicImport → Open Importer.'
+      ]
     }
   ]
 }];

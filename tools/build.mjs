@@ -21,12 +21,13 @@ for (const article of designArticles) {
 }
 for (const [key, {groups}] of Object.entries(libraryCollections)) {
   for (const {entries} of groups) {
-    for (const {slug} of entries) {
+    for (const {slug, download} of entries) {
       const sample = librarySamples[slug];
       if (!sample && Object.hasOwn(fullLibrarySections, key)) {
         throw new Error(`Missing library sample for ${slug}`);
       }
       if (sample) await fs.access('dist/' + sample.src);
+      if (download) await fs.access('dist/' + download.src);
     }
   }
 }
