@@ -19,12 +19,14 @@ for (const article of designArticles) {
     for (const figure of section.figures || []) await fs.access('dist/' + figure.src);
   }
 }
-for (const {groups} of Object.values(libraryCollections)) {
+for (const [key, {groups}] of Object.entries(libraryCollections)) {
   for (const {entries} of groups) {
     for (const {slug} of entries) {
       const sample = librarySamples[slug];
-      if (!sample) throw new Error(`Missing library sample for ${slug}`);
-      await fs.access('dist/' + sample.src);
+      if (!sample && Object.hasOwn(fullLibrarySections, key)) {
+        throw new Error(`Missing library sample for ${slug}`);
+      }
+      if (sample) await fs.access('dist/' + sample.src);
     }
   }
 }

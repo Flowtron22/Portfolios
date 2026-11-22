@@ -161,6 +161,40 @@ const caseStudies = [
     ['Repeat with representative content', 'Compare the result with a known baseline and test moving lights, busy views, repeated props and traversal across cell boundaries. Record the build and conditions for every finding. A technology choice should follow the game’s needs and measured behaviour on its target hardware.'])
 ];
 
+const goodies = [{
+  slug: 'urekatools-for-unity',
+  title: 'UrekaTools for Unity',
+  summary: 'Automate model imports and set up HDRP materials with EpicImport and EpicShade.',
+  sections: [
+    {
+      heading: 'EpicImport',
+      paragraphs: ['EpicImport prepares models, materials and textures in the Unity Editor and generates clean prefabs.'],
+      bullets: [
+        'Corrects common FBX axis and −90° rotation issues and generates prefabs with zero root rotation and 1, 1, 1 scale.',
+        'Extracts embedded materials and textures, detects sidecar textures and converts imported materials to EpicShade.',
+        'Packs ambient occlusion into the red channel, roughness into green and metallic into blue (ORM).',
+        'Supports custom pivot markers, watched folders and batch reprocessing.',
+        'Imports FBX and OBJ. GLB and glTF require a compatible glTF importer.'
+      ]
+    },
+    {
+      heading: 'EpicShade',
+      paragraphs: ['EpicShade is a customizable HDRP shader with opaque and transparent variants.'],
+      bullets: [
+        'Base color and albedo textures, metallic and roughness sliders, separate metallic and roughness maps, and packed ORM support.',
+        'Autodesk-compatible roughness conversion, normal maps, ambient occlusion, emission and reflection controls.',
+        'Rim lighting and material-based outlines with opacity, bias and contrast controls.',
+        'Vertex colors, detail maps, multiple material layers, height-based coloring and shadow overlays.',
+        'Plant-sway animation.'
+      ]
+    },
+    {
+      heading: 'Requirements',
+      paragraphs: ['UrekaTools 1.2.12 is built for Unity 6 (6000.0 or later) with HDRP 17 or later.']
+    }
+  ]
+}];
+
 export const libraryCollections = {
   concept: {title: 'Concept', groups: [{entries: concepts}]},
   'brain-snacks': {title: 'Brain Snacks', groups: [
@@ -169,5 +203,6 @@ export const libraryCollections = {
     {title: 'Shape Language Fundamentals', entries: shapeLanguage}
   ]},
   'case-study': {title: 'Case Study', groups: [{entries: caseStudies}]},
-  cookies: {title: 'Cookies', groups: [{entries: cookies}]}
+  cookies: {title: 'Cookies', groups: [{entries: cookies}]},
+  goodies: {title: 'Goodies', groups: [{entries: goodies}]}
 };
