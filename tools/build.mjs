@@ -5,10 +5,11 @@ import {designArticles} from '../dist/design.js';
 import {libraryCollections} from '../dist/library-content.js';
 import {librarySamples} from '../dist/library-samples.js';
 import {fullLibrarySections} from '../dist/library-article-index.js';
+import {pandora} from '../dist/pandora.js';
 const required=['dist/index.html','dist/style.css','dist/mobile.css','dist/app.js','dist/scene.js','dist/cube-menu.js','dist/cube-state.js','dist/assets/three.module.js','dist/assets/three.core.js','dist/assets/police-n-thief.jpg','dist/assets/combat-patrol.jpg','dist/assets/potionpendium.jpg','dist/assets/quantum-loom.jpg','dist/assets/codex-imperium.jpg','dist/assets/my-watt.jpg','dist/assets/Ahmad-Fadzil-CV.pdf','dist/assets/ahmad-fadzil.png'];
 for(const file of required)await fs.access(file);
-for (const image of ['pandora-title', 'pandora-combat', 'pandora-awang', 'pandora-spirit-world']) {
-  await fs.access(`dist/assets/${image}.webp`);
+for (const {image} of [pandora, pandora.poster, ...pandora.gallery]) {
+  await fs.access(`dist/assets/${image}`);
 }
 for(const art of artworks){for(const file of [art.image,art.thumbnail])await fs.access('dist/'+file);}
 await fs.access('dist/art-gallery.js');
