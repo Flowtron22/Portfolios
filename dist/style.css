@@ -141,3 +141,15 @@
 .role-responsibilities{padding-left:21px;margin:16px 0;color:var(--muted);line-height:1.75}
 .role-responsibilities li+li{margin-top:6px}
 @media print{.role-responsibilities{color:#333}}
+
+.featured-image{background:#0d120e}
+.featured-image img,.thumb img[width][height]{object-fit:contain}
+.detail-image[width][height]{height:auto;min-height:0;object-fit:contain;background:#0d120e}
+.project-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:44px}
+.project-gallery figure{margin:0}
+.project-gallery img{display:block;width:100%;height:auto}
+.project-gallery figcaption{padding-top:8px;color:var(--muted);font-size:14px}
+@media(max-width:700px){
+  .featured .featured-image{aspect-ratio:1024/434}
+  .project-gallery{grid-template-columns:1fr;margin-top:30px}
+}

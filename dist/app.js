@@ -1,7 +1,29 @@
 import {libraryEntryCount,libraryPage,loadLibraryArticle} from './design.js';
 import {artworks} from './art.js';
 import {artCards,artViewer,initArtViewer} from './art-gallery.js';
+const pandora = {
+  id: 'pandora',
+  name: 'PANDORA',
+  type: 'Action RPG roguelite',
+  image: 'pandora-title.webp',
+  imageAlt: 'PANDORA title artwork set among forest ruins in Alam Sela',
+  imageWidth: 1024,
+  imageHeight: 434,
+  intro: 'Awang, a young pawang, enters the spirit realm of Alam Sela to find a cure for his village.',
+  description: 'In this single-player action RPG inspired by Southeast Asian folklore, Awang prepares a weapon, a starting herb and medicine before each expedition. He chooses routes through combat encounters, where an ancient intelligence named Logos uses the herbs he finds to change his weapon’s abilities. After defeating the boss, he brings his discoveries back to the village and unlocks new options for later runs.',
+  status: 'In development',
+  studio: 'Ureka Games',
+  role: 'Game Director / Technical Artist',
+  tech: 'Unreal Engine 5',
+  contribution: [],
+  gallery: [
+    {image: 'pandora-combat.webp', width: 1024, height: 576, alt: 'Awang in a forest arena with the combat prototype interface visible', caption: 'Combat prototype'},
+    {image: 'pandora-awang.webp', width: 1145, height: 579, alt: 'Character sheet showing Awang’s costume and weapon from multiple angles', caption: 'Awang character exploration'},
+    {image: 'pandora-spirit-world.webp', width: 1600, height: 900, alt: 'Concept art of a massive spirit in a rocky landscape', caption: 'Alam Sela concept art'}
+  ]
+};
 const projects=[
+ pandora,
  {id:'police-n-thief',name:'Police N Thief',type:'Multiplayer party game',image:'police-n-thief.jpg',url:'https://police-n-thief.vercel.app/',intro:'An asymmetric multiplayer chase with police, thieves, tools and team rescues.',focus:'Gameplay · AI · Multiplayer · UI',description:'A solo-developed party-game prototype in which police pursue thieves while thieves steal and rescue captured teammates. Distinct roles and tools give each team different ways to pursue, escape and coordinate rescues.',contribution:['Creative direction and gameplay rules','Player controls, AI behaviour and interface design','Online and local multiplayer','Testing and playable-build delivery'],tech:'Three.js'},
  {id:'combat-patrol',name:'Combat Patrol',type:'Browser game',image:'combat-patrol.jpg',url:'https://combatpatrol.vercel.app/',intro:'A science-fiction game for the browser.',description:'A personal game project with a dark science-fiction setting. The public build includes a new-game flow, a resume option, settings and credits.',contribution:[]},
  {id:'potionpendium',name:'Potionpendium',type:'Potion puzzle',image:'potionpendium.jpg',url:'https://potionpendium.vercel.app/',intro:'A potion puzzle with gems, bottle queues and mana abilities.',focus:'Puzzle systems · Interaction · Progression',description:'Plan around bottle capacities, blocked queues and a limited brewing shelf. Mana abilities let players clear or rearrange gems. Daily challenges and a journey mode provide different ways to play.',contribution:['Gem interactions, bottle queues and mana spells','Mastery progression and daily challenges']},
@@ -32,14 +54,15 @@ const experience=[
 const main=document.querySelector('main');
 const button=(href,label,primary=false)=>`<a ${href.endsWith('.pdf')?'download':''} class="button ${primary?'primary':''}" href="${href}">${label}</a>`;
 const external=(url,label)=>`<a class="button primary" href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`;
-const card=p=>`<a class="project-card" href="#/project/${p.id}"><div class="thumb"><img src="assets/${p.image}" alt="${p.name} live browser screenshot" loading="lazy"><span>${p.type}</span></div><div class="card-top"><h2>${p.name}</h2><span>View project</span></div><p>${p.intro}</p></a>`;
+const projectImage = (p, attributes) => `<img src="assets/${p.image}" alt="${p.imageAlt || `${p.name} browser screenshot`}"${p.imageWidth ? ` width="${p.imageWidth}" height="${p.imageHeight}"` : ''} ${attributes}>`;
+const card=p=>`<a class="project-card" href="#/project/${p.id}"><div class="thumb">${projectImage(p, 'loading="lazy"')}<span>${p.type}</span></div><div class="card-top"><h2>${p.name}</h2><span>View project</span></div><p>${p.intro}</p></a>`;
 const heading=(label,title,text)=>`<div class="page-head">${label?'<span class="eyebrow">'+label+'</span>':''}<h1>${title}</h1><p>${text}</p></div>`;
 const projectCredits=items=>items.length?'<ul class="project-credits">'+items.map(([title,credit])=>'<li><strong>'+title+'</strong> — '+credit+'</li>').join('')+'</ul>':'';
 const roleDetails=roles=>roles.map(r=>'<section class="company-role">'+(r.period?'<time>'+r.period+'</time>':'')+'<h3>'+r.title+'</h3>'+(r.summary?'<p>'+r.summary+'</p>':'')+(r.responsibilities?.length?'<ul class="role-responsibilities">'+r.responsibilities.map(item=>'<li>'+item+'</li>').join('')+'</ul>':'')+projectCredits(r.projects)+'</section>').join('');
 const exp=()=>experience.map(c=>'<article class="experience company-experience"><h2>'+c.company+'</h2>'+roleDetails(c.roles)+'</article>').join('');
 function home(){return `<section class="hero"><div class="hero-copy"><div class="hero-identity"><img src="assets/ahmad-fadzil.png" alt="Portrait of Ahmad Fadzil" width="200" height="200" fetchpriority="high" decoding="async"></div><h1>Creative <br><em>direction &</em> <br><em>development.</em></h1><p>I develop gameplay concepts, direct visual production and coordinate multidisciplinary teams.</p></div><div class="scene-shell cube-shell" id="scene" role="region" aria-label="Portfolio navigation"><nav class="cube-fallback" aria-label="Portfolio sections"><a class="button" href="#/solo/art">Art</a><a class="button" href="#/solo/games">Games</a><a class="button" href="#/solo/library">Library</a><a class="button" href="#/cv">CV</a><a class="button" href="#/contact">Contact</a></nav></div></section>
  <section class="section"><div class="section-heading"><div><span class="eyebrow">Background</span><h2>Experience</h2></div><a class="text-link" href="#/cv">Read my experience</a></div><div class="leadership"><p>I founded Ureka Games to develop independent games and build playable prototypes. At Todak Studios, I set creative direction for Mastra Battle Arena before moving into production management. Earlier roles at Virtuos, Studio Kamii and Animonsta developed my experience in technical art and asset production.</p><div class="principles"><div><h3>Creative direction</h3><p>Narrative, world-building, visual direction, and audio style for Mastra Battle Arena, plus hands-on Live Ops design for online games.</p></div><div><h3>Technical art</h3><p>Technical art direction at Studio Kamii and commercial co-development experience at Virtuos.</p></div><div><h3>Production management</h3><p>Milestone planning, resource allocation, delivery risks and structured playtesting.</p></div></div></div><div class="credit-line"><span>Ureka Games</span><span>Todak Studios</span><span>Virtuos Kuala Lumpur</span><span>Studio Kamii</span><span>Animonsta</span></div></section>
- <section class="section"><div class="section-heading"><div><span class="eyebrow">Solo development</span><h2>Featured Project</h2></div><a class="text-link" href="#/solo/games">Explore all projects</a></div><article class="featured"><a class="featured-image" href="#/project/police-n-thief"><img src="assets/police-n-thief.jpg" alt="Police N Thief colourful Three.js character and game menu"></a><div class="featured-copy"><div class="tags"><span class="tag">Solo development</span><span class="tag">Multiplayer</span><span class="tag">Three.js</span></div><h3>Police N Thief</h3><p>A police-and-thieves party game. I designed and developed the rules, controls, AI, interface and multiplayer systems.</p>${button('#/project/police-n-thief','Explore the project')}</div></article></section>
+ <section class="section"><div class="section-heading"><h2>Featured Project</h2><a class="text-link" href="#/solo/games">Explore all projects</a></div><article class="featured"><a class="featured-image" href="#/project/${pandora.id}">${projectImage(pandora, 'loading="lazy"')}</a><div class="featured-copy"><div class="tags"><span class="tag">${pandora.type}</span><span class="tag">${pandora.status}</span></div><h3>${pandora.name}</h3><p>${pandora.intro}</p>${button('#/project/'+pandora.id,'Explore PANDORA')}</div></article></section>
  <section class="section cta"><div><h2>Discuss a project</h2><p>For creative direction, game development and production enquiries.</p></div>${button('#/contact','Contact me',true)}</section>`;}
 function work(){return heading('Professional work','Work & experience.','Selected contributions across studio leadership, game development and animation production.')+'<div class="page-content">'+experience.map(c=>'<article class="work-row company-work"><div><h2>'+c.company+'</h2></div><div>'+roleDetails(c.roles)+'</div></article>').join('')+'<div class="actions">'+button('#/cv','View full CV',true)+'</div></div>';}
 const isLibrary = section => section === 'library' || section === 'design';
@@ -73,7 +96,27 @@ function solo(section = 'art', subsection, slug) {
     ${content[active]()}
   </section>`;
 }
-function project(id){const p=projects.find(x=>x.id===id);if(!p)return missing();return `<article class="detail"><a class="breadcrumb" href="#/solo/games">All games</a><div class="detail-top"><div><span class="eyebrow">${p.type}</span><h1>${p.name}</h1><p>${p.intro}</p></div><div class="actions">${external(p.url,p.launch || 'Play in browser')}</div></div><img class="detail-image" src="assets/${p.image}" alt="${p.name} browser screenshot"><div class="detail-columns"><aside><h2>Project details</h2><dl><dt>Role</dt><dd>Solo developer</dd>${p.focus?'<dt>Focus</dt><dd>'+p.focus+'</dd>':''}${p.tech?'<dt>Technology</dt><dd>'+p.tech+'</dd>':''}</dl></aside><div><h2>Overview</h2><p>${p.description}</p>${p.contribution.length?'<h3>My contribution</h3><ul>'+p.contribution.map(x=>'<li>'+x+'</li>').join('')+'</ul>':''}</div></div></article>`;}
+function project(id) {
+  const p = projects.find(p => p.id === id);
+  if (!p) return missing();
+  const details = [
+    ['Role', p.role || 'Solo developer'], ['Studio', p.studio], ['Status', p.status],
+    ['Focus', p.focus], ['Technology', p.tech]
+  ];
+  return `<article class="detail">
+    <a class="breadcrumb" href="#/solo/games">All games</a>
+    <div class="detail-top">
+      <div><span class="eyebrow">${p.type}</span><h1>${p.name}</h1><p>${p.intro}</p></div>
+      ${p.url ? `<div class="actions">${external(p.url, p.launch || 'Play in browser')}</div>` : ''}
+    </div>
+    ${projectImage(p, 'class="detail-image"')}
+    <div class="detail-columns">
+      <aside><h2>Project details</h2><dl>${details.filter(([, value]) => value).map(([label, value]) => `<dt>${label}</dt><dd>${value}</dd>`).join('')}</dl></aside>
+      <div><h2>Overview</h2><p>${p.description}</p>${p.contribution.length ? '<h3>My contribution</h3><ul>' + p.contribution.map(item => '<li>' + item + '</li>').join('') + '</ul>' : ''}</div>
+    </div>
+    ${p.gallery ? `<section class="project-gallery" aria-label="Game artwork and prototype">${p.gallery.map(({image, width, height, alt, caption}) => `<figure><img src="assets/${image}" width="${width}" height="${height}" alt="${alt}" loading="lazy"><figcaption>${caption}</figcaption></figure>`).join('')}</section>` : ''}
+  </article>`;
+}
 function cv(){return heading('','Ahmad Fadzil','DESIGN . NARRATIVE . ART')+`<section class="page-content cv-layout"><aside class="cv-aside"><h2>Profile</h2><p>Creative director and producer with 17+ years of experience in games and animation, including technical art, commercial co-development and studio production.</p>${button('assets/Ahmad-Fadzil-CV.pdf','Download CV · PDF',true)}<button class="button" id="print-cv">Print web CV</button><p><a href="mailto:ahmadfadzil22@gmail.com">ahmadfadzil22@gmail.com</a></p><p><strong>Areas of practice</strong><br>Creative direction · Narrative direction · World-building · Audio direction · GDD frameworks · Game and level design · Live Ops design · Core gameplay mechanics · Design quality control · Team training · Prototyping · Technical art · Art briefs · Production planning · Multidisciplinary coordination · Recruitment · QA playtesting</p><p><a class="text-link" href="https://a-fadzil.vercel.app/">a-fadzil.vercel.app</a></p></aside><div>${exp()}<article class="experience"><h2>Independent projects</h2><p>Police N Thief, Combat Patrol, Potionpendium and QuantumLoom are available in the Projects gallery.</p><div class="actions" style="margin-top:20px">${button('#/solo/games','Explore projects')}</div></article></div></section>`;}
 function contact(){return `<section class="contact"><h1>Contact</h1><p>For roles, collaborations and project enquiries, contact me by email.</p><a class="contact-email" href="mailto:ahmadfadzil22@gmail.com">ahmadfadzil22@gmail.com</a><div class="contact-links"><a class="text-link" href="assets/Ahmad-Fadzil-CV.pdf" download>Download CV</a><a class="text-link" href="#/solo/games">Games</a></div></section>`;}
 function missing(){return `<section class="error"><span class="eyebrow">Page not found</span><h1>Page not found.</h1>${button('#/','Return to overview',true)}</section>`;}
