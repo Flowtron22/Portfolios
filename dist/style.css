@@ -129,3 +129,15 @@
 .source-table td > :first-child{margin-top:0}
 .source-table td > :last-child{margin-bottom:0}
 @media (max-width:600px){.source-table td{padding:6px}.source-reading .source-figure{display:block}}
+.cube-menu-stage.cube-face-hover{cursor:pointer}
+.cube-menu-stage.cube-dragging{cursor:grabbing}
+.cube-menu-stage{touch-action:pan-y}
+.cube-fallback{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:auto}
+.cube-menu-help{text-align:center;color:var(--muted);font-size:13px}
+.cube-mode-toggle{align-self:center;background:transparent;border:0;color:var(--muted);font:inherit;font-size:13px;text-decoration:underline;text-underline-offset:3px;padding:10px;min-height:44px;cursor:pointer}
+.cube-mode-toggle:hover,.cube-mode-toggle:focus-visible{color:var(--accent)}
+@media(max-width:700px){.cube-menu .cube-menu-stage{touch-action:pan-y;height:clamp(190px,30svh,255px)}}
+
+.role-responsibilities{padding-left:21px;margin:16px 0;color:var(--muted);line-height:1.75}
+.role-responsibilities li+li{margin-top:6px}
+@media print{.role-responsibilities{color:#333}}
