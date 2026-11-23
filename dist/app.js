@@ -67,9 +67,9 @@ const projectCredits=items=>items.length?'<ul class="project-credits">'+items.ma
 function workProjectCredits(items) {
   if (!items.some(([title]) => Object.hasOwn(workMedia, title))) return projectCredits(items);
   return `<ul class="work-projects">${items.map(([title, credit]) => {
-    const {images = [], trailers = []} = workMedia[title] ?? {};
+    const {images = [], trailers = [], cropImages} = workMedia[title] ?? {};
     return `<li${images.length > 1 || trailers.length ? ' class="work-project-wide"' : ''}>
-      ${images.length ? `<div class="work-project-art">${images.map(({file, alt}) => `<a href="assets/work/${file}" target="_blank" rel="noopener" aria-label="View full-size image. ${alt}"><img src="assets/work/${file}" alt="${alt}" loading="lazy" decoding="async"></a>`).join('')}</div>` : ''}
+      ${images.length ? `<div class="work-project-art${cropImages ? ' work-project-art-cropped' : ''}">${images.map(({file, alt}) => `<a href="assets/work/${file}" target="_blank" rel="noopener" aria-label="View full-size image. ${alt}"><img src="assets/work/${file}" alt="${alt}" loading="lazy" decoding="async"></a>`).join('')}</div>` : ''}
       <div class="work-project-copy"><h4>${trailers.length ? 'Mastra Trailers' : title}</h4><p>${trailers.length ? 'Opening cinematic contribution. ' : ''}${credit}</p></div>
       ${trailers.length ? `<div class="work-trailers">${trailers.map(({id, title: trailerTitle}) => `<div>
         <iframe src="https://www.youtube-nocookie.com/embed/${id}" title="${trailerTitle}" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>

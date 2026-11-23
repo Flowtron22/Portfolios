@@ -1,8 +1,7 @@
 export const workMedia = {
-  'Mastra Battle Arena': {images: [
+  'Mastra Battle Arena': {cropImages: true, images: [
     {file: 'mastra-banner.webp', alt: 'Mastra Battle Arena banner'},
-    {file: 'mastra-antaboga.webp', alt: 'Antaboga home screen artwork'},
-    {file: 'mastra-scene.webp', alt: 'Character wearing a feathered headdress in a blue-lit scene'}
+    {file: 'mastra-antaboga.webp', alt: 'Antaboga home screen artwork'}
   ]},
   'Mastra Opening Trailer': {trailers: [
     {id: 'Q3jCak7eOSk', title: 'Mastra Opening Cinematic'},
