@@ -5,9 +5,9 @@ import {pandora} from './pandora.js';
 const projects=[
  pandora,
  {
-  id: 'maut', name: 'MAUT', type: 'Game concept', image: 'maut.webp',
-  imageAlt: 'The Death Dealer stands before towering stone figures in a misty forest',
-  imageWidth: 1261, imageHeight: 862,
+  id: 'maut', name: 'MAUT', type: 'Game concept', image: 'maut-title.webp',
+  imageAlt: 'MAUT title art showing the Death Dealer before towering stone figures in a misty forest',
+  imageWidth: 1517, imageHeight: 1037,
   intro: 'A Death Dealer hunts creatures from folklore using dark magic and the spirits they summon.',
   description: 'MAUT is an early gameplay concept exploring how spirit summoning and dark magic could shape the Death Dealer’s hunts.',
   status: 'Early concept', contribution: [],
