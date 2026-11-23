@@ -10,7 +10,12 @@ const projects=[
   imageWidth: 1261, imageHeight: 862,
   intro: 'A Death Dealer hunts creatures from folklore using dark magic and the spirits they summon.',
   description: 'MAUT is an early gameplay concept exploring how spirit summoning and dark magic could shape the Death Dealer’s hunts.',
-  status: 'Early concept', contribution: []
+  status: 'Early concept', contribution: [],
+  gallery: [{
+    image: 'maut-overhead.webp', width: 1261, height: 862,
+    alt: 'Overhead view of the Death Dealer in a misty forest clearing',
+    caption: 'Overhead forest view'
+  }]
  },
  {id:'police-n-thief',name:'Police N Thief',type:'Multiplayer party game',image:'police-n-thief.jpg',url:'https://police-n-thief.vercel.app/',intro:'An asymmetric multiplayer chase with police, thieves, tools and team rescues.',focus:'Gameplay · AI · Multiplayer · UI',description:'A solo-developed party-game prototype in which police pursue thieves while thieves steal and rescue captured teammates. Distinct roles and tools give each team different ways to pursue, escape and coordinate rescues.',contribution:['Creative direction and gameplay rules','Player controls, AI behaviour and interface design','Online and local multiplayer','Testing and playable-build delivery'],tech:'Three.js'},
  {id:'combat-patrol',name:'Combat Patrol',type:'Browser game',image:'combat-patrol.jpg',url:'https://combatpatrol.vercel.app/',intro:'A science-fiction game for the browser.',description:'A personal game project with a dark science-fiction setting. The public build includes a new-game flow, a resume option, settings and credits.',contribution:[]},
