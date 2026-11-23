@@ -8,9 +8,7 @@ import {fullLibrarySections} from '../dist/library-article-index.js';
 import {pandora} from '../dist/pandora.js';
 const required=['dist/index.html','dist/style.css','dist/mobile.css','dist/app.js','dist/scene.js','dist/cube-menu.js','dist/cube-state.js','dist/assets/three.module.js','dist/assets/three.core.js','dist/assets/police-n-thief.jpg','dist/assets/combat-patrol.jpg','dist/assets/potionpendium.jpg','dist/assets/quantum-loom.jpg','dist/assets/codex-imperium.jpg','dist/assets/my-watt.jpg','dist/assets/Ahmad-Fadzil-CV.pdf','dist/assets/ahmad-fadzil.png'];
 for(const file of required)await fs.access(file);
-await fs.access('dist/assets/maut-title.webp');
-await fs.access('dist/assets/maut-overhead.webp');
-for (const image of ['maut-preview.webp', 'maut-ruins-gameplay.webp', 'maut-camera-gameplay.webp']) {
+for (const image of ['maut-preview.webp', 'maut-overhead.webp', 'maut-ruins-gameplay.webp', 'maut-camera-gameplay.webp']) {
   await fs.access(`dist/assets/${image}`);
 }
 for (const {image} of [pandora, pandora.poster, ...pandora.gallery]) {
