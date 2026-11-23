@@ -13,6 +13,10 @@ export const pandora = {
   role: 'Game Director / Technical Artist',
   tech: 'Unreal Engine 5',
   contribution: [],
+  videos: [
+    {src: 'pandora-test-v03.mp4', poster: 'pandora-test-v03.webp', title: 'Prototype test 03'},
+    {src: 'pandora-test-v02.mp4', poster: 'pandora-test-v02.webp', title: 'Prototype test 02'}
+  ],
   poster: {
     image: 'pandora-poster.webp', width: 842, height: 1264,
     alt: 'PANDORA poster with shadow spirits under a red moon above the waterfalls of Alam Sela',

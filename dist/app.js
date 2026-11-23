@@ -99,6 +99,16 @@ function project(id) {
       ${p.poster ? projectFigure(p.poster, 'project-poster') : projectDetails}
       <div><h2>Overview</h2><p>${p.description}</p>${p.contribution.length ? '<h3>My contribution</h3><ul>' + p.contribution.map(item => '<li>' + item + '</li>').join('') + '</ul>' : ''}${p.poster ? projectDetails : ''}</div>
     </div>
+    ${p.videos ? `<section class="project-videos" aria-labelledby="project-videos-heading">
+      <h2 id="project-videos-heading">Prototype videos</h2>
+      <div class="project-video-grid">${p.videos.map(({src, poster, title}) => `<figure>
+        <video controls playsinline preload="none" width="1280" height="716" poster="assets/${poster}" aria-label="${title}">
+          <source src="assets/${src}" type="video/mp4">
+          <a href="assets/${src}">Open ${title}</a>
+        </video>
+        <figcaption>${title}</figcaption>
+      </figure>`).join('')}</div>
+    </section>` : ''}
     ${p.gallery ? `<section class="project-gallery" aria-label="Game artwork and prototype">${p.gallery.map(art => projectFigure(art)).join('')}</section>` : ''}
   </article>`;
 }

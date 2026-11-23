@@ -11,6 +11,10 @@ for(const file of required)await fs.access(file);
 for (const {image} of [pandora, pandora.poster, ...pandora.gallery]) {
   await fs.access(`dist/assets/${image}`);
 }
+for (const {src, poster} of pandora.videos) {
+  await fs.access(`dist/assets/${src}`);
+  await fs.access(`dist/assets/${poster}`);
+}
 for(const art of artworks){for(const file of [art.image,art.thumbnail])await fs.access('dist/'+file);}
 await fs.access('dist/art-gallery.js');
 await fs.access('dist/design.js');
