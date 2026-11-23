@@ -24,6 +24,7 @@
 .design-slide{margin:0;min-width:0}
 .design-slide a,.design-slide img{display:block;width:100%}
 .design-slide img{height:auto;background:var(--panel)}
+.design-slide img[data-portrait]{max-height:min(70svh,620px);object-fit:contain}
 .library-sample{margin-block:24px}
 .library-sample img{max-height:min(64vh,580px);object-fit:contain}
 .design-slide figcaption{margin-top:9px;color:var(--muted);font-size:14px;line-height:1.55}

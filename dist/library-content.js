@@ -1,4 +1,5 @@
 import {cookies} from './cookie-content.js';
+import {candlesanGroups} from './candlesan.js';
 
 function entry(slug, title, summary, ...sections) {
   return {slug, title, summary, sections: sections.map(([heading, ...paragraphs]) => ({heading, paragraphs}))};
@@ -208,6 +209,7 @@ const goodies = [{
 }];
 
 export const libraryCollections = {
+  candlesan: {title: 'Candlesan', groups: candlesanGroups},
   concept: {title: 'Concept', groups: [{entries: concepts}]},
   'brain-snacks': {title: 'Brain Snacks', groups: [
     {title: 'Level Art Fundamentals', entries: levelArt},

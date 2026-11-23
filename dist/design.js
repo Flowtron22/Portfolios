@@ -88,7 +88,7 @@ const escape=text=>String(text??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'
 function renderFigure({src, alt, caption, width = 1400, height = 788}) {
   return `<figure class="design-slide">
     <a href="${escape(src)}" target="_blank" rel="noopener noreferrer" aria-label="Open image full size. ${escape(alt)}">
-      <img src="${escape(src)}" alt="${escape(alt)}" width="${width}" height="${height}" loading="lazy" decoding="async">
+      <img src="${escape(src)}" alt="${escape(alt)}" width="${width}" height="${height}"${height > width ? ' data-portrait' : ''} loading="lazy" decoding="async">
     </a>
     ${caption ? `<figcaption>${escape(caption)}</figcaption>` : ''}
   </figure>`;
@@ -130,7 +130,8 @@ function libraryTabs(active) {
 }
 
 function libraryCard(collection, article, grouped) {
-  const cover = designDecks[article.number]?.slides[0].thumbnail ?? librarySamples[article.slug]?.src;
+  const cover = designDecks[article.number]?.slides[0].thumbnail ?? librarySamples[article.slug]?.src
+    ?? article.sections?.find(section => section.figures?.length)?.figures[0].src;
   const heading = grouped ? 'h3' : 'h2';
   return `<li>
     <a href="${articleLink(collection, article.slug)}">
