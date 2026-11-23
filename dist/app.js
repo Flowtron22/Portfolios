@@ -2,6 +2,7 @@ import {libraryEntryCount,libraryPage,loadLibraryArticle} from './design.js';
 import {artworks} from './art.js';
 import {artCards,artViewer,initArtViewer} from './art-gallery.js';
 import {pandora} from './pandora.js';
+import {workMedia} from './work-media.js';
 const projects=[
  pandora,
  {
@@ -63,13 +64,27 @@ const projectFigure = ({image, width, height, alt, caption}, className = '') => 
 const card=p=>`<a class="project-card" href="#/project/${p.id}"><div class="thumb">${projectImage(p, 'loading="lazy"')}<span>${p.type}</span></div><div class="card-top"><h2>${p.name}</h2><span>View project</span></div><p>${p.intro}</p></a>`;
 const heading=(label,title,text)=>`<div class="page-head">${label?'<span class="eyebrow">'+label+'</span>':''}<h1>${title}</h1><p>${text}</p></div>`;
 const projectCredits=items=>items.length?'<ul class="project-credits">'+items.map(([title,credit])=>'<li><strong>'+title+'</strong> — '+credit+'</li>').join('')+'</ul>':'';
-const roleDetails=roles=>roles.map(r=>'<section class="company-role">'+(r.period?'<time>'+r.period+'</time>':'')+'<h3>'+r.title+'</h3>'+(r.summary?'<p>'+r.summary+'</p>':'')+(r.responsibilities?.length?'<ul class="role-responsibilities">'+r.responsibilities.map(item=>'<li>'+item+'</li>').join('')+'</ul>':'')+projectCredits(r.projects)+'</section>').join('');
+function workProjectCredits(items) {
+  if (!items.some(([title]) => Object.hasOwn(workMedia, title))) return projectCredits(items);
+  return `<ul class="work-projects">${items.map(([title, credit]) => {
+    const {images = [], trailers = []} = workMedia[title] ?? {};
+    return `<li${images.length > 1 || trailers.length ? ' class="work-project-wide"' : ''}>
+      ${images.length ? `<div class="work-project-art">${images.map(({file, alt}) => `<a href="assets/work/${file}" target="_blank" rel="noopener" aria-label="View full-size image. ${alt}"><img src="assets/work/${file}" alt="${alt}" loading="lazy" decoding="async"></a>`).join('')}</div>` : ''}
+      <div class="work-project-copy"><h4>${trailers.length ? 'Mastra Trailers' : title}</h4><p>${trailers.length ? 'Opening cinematic contribution. ' : ''}${credit}</p></div>
+      ${trailers.length ? `<div class="work-trailers">${trailers.map(({id, title: trailerTitle}) => `<div>
+        <iframe src="https://www.youtube-nocookie.com/embed/${id}" title="${trailerTitle}" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
+        <a class="text-link" href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener">${trailerTitle} on YouTube</a>
+      </div>`).join('')}</div>` : ''}
+    </li>`;
+  }).join('')}</ul>`;
+}
+const roleDetails=(roles, credits=projectCredits)=>roles.map(r=>'<section class="company-role">'+(r.period?'<time>'+r.period+'</time>':'')+'<h3>'+r.title+'</h3>'+(r.summary?'<p>'+r.summary+'</p>':'')+(r.responsibilities?.length?'<ul class="role-responsibilities">'+r.responsibilities.map(item=>'<li>'+item+'</li>').join('')+'</ul>':'')+credits(r.projects)+'</section>').join('');
 const exp=()=>experience.map(c=>'<article class="experience company-experience"><h2>'+c.company+'</h2>'+roleDetails(c.roles)+'</article>').join('');
 function home(){return `<section class="hero"><div class="hero-copy"><div class="hero-identity"><img src="assets/ahmad-fadzil.png" alt="Portrait of Ahmad Fadzil" width="200" height="200" fetchpriority="high" decoding="async"></div><h1><span class="hero-desktop-title">Design <br><em>direction &</em> <br><em>development.</em></span><span class="hero-mobile-title">Design <em>Direction</em> <em>Development</em></span></h1><p>I develop gameplay concepts, direct visual production and coordinate multidisciplinary teams.</p></div><div class="scene-shell cube-shell" id="scene" role="region" aria-label="Portfolio navigation"><nav class="cube-fallback" aria-label="Portfolio sections"><a class="button" href="#/solo/art">Art</a><a class="button" href="#/solo/games">Games</a><a class="button" href="#/solo/library">Library</a><a class="button" href="#/cv">CV</a><a class="button" href="#/contact">Contact</a></nav></div></section>
  <section class="section"><div class="section-heading"><div><span class="eyebrow">Background</span><h2>Experience</h2></div><a class="text-link" href="#/cv">Read my experience</a></div><div class="leadership"><p>I founded Ureka Games to develop independent games and build playable prototypes. At Todak Studios, I set creative direction for Mastra Battle Arena before moving into production management. Earlier roles at Virtuos, Studio Kamii and Animonsta developed my experience in technical art and asset production.</p><div class="principles"><div><h3>Creative direction</h3><p>Narrative, world-building, visual direction, and audio style for Mastra Battle Arena, plus hands-on Live Ops design for online games.</p></div><div><h3>Technical art</h3><p>I led technical art direction at Todak Studios and Studio Kamii and worked in commercial co-development at Virtuos. I set performance benchmarks and technical limits for target platforms and guide art and engineering teams in meeting them.</p></div><div><h3>Production management</h3><p>I plan milestones, allocate resources, track delivery risks, and organize structured playtests. I coordinate deliverables for the open beta build, monthly events, and exhibitions.</p></div></div></div><div class="credit-line"><span>Ureka Games</span><span>Todak Studios</span><span>Virtuos Kuala Lumpur</span><span>Studio Kamii</span><span>Animonsta</span></div></section>
  <section class="section"><div class="section-heading"><h2>Featured Project</h2><a class="text-link" href="#/solo/games">Explore all projects</a></div><article class="featured"><a class="featured-image" href="#/project/${pandora.id}">${projectImage(pandora, 'loading="lazy"')}</a><div class="featured-copy"><div class="tags"><span class="tag">${pandora.type}</span><span class="tag">${pandora.status}</span></div><h3>${pandora.name}</h3><p>${pandora.intro}</p>${button('#/project/'+pandora.id,'Explore PANDORA')}</div></article></section>
  <section class="section cta"><div><h2>Discuss a project</h2><p>For creative direction, game development and production enquiries.</p></div>${button('#/contact','Contact me',true)}</section>`;}
-function work(){return heading('Professional work','Work & experience.','Selected contributions across studio leadership, game development and animation production.')+'<div class="page-content">'+experience.map(c=>'<article class="work-row company-work"><div><h2>'+c.company+'</h2></div><div>'+roleDetails(c.roles)+'</div></article>').join('')+'<div class="actions">'+button('#/cv','View full CV',true)+'</div></div>';}
+function work(){return heading('Professional work','Work & experience.','Selected contributions across studio leadership, game development and animation production.')+'<div class="page-content">'+experience.map(c=>'<article class="work-row company-work"><div><h2>'+c.company+'</h2></div><div>'+roleDetails(c.roles,workProjectCredits)+'</div></article>').join('')+'<div class="actions">'+button('#/cv','View full CV',true)+'</div></div>';}
 const isLibrary = section => section === 'library' || section === 'design';
 function solo(section = 'art', subsection, slug) {
   const active = section === 'games' ? 'games' : isLibrary(section) ? 'library' : 'art';
