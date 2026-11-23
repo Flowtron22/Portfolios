@@ -100,7 +100,7 @@ function project(id) {
       <div><h2>Overview</h2><p>${p.description}</p>${p.contribution.length ? '<h3>My contribution</h3><ul>' + p.contribution.map(item => '<li>' + item + '</li>').join('') + '</ul>' : ''}${p.poster ? projectDetails : ''}</div>
     </div>
     ${p.videos ? `<section class="project-videos" aria-labelledby="project-videos-heading">
-      <h2 id="project-videos-heading">Prototype videos</h2>
+      <h2 id="project-videos-heading">Mechanic Test</h2>
       <div class="project-video-grid">${p.videos.map(({src, poster, title}) => `<figure>
         <video controls playsinline preload="none" width="1280" height="716" poster="assets/${poster}" aria-label="${title}">
           <source src="assets/${src}" type="video/mp4">

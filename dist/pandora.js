@@ -14,8 +14,8 @@ export const pandora = {
   tech: 'Unreal Engine 5',
   contribution: [],
   videos: [
-    {src: 'pandora-test-v03.mp4', poster: 'pandora-test-v03.webp', title: 'Prototype test 03'},
-    {src: 'pandora-test-v02.mp4', poster: 'pandora-test-v02.webp', title: 'Prototype test 02'}
+    {src: 'pandora-test-v02.mp4', poster: 'pandora-test-v02.webp', title: 'Phase A'},
+    {src: 'pandora-test-v03.mp4', poster: 'pandora-test-v03.webp', title: 'Phase B'}
   ],
   poster: {
     image: 'pandora-poster.webp', width: 842, height: 1264,
