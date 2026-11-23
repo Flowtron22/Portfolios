@@ -10,6 +10,9 @@ const required=['dist/index.html','dist/style.css','dist/mobile.css','dist/app.j
 for(const file of required)await fs.access(file);
 await fs.access('dist/assets/maut-title.webp');
 await fs.access('dist/assets/maut-overhead.webp');
+for (const image of ['maut-preview.webp', 'maut-ruins-gameplay.webp', 'maut-camera-gameplay.webp']) {
+  await fs.access(`dist/assets/${image}`);
+}
 for (const {image} of [pandora, pandora.poster, ...pandora.gallery]) {
   await fs.access(`dist/assets/${image}`);
 }

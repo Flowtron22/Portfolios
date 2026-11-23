@@ -8,6 +8,10 @@ const projects=[
   id: 'maut', name: 'MAUT', type: 'Game concept', image: 'maut-title.webp',
   imageAlt: 'MAUT title art showing the Death Dealer before towering stone figures in a misty forest',
   imageWidth: 1517, imageHeight: 1037,
+  preview: {
+    image: 'maut-preview.webp', imageWidth: 1920, imageHeight: 803,
+    imageAlt: 'The Death Dealer faces three skull-shaped stone formations in a misty forest'
+  },
   intro: 'A Death Dealer hunts creatures from folklore using dark magic and the spirits they summon.',
   description: 'MAUT is an early gameplay concept exploring how spirit summoning and dark magic could shape the Death Dealer’s hunts.',
   status: 'Early concept', contribution: [],
@@ -15,6 +19,14 @@ const projects=[
     image: 'maut-overhead.webp', width: 1261, height: 862,
     alt: 'Overhead view of the Death Dealer in a misty forest clearing',
     caption: 'Overhead forest view'
+  }, {
+    image: 'maut-ruins-gameplay.webp', width: 1286, height: 760,
+    alt: 'Overhead gameplay view of the Death Dealer in torchlit ruins',
+    caption: 'Ruins gameplay preview'
+  }, {
+    image: 'maut-camera-gameplay.webp', width: 1286, height: 760,
+    alt: 'Overhead gameplay view with the prototype camera settings visible',
+    caption: 'Gameplay camera test'
   }]
  },
  {id:'police-n-thief',name:'Police N Thief',type:'Multiplayer party game',image:'police-n-thief.jpg',url:'https://police-n-thief.vercel.app/',intro:'An asymmetric multiplayer chase with police, thieves, tools and team rescues.',focus:'Gameplay · AI · Multiplayer · UI',description:'A solo-developed party-game prototype in which police pursue thieves while thieves steal and rescue captured teammates. Distinct roles and tools give each team different ways to pursue, escape and coordinate rescues.',contribution:['Creative direction and gameplay rules','Player controls, AI behaviour and interface design','Online and local multiplayer','Testing and playable-build delivery'],tech:'Three.js'},
@@ -52,7 +64,7 @@ const projectFigure = ({image, width, height, alt, caption}, className = '') => 
   <a href="assets/${image}" target="_blank" rel="noopener" aria-label="View ${caption} full size"><img src="assets/${image}" width="${width}" height="${height}" alt="${alt}" loading="lazy"></a>
   <figcaption>${caption}</figcaption>
 </figure>`;
-const card=p=>`<a class="project-card" href="#/project/${p.id}"><div class="thumb">${projectImage(p, 'loading="lazy"')}<span>${p.type}</span></div><div class="card-top"><h2>${p.name}</h2><span>View project</span></div><p>${p.intro}</p></a>`;
+const card=p=>`<a class="project-card" href="#/project/${p.id}"><div class="thumb">${projectImage(p.preview ?? p, 'loading="lazy"')}<span>${p.type}</span></div><div class="card-top"><h2>${p.name}</h2><span>View project</span></div><p>${p.intro}</p></a>`;
 const heading=(label,title,text)=>`<div class="page-head">${label?'<span class="eyebrow">'+label+'</span>':''}<h1>${title}</h1><p>${text}</p></div>`;
 const projectCredits=items=>items.length?'<ul class="project-credits">'+items.map(([title,credit])=>'<li><strong>'+title+'</strong> — '+credit+'</li>').join('')+'</ul>':'';
 const roleDetails=roles=>roles.map(r=>'<section class="company-role">'+(r.period?'<time>'+r.period+'</time>':'')+'<h3>'+r.title+'</h3>'+(r.summary?'<p>'+r.summary+'</p>':'')+(r.responsibilities?.length?'<ul class="role-responsibilities">'+r.responsibilities.map(item=>'<li>'+item+'</li>').join('')+'</ul>':'')+projectCredits(r.projects)+'</section>').join('');
