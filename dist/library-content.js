@@ -220,3 +220,9 @@ export const libraryCollections = {
   cookies: {title: 'Cookies', groups: [{entries: cookies}]},
   goodies: {title: 'Goodies', groups: [{entries: goodies}]}
 };
+
+export const publishedLibraryCollections = {
+  candlesan: libraryCollections.candlesan,
+  concept: libraryCollections.concept,
+  goodies: libraryCollections.goodies
+};

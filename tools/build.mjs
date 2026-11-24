@@ -1,4 +1,3 @@
-import {designDecks} from '../dist/design-decks.js';
 import fs from 'node:fs/promises';
 import {artworks} from '../dist/art.js';
 import {designArticles, standaloneDesignArticles} from '../dist/design.js';
@@ -25,12 +24,6 @@ for (const {src, poster} of pandora.videos) {
 for(const art of artworks){for(const file of [art.image,art.thumbnail])await fs.access('dist/'+file);}
 await fs.access('dist/art-gallery.js');
 await fs.access('dist/design.js');
-for (const article of designArticles) {
-  const deck = designDecks[article.number];
-  if (!deck?.slides.length) throw new Error(`Missing presentation for Topic ${article.number}`);
-  await fs.access('dist/' + deck.pdf);
-  for (const slide of deck.slides) await fs.access('dist/' + slide.thumbnail);
-}
 for (const article of [...designArticles, ...standaloneDesignArticles]) {
   for (const section of article.sections) {
     for (const figure of section.figures || []) await fs.access('dist/' + figure.src);

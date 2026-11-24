@@ -22,7 +22,7 @@ npm run build
 
 ## Deploy to Vercel
 
-Import this GitHub repository into Vercel. Use Framework Preset **Other**, Build Command **npm run build**, and Output Directory **dist**. The included vercel.json sets the build command and output directory. Navigation uses hash routes so project and CV views work without server rewrites. No environment variables are required.
+Import this GitHub repository into Vercel using the **Other** framework preset. The included vercel.json validates the source in `dist` and stages the public site in `public-dist`. Deploy `public-dist` so the archived library materials stay out of the hosted site. Navigation uses hash routes so project and CV views work without server rewrites. No environment variables are required.
 
 ## Edit
 
