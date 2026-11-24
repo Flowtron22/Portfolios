@@ -4,6 +4,11 @@ const bagSize = 8;
 const criticalHitsPerBag = 2;
 const criticalChance = criticalHitsPerBag / bagSize;
 
+function marbles(critical, total) {
+  return Array.from({length: total}, (_, index) =>
+    `<span class="shuffle-marble ${index < critical ? 'shuffle-marble-red' : 'shuffle-marble-blue'}"></span>`).join('');
+}
+
 export function shuffleBagDemo() {
   return `<section class="shuffle-demo" data-shuffle-demo aria-labelledby="shuffle-demo-title">
     <h2 id="shuffle-demo-title">Try the shuffle bag</h2>
@@ -15,6 +20,13 @@ export function shuffleBagDemo() {
     <div class="shuffle-demo-comparison">
       <div>
         <h3>Shuffle bag</h3>
+        <div class="shuffle-jar-display" aria-hidden="true">
+          <span class="shuffle-jar-count" data-shuffle-marble-count>2 red · 6 blue</span>
+          <span class="shuffle-jar-chance" data-shuffle-marble-chance>25% chance on next draw</span>
+          <div class="shuffle-jar">
+            <div class="shuffle-marbles" data-shuffle-marbles>${marbles(criticalHitsPerBag, bagSize)}</div>
+          </div>
+        </div>
         <p data-shuffle-bag-status>Bag 1 · 2 critical hits in 8 remaining draws</p>
         <ol class="shuffle-results" data-shuffle-bag aria-label="Draws in the current bag"></ol>
       </div>
@@ -37,6 +49,9 @@ export function initShuffleBagDemo(container) {
   const bagResults = demo.querySelector('[data-shuffle-bag]');
   const rollResults = demo.querySelector('[data-shuffle-roll]');
   const bagStatus = demo.querySelector('[data-shuffle-bag-status]');
+  const marbleCount = demo.querySelector('[data-shuffle-marble-count]');
+  const marbleChance = demo.querySelector('[data-shuffle-marble-chance]');
+  const jar = demo.querySelector('[data-shuffle-marbles]');
   const total = demo.querySelector('[data-shuffle-total]');
   const announcement = demo.querySelector('[data-shuffle-announcement]');
   let draws = 0;
@@ -54,7 +69,14 @@ export function initShuffleBagDemo(container) {
   function updateStatus() {
     const used = draws % bagSize;
     const cycle = Math.ceil(draws / bagSize) || 1;
-    bagStatus.textContent = draws && !used
+    const complete = draws > 0 && used === 0;
+    const remaining = complete ? 0 : bagSize - used;
+    jar.innerHTML = marbles(remainingCritical, remaining);
+    marbleCount.textContent = `${remainingCritical} red · ${remaining - remainingCritical} blue`;
+    marbleChance.textContent = complete
+      ? 'Next draw refills the jar'
+      : `${Math.round(remainingCritical / remaining * 100)}% chance on next draw`;
+    bagStatus.textContent = complete
       ? `Bag ${cycle} complete · Next draw refills it`
       : `Bag ${cycle} · ${remainingCritical} critical hits in ${bagSize - used} remaining draws`;
     total.textContent = `Total critical hits · Bag ${bagCriticalHits} of ${draws} · Independent ${rollCriticalHits} of ${draws}`;
