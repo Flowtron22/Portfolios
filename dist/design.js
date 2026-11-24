@@ -5,6 +5,7 @@ import {playerTypeArticles} from './design-player-types.js';
 import {multiplayerBalance} from './design-multiplayer-balance.js';
 import {liveOps} from './design-live-ops.js';
 import {matsuno} from './design-matsuno.js';
+import {matsunoMethod} from './design-matsuno-method.js';
 import {gameplaySystems} from './candlesan.js';
 import {renderMatsunoBody} from './design-matsuno-interactions.js';
 import {shuffleBagDemo} from './shufflebag-demo.js';
@@ -13,7 +14,7 @@ import {armorDemo} from './armor-demo.js';
 import {armorSurvivalDemo} from './armor-survival-demo.js';
 import {gameFeelDemo} from './game-feel-demo.js';
 
-const additionalDesignArticles = [matsuno, multiplayerBalance, liveOps];
+const additionalDesignArticles = [matsuno, matsunoMethod, multiplayerBalance, liveOps];
 export const designArticles = [...playerTypeArticles, ...gameplaySystems, ...additionalDesignArticles];
 const fullArticleSlugs = new Set(Object.keys(publishedLibraryCollections).flatMap(key => fullLibrarySections[key] ?? []));
 
@@ -97,7 +98,7 @@ function renderArticle(article, backLink) {
     <h1>${escape(article.title)}</h1>
     ${fullArticleSlugs.has(article.slug)
       ? `<section class="source-reading" data-library-article="${escape(article.slug)}" aria-busy="true"><p role="status">Loading article…</p></section>`
-      : article === matsuno ? renderMatsunoBody() : renderArticleSummary(article, sample)}
+      : article.body ? renderMatsunoBody(article) : renderArticleSummary(article, sample)}
   </article>`;
 }
 

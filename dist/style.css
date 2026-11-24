@@ -93,6 +93,37 @@
   background:#efeee5;color:var(--ink);color-scheme:light;
 }
 .matsuno-gambit h3{margin-top:0}
+.matsuno-part-link{margin-top:12px}
+.matsuno-method-key{width:6px;align-self:stretch;flex:none;background:var(--method-key)}
+.matsuno-method-demo form{display:grid;gap:14px}
+.matsuno-method-demo label,.method-meter,.method-slider{display:grid;gap:5px}
+.method-meter span,.method-slider span{display:flex;justify-content:space-between;gap:8px}
+.matsuno-method-demo :is(meter,input[type=range]){width:100%;margin:0;accent-color:var(--accent)}
+.matsuno-method-demo input:where([type=checkbox],[type=radio]){accent-color:var(--accent)}
+.matsuno-method-demo .method-choice{display:flex;align-items:baseline;gap:8px}
+.matsuno-method-demo fieldset{min-width:0;margin:0;padding:8px 12px;border:1px solid var(--line)}
+.matsuno-method-demo fieldset label+label{margin-top:8px}
+.matsuno-method-demo :is(.method-meter,.method-slider) output{flex:none;font-weight:700;color:var(--accent)}
+.method-result{display:grid;gap:3px;padding:10px 12px;background:#d9e7db;color:#234938}
+.method-result span{font-size:14px}
+.method-result strong{line-height:1.4}
+.method-chart{display:block;width:min(100%,560px);max-height:340px;margin:0 auto}
+.method-chart text{fill:currentColor;font:9px var(--font)}
+.method-chart-legend{display:flex;justify-content:center;gap:18px;flex-wrap:wrap}
+.method-chart-legend span::before{content:'';display:inline-block;width:12px;height:3px;vertical-align:middle;margin-right:6px;background:#367255}
+.method-chart-legend span+span::before{background:#a74b42}
+.method-selects,.method-metrics,.method-assessment-grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr))}
+.method-metrics{grid-template-columns:repeat(3,minmax(0,1fr))}
+.method-assessment-grid>div{padding:10px;background:#f7f6f0;border:1px solid var(--line)}
+.method-assessment-grid small{display:block;margin-top:6px;color:var(--muted)}
+.design-reading .method-rules{padding-left:28px;margin:0}
+.method-rules li{padding:6px}
+.method-rules li strong{float:right;margin-left:8px}
+.method-rules li[aria-current]{background:#d9e7db}
+.matsuno-method-demo .button{padding:8px 16px;background:#f7f6f0;border:1px solid #7c8278}
+.matsuno-method-demo .button.primary{background:var(--accent);color:#fff}
+.matsuno-method-demo .button:hover{background:var(--ink);color:#fff}
+.matsuno-method-demo textarea{min-height:120px;width:100%}
 .matsuno-gambit select{font:inherit;color:var(--ink);background:#fff;border:1px solid #7c8278;padding:6px}
 .matsuno-gambit :is(input,select):focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .gambit-controls{display:grid;gap:8px}

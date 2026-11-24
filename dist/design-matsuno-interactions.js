@@ -1,4 +1,4 @@
-import {matsuno} from './design-matsuno.js';
+import {renderMatsunoModels, initMatsunoModels} from './design-matsuno-method-demos.js';
 
 const gambitMarkup = `<div class="matsuno-gambit" data-matsuno-gambit>
   <h3>Interactive Gambit demonstration</h3>
@@ -32,14 +32,18 @@ const gambitMarkup = `<div class="matsuno-gambit" data-matsuno-gambit>
   </form>
 </div>`;
 
-export function renderMatsunoBody() {
-  return `<p class="design-intro">${matsuno.summary}</p>
-    ${matsuno.body.replace('<div data-matsuno-gambit></div>', gambitMarkup)}`;
+export function renderMatsunoBody(article) {
+  const body = renderMatsunoModels(article.body.replace('<div data-matsuno-gambit></div>', gambitMarkup));
+  const partLink = article.slug === 'the-matsuno-method'
+    ? '<a class="text-link" href="#/solo/library/yasumi-matsuno-designing-consequences">Read Part I</a>'
+    : '<a class="text-link" href="#/solo/library/the-matsuno-method">Read Part II</a>';
+  return `<p class="design-intro">${article.summary}</p><p class="matsuno-part-link">${partLink}</p>${body}`;
 }
 
 export function initMatsunoArticle(container) {
   const study = container.querySelector('.matsuno-study');
   if (!study) return;
+  initMatsunoModels(study);
 
   for (const button of study.querySelectorAll('[data-matsuno-jump]')) {
     button.addEventListener('click', () => {
