@@ -8,6 +8,7 @@ import {shuffleBagDemo} from './shufflebag-demo.js';
 import {lootTableDemo} from './loot-table-demo.js';
 import {armorDemo} from './armor-demo.js';
 import {armorSurvivalDemo} from './armor-survival-demo.js';
+import {gameFeelDemo} from './game-feel-demo.js';
 
 const additionalDesignArticles = [multiplayerBalance, liveOps];
 export const designArticles = [...playerTypeArticles, ...additionalDesignArticles];
@@ -110,6 +111,7 @@ function renderArticleSummary(article, sample) {
       ${section.demo === 'loot-table' ? lootTableDemo() : ''}
       ${section.demo === 'armor' ? armorDemo() : ''}
       ${section.demo === 'armor-survival' ? armorSurvivalDemo() : ''}
+      ${section.demo === 'game-feel' ? gameFeelDemo() : ''}
     </section>`).join('')}`;
 }
 

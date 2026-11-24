@@ -31,7 +31,7 @@ export const candlesanGroups = [
         'Before firing, Dave\'s hands and harpoon track the aim, a precision arc shows the angle and range of motion, and the camera moves in. At release, Dave leans backward and bubbles trace the harpoon\'s path underwater. On contact, the fish is knocked backward and particles burst at the impact point and on the fish.',
         'The feedback continues after the hit. Dave kicks while he struggles with the catch, the camera shakes a little, and the camera pulls back when the catch completes. Each effect has a different job: conveying control, marking force or contact, showing resistance, or letting the player know it is over.',
         'On your own recording, mark when each effect starts and ends. Turn effects off one at a time and replay the action at full speed to see what information disappears. This helps you decide where polish does useful work and where effects might be competing.'
-      ]}),
+      ]}, {demo: 'game-feel'}),
     topic('how-hard-should-games-be', 'How Hard Should Your Game Be?',
       'Tune the challenge to what players came to feel.',
       'Choose difficulty that serves the experience', [
