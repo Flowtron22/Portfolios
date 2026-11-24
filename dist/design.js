@@ -4,14 +4,16 @@ import {fullLibrarySections} from './library-article-index.js';
 import {designDecks} from './design-decks.js';
 import {designTopics} from './design-topics.js';
 import {playerTypeArticles} from './design-player-types.js';
+import {multiplayerBalance} from './design-multiplayer-balance.js';
 
 const fullArticleSlugs = new Set(Object.values(fullLibrarySections).flat());
 
 const mapSlides = 'assets/design/multiplayer-maps';
 const mapSlide = (number, alt, caption) => ({src: `${mapSlides}/slide-${number}.jpg`, alt, caption});
 
+export const standaloneDesignArticles = [...playerTypeArticles, multiplayerBalance];
+
 export const designArticles = [
-  ...playerTypeArticles,
   {
     number: '21',
     slug: 'tips-for-building-multiplayer-maps',
@@ -119,7 +121,7 @@ const articleLink = (collection, slug) => `${collectionLink(collection)}/${encod
 const collections = {
   design: {title: 'Design', groups: [
     {title: 'Player types & motivation', featured: true, entries: playerTypeArticles},
-    {title: 'Design articles', entries: designArticles.filter(article => !article.source).sort((a, b) => Number(a.number) - Number(b.number))}
+    {title: 'Design articles', entries: [multiplayerBalance, ...[...designArticles].sort((a, b) => Number(a.number) - Number(b.number))]}
   ]},
   ...libraryCollections
 };
