@@ -7,6 +7,7 @@ import {liveOps} from './design-live-ops.js';
 import {matsuno} from './design-matsuno.js';
 import {matsunoMethod} from './design-matsuno-method.js';
 import {mobaScaling} from './design-moba-scaling.js';
+import {diminishReturns} from './design-diminish-returns.js';
 import {mobaPanels} from './moba-scaling-demos.js';
 import {gameplaySystems as existingGameplaySystems} from './candlesan.js';
 import {renderMatsunoBody} from './design-matsuno-interactions.js';
@@ -16,7 +17,7 @@ import {armorDemo} from './armor-demo.js';
 import {armorSurvivalDemo} from './armor-survival-demo.js';
 import {gameFeelDemo} from './game-feel-demo.js';
 
-const gameplaySystems = [...existingGameplaySystems, mobaScaling];
+const gameplaySystems = [...existingGameplaySystems, mobaScaling, diminishReturns];
 const additionalDesignArticles = [matsuno, matsunoMethod, multiplayerBalance, liveOps];
 export const designArticles = [...playerTypeArticles, ...gameplaySystems, ...additionalDesignArticles];
 const fullArticleSlugs = new Set(Object.keys(publishedLibraryCollections).flatMap(key => fullLibrarySections[key] ?? []));

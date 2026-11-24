@@ -30,7 +30,7 @@ const metrics = labels => `<dl class="moba-metrics" aria-live="polite">${Object.
 const chart = label => `<figure class="moba-figure"><svg viewBox="0 0 480 205" role="img" aria-label="${label}"></svg><figcaption class="moba-legend"></figcaption></figure>`;
 const caption = key => `<p class="moba-note" data-stat="${key}"></p>`;
 
-export const mobaPanels = {
+const scalingPanels = {
   'moba-curve': panel('curve',
     controls(select('role', 'Highlight an archetype', Object.keys(archetypes))) +
     chart('Relative hero power across the match') +
@@ -67,7 +67,7 @@ export const mobaPanels = {
     metrics({minutes:'Estimated item timing', lead:'Lead index at interval 8', reduced:'Lead index with comeback'}) + caption('offset'))
 };
 
-function draw(panel, xValues, series, {labels, mark, min = 0, max, baseline} = {}) {
+function draw(panel, xValues, series, {labels, mark, min = 0, max, baseline, yFormat = value => fmt(Math.round(value))} = {}) {
   const figure = panel.querySelector('.moba-figure');
   const left = 44, right = 452, top = 13, bottom = 166;
   const upper = max ?? Math.max(...series.flatMap(item => item.values)) * 1.1;
@@ -75,7 +75,7 @@ function draw(panel, xValues, series, {labels, mark, min = 0, max, baseline} = {
   const y = value => bottom - (bottom-top) * (value-min) / (upper-min);
   const pos = value => value.toFixed(2);
   const grid = Array.from({length:5}, (_,i) => min + (upper-min)*i/4).map(value =>
-    `<line x1="${left}" x2="${right}" y1="${pos(y(value))}" y2="${pos(y(value))}" class="moba-gridline"/><text x="${left-7}" y="${pos(y(value)+4)}" text-anchor="end">${fmt(Math.round(value))}</text>`).join('');
+    `<line x1="${left}" x2="${right}" y1="${pos(y(value))}" y2="${pos(y(value))}" class="moba-gridline"/><text x="${left-7}" y="${pos(y(value)+4)}" text-anchor="end">${yFormat(value)}</text>`).join('');
   const ticks = (labels ?? [[xValues[0],xValues[0]],[xValues.at(-1),xValues.at(-1)]]).map(([value,label]) =>
     `<text x="${pos(x(value))}" y="188" text-anchor="middle">${label}</text>`).join('');
   const curves = series.map(({values,color,emphasis=true}) =>
@@ -89,7 +89,7 @@ function draw(panel, xValues, series, {labels, mark, min = 0, max, baseline} = {
 
 const valuesBy = (labels, data, emphasis) => labels.map((label,i) =>
   ({label, values:data[i], color:colors[i], emphasis:emphasis===undefined || emphasis===i}));
-const models = {
+const scalingModels = {
   curve(panel, read) {
     const chosen = read('role');
     const names = Object.keys(archetypes);
@@ -155,6 +155,85 @@ const models = {
       offset:'Net lead growth with comeback: '+fmt(growth-offset)+'% per interval.'};
   }
 };
+
+const precise = new Intl.NumberFormat('en', {maximumFractionDigits: 3});
+const signed = value => '+' + fmt(value);
+
+const diminishingPanels = {
+  'diminish-curve': panel('diminishCurve',
+    controls(range('stat','Stat investment',0,600,5,150), range('constant','Balancing constant K',10,400,5,100),
+      range('maximum','Theoretical maximum M',15,100,1,100,'%'), range('target','Target at current investment',5,100,1,60,'%')) +
+    chart('Hyperbolic returns compared with a linear curve capped at 300 points') +
+    metrics({effect:'Current effect', next:'Gain from the next 50 points', target:'K needed for target'})),
+  'diminish-stack': panel('diminishStack',
+    controls(range('items','Stacked sources',1,8,1,3), range('strength','Resistance per source',0,95,1,30,'%')) +
+    chart('Additive and multiplicative resistance by number of sources') +
+    metrics({additive:'Uncapped additive total', multiplied:'Multiplicative resistance', remaining:'Damage taken from 1,000', next:'Gain from one more source'})),
+  'diminish-cap': panel('diminishCap',
+    controls(range('raw','Raw movement speed',200,800,5,600), range('threshold','First threshold',250,550,5,400),
+      range('first','Effectiveness after first threshold',0,100,5,50,'%'),
+      select('mode','Thresholds',['One threshold','Two thresholds']),
+      range('second','Second tier retains this share of first tier',0,100,5,50,'%')) +
+    chart('Effective movement speed with and without a soft cap') +
+    metrics({effective:'Effective movement speed', marginal:'Gain from next 100 raw speed', lost:'Raw speed lost to soft cap'}) +
+    caption('tier')),
+  'diminish-sequence': panel('diminishSequence',
+    controls(range('base','Base stun duration',.25,5,.25,2,' s'), range('retention','Duration retained per repeat',0,100,5,50,'%'),
+      range('count','Stun applications',1,8,1,5), range('gap','Wait after each stun expires',0,10,.5,0,' s'),
+      range('window','Reset window',.5,10,.5,5,' s')) +
+    chart('Stun duration by application, with or without repeated-effect penalties') +
+    metrics({last:'Last stun', combined:'Total time stunned', reset:'Counter before next stun'}))
+};
+
+const diminishingModels = {
+  diminishCurve(panel, read) {
+    const stat = read('stat'), constant = read('constant'), maximum = read('maximum'), target = read('target');
+    const effect = value => maximum * value / (value + constant);
+    const values = Array.from({length:27}, (_,i) => i * 25);
+    draw(panel, values, valuesBy(['Hyperbolic effect','Linear to 300, then capped'], [
+      values.map(effect), values.map(value => maximum * Math.min(value/300,1))
+    ]), {mark:stat, max:100, labels:[[0,'0'],[300,'300 points'],[650,'650']]});
+    const k = stat > 0 && target < maximum ? fmt(stat*(maximum/target-1)) : 'Unreachable';
+    return {effect:fmt(effect(stat))+'%', next:signed(effect(stat+50)-effect(stat))+' pp', target:k};
+  },
+  diminishStack(panel, read) {
+    const items = read('items'), strength = read('strength');
+    const stacked = n => 100*(1-(1-strength/100)**n);
+    const steps = Array.from({length:9},(_,i)=>i);
+    draw(panel,steps,valuesBy(['Uncapped additive','Multiplicative'],[
+      steps.map(n=>n*strength),steps.map(stacked)
+    ]),{mark:items,max:Math.max(100,8*strength),baseline:100,labels:[[0,'0'],[4,'4 sources'],[8,'8 sources']]});
+    return {additive:fmt(items*strength)+'%', multiplied:fmt(stacked(items))+'%',
+      remaining:fmt(1000*(1-strength/100)**items),next:signed(stacked(items+1)-stacked(items))+' pp'};
+  },
+  diminishCap(panel, read) {
+    const raw = read('raw'), threshold = read('threshold'), first = read('first')/100;
+    const two = read('mode') === 'Two thresholds', second = first*read('second')/100;
+    panel.querySelector('[name="second"]').disabled = !two;
+    const effective = value => {
+      const extra = Math.max(0,value-threshold);
+      return Math.min(value,threshold) + (two ? Math.min(extra,100)*first + Math.max(0,extra-100)*second : extra*first);
+    };
+    const values = [0, threshold, ...(two?[threshold+100]:[]), 900];
+    draw(panel,values,valuesBy(['Soft cap','Unrestricted'],[values.map(effective),values]),
+      {mark:raw,max:900,labels:[[0,'0'],[450,'450 raw speed'],[900,'900']]});
+    return {effective:fmt(effective(raw)), marginal:signed(effective(raw+100)-effective(raw)),
+      lost:fmt(raw-effective(raw)), tier:two?'Beyond '+(threshold+100)+' raw speed, the second tier grants '+fmt(second*100)+'% effectiveness.':'One threshold active.'};
+  },
+  diminishSequence(panel, read) {
+    const base = read('base'), retention = read('retention')/100, count = read('count');
+    const reset = read('gap') >= read('window');
+    const applications = Array.from({length:8}, (_,i)=>i+1);
+    const durations = applications.map(n=>reset?base:base*retention**(n-1));
+    draw(panel,applications,valuesBy(['Actual stun length','Base duration'],[durations,applications.map(()=>base)]),
+      {mark:count,max:base*1.2,yFormat:fmt,labels:[[1,'Stun 1'],[4,'Stun 4'],[8,'Stun 8']]});
+    return {last:precise.format(durations[count-1])+' s', combined:precise.format(durations.slice(0,count).reduce((a,b)=>a+b,0))+' s',
+      reset:reset?'Reset':'Keeps stacking'};
+  }
+};
+
+export const mobaPanels = {...scalingPanels, ...diminishingPanels};
+const models = {...scalingModels, ...diminishingModels};
 
 export function initMobaScaling(container) {
   for (const panel of container.querySelectorAll('[data-moba]')) {
