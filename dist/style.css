@@ -93,7 +93,7 @@
   background:#efeee5;color:var(--ink);color-scheme:light;
 }
 .matsuno-gambit h3{margin-top:0}
-.matsuno-part-link{margin-top:12px}
+.matsuno-part-link{margin-top:12px;justify-content:flex-start;gap:8px 20px;flex-wrap:wrap}
 .matsuno-method-key{width:6px;align-self:stretch;flex:none;background:var(--method-key)}
 .matsuno-method-demo form{display:grid;gap:14px}
 .matsuno-method-demo label,.method-meter,.method-slider{display:grid;gap:5px}
@@ -124,6 +124,41 @@
 .matsuno-method-demo .button.primary{background:var(--accent);color:#fff}
 .matsuno-method-demo .button:hover{background:var(--ink);color:#fff}
 .matsuno-method-demo textarea{min-height:120px;width:100%}
+.mechanic-panel .method-selects{grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr))}
+.recovery-timeline{display:grid;gap:8px;margin:16px 0}
+.recovery-scale,.recovery-lane{display:grid;grid-template-columns:78px minmax(0,1fr);gap:8px}
+.recovery-scale{grid-template-columns:repeat(5,minmax(0,1fr));margin-left:86px;gap:0;font-size:12px;color:var(--muted)}
+.recovery-scale span{text-align:center}
+.recovery-scale span:first-child{text-align:left}
+.recovery-scale span:last-child{text-align:right}
+.recovery-lane strong{font-size:14px;align-self:center}
+.recovery-track{
+  position:relative;height:27px;margin-right:8px;border-inline:1px solid #8e9b8e;
+  background:repeating-linear-gradient(to right,#eeeee6 0,#eeeee6 calc(25% - 1px),#c6cac0 calc(25% - 1px),#c6cac0 25%);
+}
+.recovery-point{
+  position:absolute;top:50%;width:11px;height:11px;border-radius:50%;transform:translate(-50%,-50%);background:#2e7052;
+}
+[data-turn-lane=rival] .recovery-point{background:#a44d43}
+.recovery-point.active{box-shadow:0 0 0 3px #fff,0 0 0 5px #27342b}
+.mechanic-readouts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.design-reading .mechanic-panel .mechanic-status{margin:12px 0 0;font-size:14px;font-weight:650;min-height:2.9em;line-height:1.45}
+.design-reading .mechanic-panel .mechanic-instruction{font-size:14px;margin:12px 0;line-height:1.45}
+.spell-board{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;max-width:460px}
+.spell-board button{
+  position:relative;display:grid;place-items:center;min-height:47px;aspect-ratio:1.22;
+  border:1px solid #899589;background:#faf9f4;color:#232724;cursor:pointer;padding:0;
+}
+.spell-board button:hover:not(:disabled){background:#e4ede0}
+.spell-board button:disabled{cursor:default;opacity:1}
+.spell-board .spell-area{border:2px dashed #7f5e27;background:#f4e6c7}
+.spell-board .spell-center{border-style:solid}
+.spell-board .spell-impact{background:#f3c78c}
+.spell-coordinate,.spell-goal{position:absolute;font-size:10px;line-height:1.2}
+.spell-coordinate{top:3px;left:4px}
+.spell-goal{bottom:3px;right:4px;color:#315a43}
+.spell-token{font-size:clamp(13px,3vw,23px);font-weight:700}
+.mechanic-panel .button:disabled{opacity:.55;cursor:default;background:#f7f6f0;color:var(--muted)}
 .matsuno-gambit select{font:inherit;color:var(--ink);background:#fff;border:1px solid #7c8278;padding:6px}
 .matsuno-gambit :is(input,select):focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .gambit-controls{display:grid;gap:8px}

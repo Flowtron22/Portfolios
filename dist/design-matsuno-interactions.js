@@ -1,4 +1,5 @@
 import {renderMatsunoModels, initMatsunoModels} from './design-matsuno-method-demos.js';
+import {renderMatsunoMechanics, initMatsunoMechanics} from './design-matsuno-mechanics-demos.js';
 
 const gambitMarkup = `<div class="matsuno-gambit" data-matsuno-gambit>
   <h3>Interactive Gambit demonstration</h3>
@@ -34,16 +35,21 @@ const gambitMarkup = `<div class="matsuno-gambit" data-matsuno-gambit>
 
 export function renderMatsunoBody(article) {
   const body = renderMatsunoModels(article.body.replace('<div data-matsuno-gambit></div>', gambitMarkup));
-  const partLink = article.slug === 'the-matsuno-method'
-    ? '<a class="text-link" href="#/solo/library/yasumi-matsuno-designing-consequences">Read Part I</a>'
-    : '<a class="text-link" href="#/solo/library/the-matsuno-method">Read Part II</a>';
-  return `<p class="design-intro">${article.summary}</p><p class="matsuno-part-link">${partLink}</p>${body}`;
+  const parts = [
+    ['yasumi-matsuno-designing-consequences', 'Read Part I'],
+    ['the-matsuno-method', 'Read Part II'],
+    ['matsuno-gameplay-mechanics', 'Try Gameplay Mechanics']
+  ];
+  const links = parts.filter(([slug]) => slug !== article.slug).map(([slug, label]) =>
+    `<a class="text-link" href="#/solo/library/${slug}">${label}</a>`).join('');
+  return `<p class="design-intro">${article.summary}</p><nav class="matsuno-part-link" aria-label="Matsuno articles">${links}</nav>${renderMatsunoMechanics(body)}`;
 }
 
 export function initMatsunoArticle(container) {
   const study = container.querySelector('.matsuno-study');
   if (!study) return;
   initMatsunoModels(study);
+  initMatsunoMechanics(study);
 
   for (const button of study.querySelectorAll('[data-matsuno-jump]')) {
     button.addEventListener('click', () => {
