@@ -89,7 +89,6 @@ function renderArticle(article, backLink) {
 
 function renderArticleSummary(article, sample) {
   return `<p class="design-intro">${escape(article.summary)}</p>
-    ${article.slug === 'control-randomness' ? shuffleBagDemo() : ''}
     ${article.download ? `<p class="design-intro"><a class="button primary" href="${escape(article.download.src)}" download>${escape(article.download.label)}</a></p>` : ''}
     ${sample ? `<div class="library-sample">${renderFigure(sample)}</div>` : ''}
     ${article.sections.map(section => `<section>
@@ -98,6 +97,7 @@ function renderArticleSummary(article, sample) {
       ${section.bullets?.length ? `<ul>${section.bullets.map(p => `<li>${escape(p)}</li>`).join('')}</ul>` : ''}
       ${section.steps?.length ? `<ol${section.start ? ` start="${escape(section.start)}"` : ''}>${section.steps.map(p => `<li>${escape(p)}</li>`).join('')}</ol>` : ''}
       ${section.figures?.length ? `<div class="design-slides">${section.figures.map(renderFigure).join('')}</div>` : ''}
+      ${section.demo === 'shuffle-bag' ? shuffleBagDemo() : ''}
     </section>`).join('')}`;
 }
 

@@ -6,11 +6,11 @@ const frame = (file, description, height = 800) => ({
   height
 });
 
-function topic(slug, title, summary, heading, paragraphs, application, figures, discussion) {
+function topic(slug, title, summary, heading, paragraphs, application, figures, discussion, demo) {
   return {
     slug, title, summary,
     sections: [
-      {heading, paragraphs, figures},
+      {heading, paragraphs, figures, demo},
       discussion,
       {heading: 'Put it into practice', paragraphs: [application]}
     ]
@@ -256,12 +256,12 @@ export const candlesanGroups = [
         'Bags can be nested. A word game can draw vowel versus consonant first, then draw a letter from the matching pool. A separate rare-letter pool helps control how often difficult letters appear.'
       ],
       'Simulate many short sequences and compare how frequently each approach produces a streak that feels bad. Choose the bag size and distribution around that result.',
-      [frame('randomness-bag', 'Two red marbles and six blue marbles represent a 25% success bag.')],
+      [],
       {heading: 'How to reason about streaks and refill rules', paragraphs: [
         'An independent roll remembers nothing. At 25% success, eight consecutive misses still occur about 10% of the time. A shuffle bag like two red marbles and six blue guarantees two successes in each complete bag, while preserving uncertainty about their order. The next bag starts fresh, so a bad run can span the boundary.',
         'The word-game example uses one bag to choose vowels or consonants and separate distributions to select the letter. A rarer sub-bag controls letters such as J, K, Q, X, and Z. That structure lets the designer tune at the level players notice: the availability of usable letters, the mix of vowels, and the spacing of unusual letters.',
         'Write down when the bag is refilled and whether it persists across rounds or reloads. Simulate those rules. A bag can guarantee the long-term mix without guaranteeing that every short stretch will feel fair.'
-      ]}),
+      ]}, 'shuffle-bag'),
     topic('magic-find-design', 'Why Magic Find Is Hard to Design',
       'A reward bonus can be difficult to notice and harder to value.',
       'Make the trade-off visible', [
