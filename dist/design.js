@@ -8,7 +8,7 @@ import {matsuno} from './design-matsuno.js';
 import {matsunoMethod} from './design-matsuno-method.js';
 import {mobaScaling} from './design-moba-scaling.js';
 import {mobaPanels} from './moba-scaling-demos.js';
-import {gameplaySystems} from './candlesan.js';
+import {gameplaySystems as existingGameplaySystems} from './candlesan.js';
 import {renderMatsunoBody} from './design-matsuno-interactions.js';
 import {shuffleBagDemo} from './shufflebag-demo.js';
 import {lootTableDemo} from './loot-table-demo.js';
@@ -16,7 +16,8 @@ import {armorDemo} from './armor-demo.js';
 import {armorSurvivalDemo} from './armor-survival-demo.js';
 import {gameFeelDemo} from './game-feel-demo.js';
 
-const additionalDesignArticles = [mobaScaling, matsuno, matsunoMethod, multiplayerBalance, liveOps];
+const gameplaySystems = [...existingGameplaySystems, mobaScaling];
+const additionalDesignArticles = [matsuno, matsunoMethod, multiplayerBalance, liveOps];
 export const designArticles = [...playerTypeArticles, ...gameplaySystems, ...additionalDesignArticles];
 const fullArticleSlugs = new Set(Object.keys(publishedLibraryCollections).flatMap(key => fullLibrarySections[key] ?? []));
 
@@ -38,7 +39,7 @@ const collections = {
   design: {title: 'Design', groups: [
     {title: 'Player types & motivation', featured: true, entries: playerTypeArticles},
     {title: 'Gameplay Systems', entries: gameplaySystems},
-    {title: 'Design articles', separateSimulations: false, entries: additionalDesignArticles}
+    {title: 'Design articles', entries: additionalDesignArticles}
   ]},
   ...publishedLibraryCollections
 };
@@ -74,8 +75,7 @@ function collectionIndex(key, {title, groups}) {
       const simulations = [];
       const articles = [];
       for (const article of group.entries) {
-        const featuredSimulation = group.separateSimulations !== false && article.sections?.some(section => section.demo);
-        (featuredSimulation ? simulations : articles).push(article);
+        (article.sections?.some(section => section.demo) ? simulations : articles).push(article);
       }
       const cards = (simulations.length ? `<ul class="design-articles design-simulation-cards" aria-label="Interactive simulations">${simulations.map(article => libraryCard(key, article, Boolean(group.title))).join('')}</ul>` : '')
         + (articles.length ? `<ul class="design-articles">${articles.map(article => libraryCard(key, article, Boolean(group.title))).join('')}</ul>` : '');
