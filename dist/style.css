@@ -117,17 +117,21 @@
   --sim-action-ink:#ffffff;
   --armor-value:#785326;
 }
+/* Cream and white from the reference tables, with blue reserved for highlights. */
 .armor-survival-demo{
-  --panel:#edf2f8;
-  --line:#becbdc;
-  --ink:#1c2c43;
-  --muted:#485970;
-  --accent:#214ca0;
-  --sim-surface:#fdfefe;
-  --sim-tint:#dbe8fa;
-  --sim-control-line:#788ca7;
+  --panel:#f2ede5;
+  --line:#cec8bc;
+  --ink:#1a1f23;
+  --muted:#50565c;
+  --accent:#285d99;
+  --sim-surface:#fdffff;
+  --sim-tint:#f4f3ea;
+  --sim-control-line:#81796d;
   --armor-value:var(--accent);
+  border-top:1px solid var(--line);
 }
+.armor-survival-demo .survival-odds tbody tr:nth-child(even){background:var(--sim-tint)}
+.armor-survival-demo .armor-metrics div{background:#dce8f1}
 .armor-demo form{display:grid;gap:18px}
 .armor-demo form>.button{justify-self:start}
 .armor-slider{display:grid;gap:5px;min-width:0;font-size:14px}
