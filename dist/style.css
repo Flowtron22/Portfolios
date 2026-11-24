@@ -64,6 +64,24 @@
 .loot-common{color:#e1e6e1}
 .loot-controls{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
 .design-reading [data-loot-result]{min-height:2.8em;font-size:14px;line-height:1.5;margin-bottom:0}
+.armor-demo{padding:clamp(14px,4vw,26px);border:1px solid var(--line);background:var(--panel)}
+.armor-demo form{display:grid;gap:18px}
+.armor-demo form>.button{justify-self:start}
+.armor-slider{display:grid;gap:5px;min-width:0;font-size:14px}
+.armor-slider>span{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.armor-slider output{flex:none;color:var(--accent);font-weight:700}
+.armor-slider input{width:100%;height:32px;margin:0;accent-color:var(--accent)}
+.armor-gear{display:grid;gap:8px;min-width:0;margin:0;padding:12px;border:1px solid var(--line)}
+.armor-gear legend{padding:0 5px;color:var(--muted);font-size:14px}
+.armor-levels,.armor-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0}
+.armor-metrics div{padding:10px;border:1px solid var(--line)}
+.armor-metrics dt{color:var(--muted);font-size:13px}
+.armor-metrics dd{margin:4px 0 0;color:var(--accent);font-size:22px;font-weight:700}
+.armor-matchups{display:grid;gap:9px}
+.armor-matchups>div{display:grid;grid-template-columns:minmax(95px,1fr) minmax(54px,1fr) 4ch;align-items:center;gap:8px;font-size:13px}
+.armor-matchups meter{width:100%;accent-color:var(--accent)}
+.armor-matchups strong{text-align:right}
+.design-reading .armor-model{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
 @media(max-width:700px){.design-slides{grid-template-columns:minmax(0,1fr);gap:20px}}
 
 .design-articles{

@@ -109,7 +109,7 @@ export const candlesanGroups = [
         'In mitigation = armor ÷ (armor + K), rearrange to get K = armor × (1 − mitigation) ÷ mitigation, with mitigation expressed as a decimal. If the target is 25% at 28 armor, K is 84. The point of choosing readable gear values first is to make the character sheet understandable while tuning the curve separately.',
         'A round constant such as 100 makes half damage easy to reason about at 100 armor. An RTS with small armor values can use a smaller constant. In a progression game, the curve can scale with enemy level, as in the historical World of Warcraft example discussed in the video. Basing a level term on the attacker helps avoid a character losing mitigation merely for leveling up while fighting the same opponent.',
         'Test beside a same-level foe, a stronger foe, and an early enemy the player returns to later. Those cases reveal whether the curve supports the intended feeling of progression.'
-      ]}),
+      ]}, {demo: 'armor'}),
     topic('math-behind-armor', 'The Math Behind Armor and Survivability',
       'Compare effective health when percentage mitigation looks like diminishing returns.',
       'Measure what the player can survive', [

@@ -6,6 +6,7 @@ import {multiplayerBalance} from './design-multiplayer-balance.js';
 import {liveOps} from './design-live-ops.js';
 import {shuffleBagDemo} from './shufflebag-demo.js';
 import {lootTableDemo} from './loot-table-demo.js';
+import {armorDemo} from './armor-demo.js';
 
 const additionalDesignArticles = [multiplayerBalance, liveOps];
 export const designArticles = [...playerTypeArticles, ...additionalDesignArticles];
@@ -100,6 +101,7 @@ function renderArticleSummary(article, sample) {
       ${section.figures?.length ? `<div class="design-slides">${section.figures.map(renderFigure).join('')}</div>` : ''}
       ${section.demo === 'shuffle-bag' ? shuffleBagDemo() : ''}
       ${section.demo === 'loot-table' ? lootTableDemo() : ''}
+      ${section.demo === 'armor' ? armorDemo() : ''}
     </section>`).join('')}`;
 }
 

@@ -1,6 +1,7 @@
 import {libraryEntryCount,libraryPage,loadLibraryArticle} from './design.js';
 import {initShuffleBagDemo} from './shufflebag-demo.js';
 import {initLootTableDemo} from './loot-table-demo.js';
+import {initArmorDemo} from './armor-demo.js';
 import {artworks} from './art.js';
 import {artCards,artViewer,initArtViewer} from './art-gallery.js';
 import {pandora} from './pandora.js';
@@ -160,6 +161,7 @@ async function render(){cleanup?.();cleanup=null;const [route]=(location.hash.sl
     void loadLibraryArticle(main);
     initShuffleBagDemo(main);
     initLootTableDemo(main);
+    initArmorDemo(main);
   }
     if (page === 'home') {
     const host = document.getElementById('scene');
