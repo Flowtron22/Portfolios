@@ -182,7 +182,6 @@ function renderArticle(article, backLink) {
 
 function renderArticleSummary(article, deck, sample) {
   return `<p class="design-intro">${escape(article.summary)}</p>
-    ${article.source ? `<p class="design-source">Informed by ${escape(article.source.author)} · ${escape(article.source.publication)} · ${escape(article.source.date)}</p>` : ''}
     ${article.download ? `<p class="design-intro"><a class="button primary" href="${escape(article.download.src)}" download>${escape(article.download.label)}</a></p>` : ''}
     ${deck ? renderPresentation(deck) : ''}
     ${sample ? `<div class="library-sample">${renderFigure(sample)}</div>` : ''}

@@ -187,11 +187,10 @@
   .work-projects,.work-trailers{grid-template-columns:1fr}
 }
 
-/* Featured Design series and source credits. */
+/* Featured Design series. */
 .library-featured{padding-bottom:30px;border-bottom:1px solid var(--line)}
 .library-featured .design-card-copy{padding:20px;flex:1}
 .library-featured .design-card-copy h3{font-size:clamp(22px,2.3vw,30px);line-height:1.15;margin:0 0 14px}
 .library-featured .design-card-copy p{font-size:16px;line-height:1.65}
 .library-featured .design-card-preview{object-fit:contain}
-.design-source{margin-top:12px;color:var(--muted);font-size:14px;line-height:1.6}
 @media(max-width:650px){.library-featured .design-articles{grid-template-columns:1fr}.library-featured .design-card-copy{padding:18px}.library-featured .design-card-copy h3{font-size:26px}}
