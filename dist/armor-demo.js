@@ -11,7 +11,7 @@ const slider = (id, label, min, max, value, unit = '') => `<label class="armor-s
 </label>`;
 
 export function armorDemo() {
-  return `<section class="armor-demo" data-armor-demo aria-labelledby="armor-demo-title">
+  return `<section class="article-simulation armor-demo" data-armor-demo aria-labelledby="armor-demo-title">
     <h2 id="armor-demo-title">Tune an armor curve</h2>
     <p>Choose a mitigation target for evenly matched levels. Set how much armor each gear slot adds per level, then test that gear against a different attacker.</p>
     <form>

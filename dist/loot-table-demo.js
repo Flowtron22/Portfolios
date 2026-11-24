@@ -62,7 +62,7 @@ function weightRows(items) {
 }
 
 export function lootTableDemo() {
-  return `<section class="loot-demo" data-loot-demo aria-labelledby="loot-demo-title">
+  return `<section class="article-simulation loot-demo" data-loot-demo aria-labelledby="loot-demo-title">
     <h2 id="loot-demo-title">Simulate a loot patch</h2>
     <p>Choose a patch and roll both systems. The weighted table rolls across all items. The cascade checks for legendary loot first at 2%, then checks lower rarities if it misses.</p>
     <label class="loot-patch">Content patch

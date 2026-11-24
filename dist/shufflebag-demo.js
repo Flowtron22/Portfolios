@@ -10,7 +10,7 @@ function marbles(critical, total) {
 }
 
 export function shuffleBagDemo() {
-  return `<section class="shuffle-demo" data-shuffle-demo aria-labelledby="shuffle-demo-title">
+  return `<section class="article-simulation shuffle-demo" data-shuffle-demo aria-labelledby="shuffle-demo-title">
     <h2 id="shuffle-demo-title">Try the shuffle bag</h2>
     <p>Draw one attack from each system. The bag contains two critical hits and six normal hits. The independent roll has a 25% chance of a critical hit every time.</p>
     <div class="shuffle-demo-controls">

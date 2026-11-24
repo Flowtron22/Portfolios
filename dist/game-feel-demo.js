@@ -15,7 +15,7 @@ const effects = [
 ];
 
 export function gameFeelDemo() {
-  return `<section class="game-feel-demo" data-game-feel aria-labelledby="game-feel-title">
+  return `<section class="article-simulation game-feel-demo" data-game-feel aria-labelledby="game-feel-title">
     <h2 id="game-feel-title">Play through a three-second catch</h2>
     <p>Scrub the action or play it back at a slower speed. Turn individual effects off and compare how clearly each beat reads.</p>
     <canvas width="720" height="330" role="img" aria-label="Schematic animation of a diver aiming a harpoon at a fish"></canvas>

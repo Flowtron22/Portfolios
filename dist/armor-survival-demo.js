@@ -26,7 +26,7 @@ function milestoneRows(k) {
 }
 
 export function armorSurvivalDemo() {
-  return `<section class="armor-demo armor-survival-demo" data-armor-survival aria-labelledby="armor-survival-title">
+  return `<section class="article-simulation armor-demo armor-survival-demo" data-armor-survival aria-labelledby="armor-survival-title">
     <h2 id="armor-survival-title">Simulate armor and survivability</h2>
     <p>Both attackers deal 50 damage per second before armor. Change the armor value to see which attacks each rule protects against.</p>
     <form>
