@@ -4,13 +4,14 @@ import {fullLibrarySections} from './library-article-index.js';
 import {playerTypeArticles} from './design-player-types.js';
 import {multiplayerBalance} from './design-multiplayer-balance.js';
 import {liveOps} from './design-live-ops.js';
+import {matsuno} from './design-matsuno.js';
 import {shuffleBagDemo} from './shufflebag-demo.js';
 import {lootTableDemo} from './loot-table-demo.js';
 import {armorDemo} from './armor-demo.js';
 import {armorSurvivalDemo} from './armor-survival-demo.js';
 import {gameFeelDemo} from './game-feel-demo.js';
 
-const additionalDesignArticles = [multiplayerBalance, liveOps];
+const additionalDesignArticles = [matsuno, multiplayerBalance, liveOps];
 export const designArticles = [...playerTypeArticles, ...additionalDesignArticles];
 const fullArticleSlugs = new Set(Object.keys(publishedLibraryCollections).flatMap(key => fullLibrarySections[key] ?? []));
 
@@ -107,6 +108,8 @@ function renderArticleSummary(article, sample) {
       ${section.bullets?.length ? `<ul>${section.bullets.map(p => `<li>${escape(p)}</li>`).join('')}</ul>` : ''}
       ${section.steps?.length ? `<ol${section.start ? ` start="${escape(section.start)}"` : ''}>${section.steps.map(p => `<li>${escape(p)}</li>`).join('')}</ol>` : ''}
       ${section.figures?.length ? `<div class="design-slides">${section.figures.map(renderFigure).join('')}</div>` : ''}
+      ${section.references?.map(({label, href}) =>
+        `<p><a class="design-reference" href="${escape(href)}">${escape(label)}</a></p>`).join('') ?? ''}
       ${section.demo === 'shuffle-bag' ? shuffleBagDemo() : ''}
       ${section.demo === 'loot-table' ? lootTableDemo() : ''}
       ${section.demo === 'armor' ? armorDemo() : ''}

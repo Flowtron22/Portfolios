@@ -28,6 +28,7 @@
 .library-sample{margin-block:24px}
 .library-sample img{max-height:min(64vh,580px);object-fit:contain}
 .design-slide figcaption{margin-top:9px;color:var(--muted);font-size:14px;line-height:1.55}
+.design-reference{color:var(--accent);text-decoration:underline;text-underline-offset:.2em}
 .article-simulation{
   padding:clamp(14px,4vw,26px);
   border:1px solid var(--line);
