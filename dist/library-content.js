@@ -223,6 +223,5 @@ export const libraryCollections = {
 
 export const publishedLibraryCollections = {
   candlesan: libraryCollections.candlesan,
-  concept: libraryCollections.concept,
   goodies: libraryCollections.goodies
 };

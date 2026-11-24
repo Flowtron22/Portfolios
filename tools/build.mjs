@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import {artworks} from '../dist/art.js';
-import {designArticles, standaloneDesignArticles} from '../dist/design.js';
+import {designArticles} from '../dist/design.js';
 import {libraryCollections} from '../dist/library-content.js';
 import {librarySamples} from '../dist/library-samples.js';
 import {fullLibrarySections} from '../dist/library-article-index.js';
@@ -24,7 +24,7 @@ for (const {src, poster} of pandora.videos) {
 for(const art of artworks){for(const file of [art.image,art.thumbnail])await fs.access('dist/'+file);}
 await fs.access('dist/art-gallery.js');
 await fs.access('dist/design.js');
-for (const article of [...designArticles, ...standaloneDesignArticles]) {
+for (const article of designArticles) {
   for (const section of article.sections) {
     for (const figure of section.figures || []) await fs.access('dist/' + figure.src);
   }

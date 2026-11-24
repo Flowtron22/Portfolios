@@ -1,10 +1,12 @@
 import {publishedLibraryCollections} from './library-content.js';
 import {librarySamples} from './library-samples.js';
 import {fullLibrarySections} from './library-article-index.js';
-import {designArticles, playerTypeArticles, additionalDesignArticles} from './design-original.js';
+import {playerTypeArticles} from './design-player-types.js';
+import {multiplayerBalance} from './design-multiplayer-balance.js';
+import {liveOps} from './design-live-ops.js';
 
-export {designArticles};
-export const standaloneDesignArticles = [...playerTypeArticles, ...additionalDesignArticles];
+const additionalDesignArticles = [multiplayerBalance, liveOps];
+export const designArticles = [...playerTypeArticles, ...additionalDesignArticles];
 const fullArticleSlugs = new Set(Object.keys(publishedLibraryCollections).flatMap(key => fullLibrarySections[key] ?? []));
 
 const escape=text=>String(text??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
@@ -24,7 +26,7 @@ const articleLink = (collection, slug) => `${collectionLink(collection)}/${encod
 const collections = {
   design: {title: 'Design', groups: [
     {title: 'Player types & motivation', featured: true, entries: playerTypeArticles},
-    {title: 'Design articles', entries: [...additionalDesignArticles, ...[...designArticles].sort((a, b) => Number(a.number) - Number(b.number))]}
+    {title: 'Design articles', entries: additionalDesignArticles}
   ]},
   ...publishedLibraryCollections
 };
