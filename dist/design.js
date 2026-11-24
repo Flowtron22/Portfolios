@@ -4,6 +4,7 @@ import {fullLibrarySections} from './library-article-index.js';
 import {playerTypeArticles} from './design-player-types.js';
 import {multiplayerBalance} from './design-multiplayer-balance.js';
 import {liveOps} from './design-live-ops.js';
+import {shuffleBagDemo} from './shufflebag-demo.js';
 
 const additionalDesignArticles = [multiplayerBalance, liveOps];
 export const designArticles = [...playerTypeArticles, ...additionalDesignArticles];
@@ -88,6 +89,7 @@ function renderArticle(article, backLink) {
 
 function renderArticleSummary(article, sample) {
   return `<p class="design-intro">${escape(article.summary)}</p>
+    ${article.slug === 'control-randomness' ? shuffleBagDemo() : ''}
     ${article.download ? `<p class="design-intro"><a class="button primary" href="${escape(article.download.src)}" download>${escape(article.download.label)}</a></p>` : ''}
     ${sample ? `<div class="library-sample">${renderFigure(sample)}</div>` : ''}
     ${article.sections.map(section => `<section>

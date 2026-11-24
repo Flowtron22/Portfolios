@@ -28,6 +28,15 @@
 .library-sample{margin-block:24px}
 .library-sample img{max-height:min(64vh,580px);object-fit:contain}
 .design-slide figcaption{margin-top:9px;color:var(--muted);font-size:14px;line-height:1.55}
+.shuffle-demo{padding:clamp(14px,4vw,26px);border:1px solid var(--line);background:var(--panel)}
+.shuffle-demo-controls,.shuffle-demo-comparison{display:flex;gap:12px;flex-wrap:wrap}
+.shuffle-demo-comparison{margin-top:20px}
+.shuffle-demo-comparison>div{flex:1 1 235px;min-width:0;padding:14px;border:1px solid var(--line)}
+.shuffle-demo-comparison h3{margin:0;font-size:18px}
+.design-reading .shuffle-demo-comparison p{font-size:14px;line-height:1.5;margin:8px 0}
+.design-reading .shuffle-results{display:flex;align-content:start;flex-wrap:wrap;gap:5px;list-style:none;min-height:36px;padding:0;margin:0}
+.design-reading .shuffle-results li{margin:0;padding:3px 5px;border:1px solid var(--line);font-size:13px}
+.design-reading .shuffle-results .shuffle-critical{color:var(--accent);border-color:var(--accent)}
 @media(max-width:700px){.design-slides{grid-template-columns:minmax(0,1fr);gap:20px}}
 
 .design-articles{
