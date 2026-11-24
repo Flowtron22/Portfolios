@@ -5,6 +5,7 @@ import {initArmorDemo} from './armor-demo.js';
 import {initArmorSurvivalDemo} from './armor-survival-demo.js';
 import {initGameFeelDemo} from './game-feel-demo.js';
 import {initMatsunoArticle} from './design-matsuno-interactions.js';
+import {initMobaScaling} from './moba-scaling-demos.js';
 import {gameplaySystems} from './candlesan.js';
 import {artworks} from './art.js';
 import {artCards,artViewer,initArtViewer} from './art-gallery.js';
@@ -175,6 +176,7 @@ async function render(){cleanup?.();cleanup=null;const [route]=(location.hash.sl
     initArmorSurvivalDemo(main);
     initGameFeelDemo(main);
     initMatsunoArticle(main);
+    initMobaScaling(main);
   }
     if (page === 'home') {
     const host = document.getElementById('scene');

@@ -170,6 +170,31 @@
 .article-simulation .button:hover{background:var(--ink);color:var(--panel);border-color:var(--ink)}
 .article-simulation :where(button,select,input,summary,a):focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .article-simulation ::selection{background:var(--accent);color:var(--sim-action-ink)}
+.moba-sim{
+  --panel:#f1eee5;--line:#cabfae;--ink:#252e31;--muted:#535a58;
+  --accent:#24635d;--sim-surface:#fffdf6;--sim-control-line:#878476;--sim-action-ink:#fffdf6;
+}
+.moba-sim form{display:grid;gap:16px}
+.moba-sim form>.button{justify-self:start;padding:8px 14px}
+.moba-controls,.moba-metrics{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));margin:0}
+.moba-control{display:grid;gap:5px;min-width:0;font-size:14px}
+.moba-control span{display:flex;justify-content:space-between;gap:8px}
+.moba-control output{flex:none;font-weight:700;color:var(--accent)}
+.moba-control input{width:100%;margin:0;min-height:30px;accent-color:var(--accent)}
+.moba-control select{min-height:40px;padding:5px 8px;border:1px solid var(--sim-control-line);font:inherit}
+.moba-figure{margin:0;padding:10px;background:var(--sim-surface);border:1px solid var(--line)}
+.moba-figure svg{display:block;width:100%;height:auto}
+.moba-figure text{font:12px var(--font);fill:var(--muted)}
+.moba-gridline{stroke:#d9d4c8;stroke-width:1}
+.moba-chart-guide{stroke:#6f7a72;stroke-width:1.2;stroke-dasharray:5 4}
+.moba-legend{display:flex;flex-wrap:wrap;gap:5px 14px;color:var(--muted);font-size:13px;padding:0 5px 5px}
+.moba-legend i{display:inline-block;width:13px;height:3px;background:var(--series);vertical-align:middle;margin-right:5px}
+.moba-metrics div{padding:8px 10px;border:1px solid var(--line);background:var(--sim-surface)}
+.moba-metrics dt{color:var(--muted);font-size:13px}
+.moba-metrics dd{margin:4px 0 0;color:var(--accent);font-size:22px;font-weight:700}
+.moba-budget-bar{display:flex;min-height:35px;background:var(--sim-surface)}
+.moba-budget-bar span{display:grid;place-items:center;color:#fff;font-size:13px;font-weight:700}
+.design-reading .moba-sim .moba-note{margin:0;font-size:14px;line-height:1.5}
 
 /* Charcoal and brass from the marble jar illustration. */
 .shuffle-demo{
