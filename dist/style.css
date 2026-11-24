@@ -46,6 +46,24 @@
 .design-reading .shuffle-results{display:flex;align-content:start;flex-wrap:wrap;gap:5px;list-style:none;min-height:36px;padding:0;margin:0}
 .design-reading .shuffle-results li{margin:0;padding:3px 5px;border:1px solid var(--line);font-size:13px}
 .design-reading .shuffle-results .shuffle-critical{color:var(--accent);border-color:var(--accent)}
+.loot-demo{padding:clamp(14px,4vw,26px);border:1px solid var(--line);background:var(--panel)}
+.loot-patch{display:grid;gap:6px;max-width:420px;font-size:14px;font-weight:600}
+.loot-patch select{width:100%;min-height:44px;padding:8px;color:var(--ink);background:var(--bg);border:1px solid var(--line);font:inherit}
+.design-reading .loot-pool{font-size:14px;line-height:1.5}
+.loot-odds{width:100%;border-collapse:collapse;font-size:clamp(12px,2.8vw,15px);font-variant-numeric:tabular-nums}
+.loot-odds caption{padding-bottom:8px;text-align:left;color:var(--muted)}
+.loot-odds th,.loot-odds td{padding:9px clamp(4px,1vw,12px);text-align:left;border-bottom:1px solid var(--line)}
+.loot-odds small{display:block;color:var(--muted)}
+.loot-weights{margin-top:16px}
+.loot-weights summary{cursor:pointer;color:var(--accent);font-size:14px}
+.design-reading .loot-weights p{font-size:14px;line-height:1.5}
+.loot-rarity::before{content:'';display:inline-block;width:8px;height:8px;margin-right:5px;border-radius:50%;background:currentColor}
+.loot-legendary{color:#ffb85d}
+.loot-epic{color:#d9b2fc}
+.loot-uncommon{color:#9bdfac}
+.loot-common{color:#e1e6e1}
+.loot-controls{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.design-reading [data-loot-result]{min-height:2.8em;font-size:14px;line-height:1.5;margin-bottom:0}
 @media(max-width:700px){.design-slides{grid-template-columns:minmax(0,1fr);gap:20px}}
 
 .design-articles{

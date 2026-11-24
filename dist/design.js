@@ -5,6 +5,7 @@ import {playerTypeArticles} from './design-player-types.js';
 import {multiplayerBalance} from './design-multiplayer-balance.js';
 import {liveOps} from './design-live-ops.js';
 import {shuffleBagDemo} from './shufflebag-demo.js';
+import {lootTableDemo} from './loot-table-demo.js';
 
 const additionalDesignArticles = [multiplayerBalance, liveOps];
 export const designArticles = [...playerTypeArticles, ...additionalDesignArticles];
@@ -98,6 +99,7 @@ function renderArticleSummary(article, sample) {
       ${section.steps?.length ? `<ol${section.start ? ` start="${escape(section.start)}"` : ''}>${section.steps.map(p => `<li>${escape(p)}</li>`).join('')}</ol>` : ''}
       ${section.figures?.length ? `<div class="design-slides">${section.figures.map(renderFigure).join('')}</div>` : ''}
       ${section.demo === 'shuffle-bag' ? shuffleBagDemo() : ''}
+      ${section.demo === 'loot-table' ? lootTableDemo() : ''}
     </section>`).join('')}`;
 }
 

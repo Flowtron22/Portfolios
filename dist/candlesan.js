@@ -96,7 +96,7 @@ export const candlesanGroups = [
         'In a shared weighted table, every entry competes against the total weight. Adding three ordinary swords expands that total. Disabling one sword in a hotfix shrinks it. Even when no legendary weight changes, its actual drop rate shifts, and players may perceive the return to the original rate as a nerf.',
         'Separate tables give the game independent controls for how often each rarity occurs and which item wins inside that rarity. With a cascade, a 2% legendary roll happens first. If the next tier has a 10% conditional chance, its overall chance is 98% × 10% = 9.8%.',
         'Document whether percentages are conditional or overall. Test an empty or disabled pool, add a common item, and compare the distribution before and after a content change. Those cases show whether the system will behave as intended during Live Ops.'
-      ]}),
+      ]}, {demo: 'loot-table'}),
     topic('tune-the-armor-formula', 'How to Tune the Armor Formula',
       'Choose an armor curve from a target mitigation and believable gear values.',
       'Solve for the curve you want', [
