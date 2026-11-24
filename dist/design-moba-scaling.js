@@ -1,6 +1,6 @@
 export const mobaScaling = {
   slug: 'moba-hero-power-scaling',
-  title: 'The Mathematics of MOBA Hero Power Scaling',
+  title: 'Testament Design MOBA Hero Power Scaling',
   cover: 'assets/design/moba-power-curves.png',
   summary: 'Adjust hero stats, damage curves and item timing in seven interactive balance experiments.',
   sections: [
