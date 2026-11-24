@@ -43,7 +43,7 @@ function libraryTabs(active) {
 }
 
 function libraryCard(collection, article, grouped) {
-  const cover = librarySamples[article.slug]?.src
+  const cover = article.cover ?? librarySamples[article.slug]?.src
     ?? article.sections?.find(section => section.figures?.length)?.figures[0].src;
   const heading = grouped ? 'h3' : 'h2';
   return `<li>

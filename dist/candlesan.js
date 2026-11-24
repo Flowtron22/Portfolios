@@ -6,9 +6,9 @@ const frame = (file, description, height = 800) => ({
   height
 });
 
-function topic(slug, title, summary, heading, paragraphs, application, figures, discussion, demo) {
+function topic(slug, title, summary, heading, paragraphs, application, figures, discussion, {demo, cover} = {}) {
   return {
-    slug, title, summary,
+    slug, title, summary, cover,
     sections: [
       {heading, paragraphs, figures, demo},
       discussion,
@@ -18,6 +18,111 @@ function topic(slug, title, summary, heading, paragraphs, application, figures, 
 }
 
 export const candlesanGroups = [
+  {title: 'Gameplay Systems', entries: [
+    topic('slow-motion-game-feel', 'Study Game Feel in Slow Motion',
+      'A three-second harpoon catch shows how feedback builds from aim to resolution.',
+      'Break down the action in Dave the Diver', [
+        'The hands and harpoon follow the aim. A visible aiming arc shows the shot’s angle and limits, and the camera pushes in before the release. The shot triggers recoil, a bubble trail, and an impact reaction.',
+        'The hooked fish keeps the struggle readable through movement and a small shake. The camera eases back out to mark the end of the action.'
+      ],
+      'Record one action in your own game. Step through the frames and mark aim, commitment, impact, and recovery. Add or adjust the feedback that would make an unclear moment easier to read.',
+      [frame('harpoon-aim', 'The harpoon tracks the player’s aim before firing.'), frame('harpoon-impact', 'The fish recoils and a visible burst marks the point of impact.')],
+      {heading: 'The full feedback sequence', paragraphs: [
+        'Before firing, Dave\'s hands and harpoon track the aim, a precision arc shows the angle and range of motion, and the camera moves in. At release, Dave leans backward and bubbles trace the harpoon\'s path underwater. On contact, the fish is knocked backward and particles burst at the impact point and on the fish.',
+        'The feedback continues after the hit. Dave kicks while he struggles with the catch, the camera shakes a little, and the camera pulls back when the catch completes. Each effect has a different job: conveying control, marking force or contact, showing resistance, or letting the player know it is over.',
+        'On your own recording, mark when each effect starts and ends. Turn effects off one at a time and replay the action at full speed to see what information disappears. This helps you decide where polish does useful work and where effects might be competing.'
+      ]}),
+    topic('how-hard-should-games-be', 'How Hard Should Your Game Be?',
+      'Tune the challenge to what players came to feel.',
+      'Choose difficulty that serves the experience', [
+        'In a game about mastery, difficult but readable failures give players a reason to learn. In a story-first game, repeatedly blocking the next scene can get in the way. A progression RPG can let gear and build choices offer a path through resistance.',
+        'A power fantasy can use close calls to create tension and give the player enough room to recover. The felt danger and the actual chance of losing can differ.'
+      ],
+      'Write the intended feeling before adjusting numbers. Ask testers to describe a failure or a close call and use their answers to adjust the challenge.',
+      [frame('difficulty-types', 'Different game types can target mastery, story, progression, or a power fantasy.')],
+      {heading: 'What a useful failure looks like', paragraphs: [
+        'In a Souls-like, the player should be able to connect a death to something they can learn from, such as an attack timing or a decision to overcommit. A visual novel can use the uncertainty of what happens in the story without making players repeatedly earn the chance to see the next scene.',
+        'In a progression-focused RPG, gear choices and investment can give players a route through a fight they struggled with earlier. An action power fantasy can make a narrow recovery feel dramatic while still giving the player tools and time to pull it off.',
+        'During playtesting, ask people what they believe caused the failure and what they plan to try next. A player who identifies a better response is having a different experience from someone who describes the same loss as a wall and has no idea how to proceed.'
+      ]}),
+    topic('control-randomness', 'Control Randomness with a Shuffle Bag',
+      'Draw without replacement when extreme streaks hurt the experience.',
+      'Give the rolls a memory', [
+        'With a 25% independent critical chance, four misses in a row happen about 32% of the time. A bag with two successes and six failures still yields 25% across each complete bag. Drawing without replacement limits imbalance within that bag, although streaks can cross a refill boundary.',
+        'Bags can be nested. A word game can draw vowel versus consonant first, then draw a letter from the matching pool. A separate rare-letter pool helps control how often difficult letters appear.'
+      ],
+      'Simulate many short sequences and compare how frequently each approach produces a streak that feels bad. Choose the bag size and distribution around that result.',
+      [],
+      {heading: 'How to reason about streaks and refill rules', paragraphs: [
+        'An independent roll remembers nothing. At 25% success, eight consecutive misses still occur about 10% of the time. A shuffle bag like two red marbles and six blue guarantees two successes in each complete bag, while preserving uncertainty about their order. The next bag starts fresh, so a bad run can span the boundary.',
+        'The word-game example uses one bag to choose vowels or consonants and separate distributions to select the letter. A rarer sub-bag controls letters such as J, K, Q, X, and Z. That structure lets the designer tune at the level players notice: the availability of usable letters, the mix of vowels, and the spacing of unusual letters.',
+        'Write down when the bag is refilled and whether it persists across rounds or reloads. Simulate those rules. A bag can guarantee the long-term mix without guaranteeing that every short stretch will feel fair.'
+      ]}, {demo: 'shuffle-bag', cover: 'assets/candlesan/randomness-bag.webp'}),
+    topic('magic-find-design', 'Why Magic Find Is Hard to Design',
+      'A reward bonus can be difficult to notice and harder to value.',
+      'Make the trade-off visible', [
+        'Players receive loot at rates shaped by difficulty, clear speed, and many other factors, so a passive Magic Find bonus can be hard to notice. Once a better reward rate becomes routine, it can stop feeling special. Trading combat power for an uncertain reward adds another difficult choice.',
+        'Alternatives include rewarding progression directly, offering a choice of reward types, or giving the player one deliberate trade-off tied to a clearly identifiable reward.'
+      ],
+      'Ask players to explain what changed after they opted in. If they cannot name the gain or what they gave up, make the reward more visible or simplify the choice.',
+      [frame('magic-find-choices', 'One alternative offers a choice among reward types.'), frame('magic-find-decision', 'One visible trade-off can replace many small gear choices.')],
+      {heading: 'What Diablo III’s Sage’s Set changes', paragraphs: [
+        'Highlighting a bonus drop can help players notice Magic Find, but difficulty, clear speed, and activity type all affect what they earn. Players also get used to a higher drop rate over time. Giving up damage for a reward with uncertain value leaves them doing a comparison they may never feel confident about.',
+        'The video points to Sage’s Set as a more legible example. It doubles Death’s Breath, which is easy to identify, and occupies several equipment slots. Players can decide whether to wear the set for this specific reward instead of reconsidering a small percentage on every item.',
+        'Compare that solution with tying more rewards to progression or letting players choose between experience, gold, and item rewards. Each answers a different player need. Look at whether the intended benefit is visible, whether it stays meaningful, and whether the choice is easy to explain.'
+      ]}),
+    topic('responsive-animation', 'Use Animation Timing to Make Actions Responsive',
+      'Give immediate visual feedback while preserving the weight of the action.',
+      'Shorten the wait before the first readable pose', [
+        'Anticipation can make a swing readable, but waiting through a long wind-up after pressing attack can make the input feel sluggish. Speeding up the whole animation can also take weight out of the hit.',
+        'A Diablo III example moves directly to a clearly different silhouette when the player presses attack, then lets the swing and follow-through carry the weight. A jump can use the same principle by starting upward movement immediately.'
+      ],
+      'Record input and the first clear response. Compare an animation that speeds up everywhere with one that changes only the opening pose and timing.',
+      [frame('attack-silhouette', 'The new attack pose changes the silhouette enough to signal input immediately.'), frame('attack-timing', 'The timing comparison isolates the delay removed from the start of the action.')],
+      {heading: 'Keep the weight where the player can feel it', paragraphs: [
+        'Traditional movement often has anticipation, action, and follow-through. In a film, a preparatory movement makes the action easier to read. In a game, those frames can sit between the player\'s input and the response they expect. The Diablo III test found that speeding up the whole swing made it feel lighter while leaving the impression of a delay.',
+        'The revised attack jumps to the fully drawn-back pose as soon as the player acts. The silhouette immediately changes, while the strike and follow-through keep their timing. Removing a short opening delay made a noticeable difference without needing the whole animation to run faster.',
+        'Measure the time to the first readable response separately from the time to impact. A responsive player attack and a readable enemy wind-up do different jobs, so test those timings from each character\'s point of view.'
+      ]}),
+    topic('rpg-loot-tables', 'Design RPG Loot Tables for Change',
+      'Separate rarity odds from the items available at each rarity.',
+      'Protect drop rates during content updates', [
+        'A single weighted item table can be easy to start with. Adding a common item or disabling one in a patch changes the total weight and can inadvertently shift the chance of every rare item.',
+        'Roll the rarity first, then choose an item from its own pool. A descending cascade can check for a legendary first, then test the next tier if it fails. Later chances are conditional on earlier misses.'
+      ],
+      'Before a patch, simulate drops with and without the changed item. Compare overall rarity rates and verify that the selected rarity always has an eligible reward.',
+      [frame('loot-table', 'The weighted item table ties each entry to a range in the same roll.'), frame('loot-cascade', 'The cascade checks each rarity in turn before choosing from its pool.')],
+      {heading: 'Why adding a common item can affect legendary odds', paragraphs: [
+        'In a shared weighted table, every entry competes against the total weight. Adding three ordinary swords expands that total. Disabling one sword in a hotfix shrinks it. Even when no legendary weight changes, its actual drop rate shifts, and players may perceive the return to the original rate as a nerf.',
+        'Separate tables give the game independent controls for how often each rarity occurs and which item wins inside that rarity. With a cascade, a 2% legendary roll happens first. If the next tier has a 10% conditional chance, its overall chance is 98% × 10% = 9.8%.',
+        'Document whether percentages are conditional or overall. Test an empty or disabled pool, add a common item, and compare the distribution before and after a content change. Those cases show whether the system will behave as intended during Live Ops.'
+      ]}),
+    topic('tune-the-armor-formula', 'How to Tune the Armor Formula',
+      'Choose an armor curve from a target mitigation and believable gear values.',
+      'Solve for the curve you want', [
+        'In the formula mitigation = armor ÷ (armor + K), armor equal to K yields 50% mitigation. Start with the desired mitigation at a representative point, decide how much armor gear should contribute there, and solve for K.',
+        'If gear contributes 28 armor per level and the target is 25% mitigation, the worked example gives K = 84 per level for that simplified model. When using a level-based curve, the attacker’s level can define the comparison without reducing mitigation solely because the defender leveled up.'
+      ],
+      'Choose a standard enemy, a gear benchmark, and a target number of hits to survive. Check low, middle, and high gear values before committing to the curve.',
+      [frame('armor-tuning', 'Individual gear slots contribute different amounts to the total armor budget.')],
+      {heading: 'Work backward from the target', paragraphs: [
+        'In mitigation = armor ÷ (armor + K), rearrange to get K = armor × (1 − mitigation) ÷ mitigation, with mitigation expressed as a decimal. If the target is 25% at 28 armor, K is 84. The point of choosing readable gear values first is to make the character sheet understandable while tuning the curve separately.',
+        'A round constant such as 100 makes half damage easy to reason about at 100 armor. An RTS with small armor values can use a smaller constant. In a progression game, the curve can scale with enemy level, as in the historical World of Warcraft example discussed in the video. Basing a level term on the attacker helps avoid a character losing mitigation merely for leveling up while fighting the same opponent.',
+        'Test beside a same-level foe, a stronger foe, and an early enemy the player returns to later. Those cases reveal whether the curve supports the intended feeling of progression.'
+      ]}),
+    topic('math-behind-armor', 'The Math Behind Armor and Survivability',
+      'Compare effective health when percentage mitigation looks like diminishing returns.',
+      'Measure what the player can survive', [
+        'Flat reduction affects fast and slow attacks differently. Subtracting 10 damage per hit can erase a series of 10-damage hits while barely changing a slow 100-damage hit. A straight linear mitigation percentage instead grows disproportionately in value near 100%.',
+        'The curve armor ÷ (armor + K) slows the growth of the displayed percentage, but effective health against that damage scales as base health × (1 + armor ÷ K). Equal armor gains add equal effective health when the other values stay fixed.'
+      ],
+      'Compare two attacks with equal damage per second and different hit frequencies. Then graph effective health as armor rises so you can evaluate survival alongside the displayed percentage.',
+      [frame('armor-flat', 'Flat reduction hits its limit when attack damage becomes too small.'), frame('armor-survival', 'The table compares mitigation percentages with the number of hits the player can survive.')],
+      {heading: 'What changes when you measure hits survived', paragraphs: [
+        'Take a character with 1,000 health facing 100-damage hits and use K = 100. With no armor, 10 hits consume the health pool. At 100 armor, half the damage gets through, so it takes 20 hits. At 200 armor, about a third gets through, so the same pool lasts about 30 hits. Displayed mitigation grows from 0% to 50% to about 67%, while survivability gains remain even in this example.',
+        'A flat subtraction can make attack speed decisive because the reduction applies to every hit. A direct percentage-per-point rule can reach immunity or require a hard cap. With the armor curve, a steady increase in effective health is easier to evaluate across repeated attacks, but actual time to defeat still depends on healing, burst, hit rounding, and which damage types armor covers.'
+      ]})
+  ]},
   {title: 'Design Practice', entries: [
     topic('good-ideas-wrong-game', 'When a Good Idea Doesn’t Fit the Game',
       'Judge a proposed feature against what players came to do.',
@@ -220,111 +325,6 @@ export const candlesanGroups = [
         'Seeing familiar names repeatedly on the same realm creates proximity. Shared factions, level ranges, and quests can reveal similarity. An elite enemy such as Hogger gives two players a small reason to help each other. In a dungeon or raid, each role depends more heavily on the group, which creates repeated chances to return that help.',
         'Disclosure is the part that can continue after the objective ends. Players might stay in voice chat while gathering resources or leveling a different character and talk about their lives. A long friends list measures contacts, while repeat interactions and time together give those contacts room to become relationships.',
         'Check if teammates are recognizable on a second meeting, whether they can choose to play together again, and what happens to their communication channel at the end of the activity.'
-      ]})
-  ]},
-  {title: 'Gameplay Systems', entries: [
-    topic('slow-motion-game-feel', 'Study Game Feel in Slow Motion',
-      'A three-second harpoon catch shows how feedback builds from aim to resolution.',
-      'Break down the action in Dave the Diver', [
-        'The hands and harpoon follow the aim. A visible aiming arc shows the shot’s angle and limits, and the camera pushes in before the release. The shot triggers recoil, a bubble trail, and an impact reaction.',
-        'The hooked fish keeps the struggle readable through movement and a small shake. The camera eases back out to mark the end of the action.'
-      ],
-      'Record one action in your own game. Step through the frames and mark aim, commitment, impact, and recovery. Add or adjust the feedback that would make an unclear moment easier to read.',
-      [frame('harpoon-aim', 'The harpoon tracks the player’s aim before firing.'), frame('harpoon-impact', 'The fish recoils and a visible burst marks the point of impact.')],
-      {heading: 'The full feedback sequence', paragraphs: [
-        'Before firing, Dave\'s hands and harpoon track the aim, a precision arc shows the angle and range of motion, and the camera moves in. At release, Dave leans backward and bubbles trace the harpoon\'s path underwater. On contact, the fish is knocked backward and particles burst at the impact point and on the fish.',
-        'The feedback continues after the hit. Dave kicks while he struggles with the catch, the camera shakes a little, and the camera pulls back when the catch completes. Each effect has a different job: conveying control, marking force or contact, showing resistance, or letting the player know it is over.',
-        'On your own recording, mark when each effect starts and ends. Turn effects off one at a time and replay the action at full speed to see what information disappears. This helps you decide where polish does useful work and where effects might be competing.'
-      ]}),
-    topic('how-hard-should-games-be', 'How Hard Should Your Game Be?',
-      'Tune the challenge to what players came to feel.',
-      'Choose difficulty that serves the experience', [
-        'In a game about mastery, difficult but readable failures give players a reason to learn. In a story-first game, repeatedly blocking the next scene can get in the way. A progression RPG can let gear and build choices offer a path through resistance.',
-        'A power fantasy can use close calls to create tension and give the player enough room to recover. The felt danger and the actual chance of losing can differ.'
-      ],
-      'Write the intended feeling before adjusting numbers. Ask testers to describe a failure or a close call and use their answers to adjust the challenge.',
-      [frame('difficulty-types', 'Different game types can target mastery, story, progression, or a power fantasy.')],
-      {heading: 'What a useful failure looks like', paragraphs: [
-        'In a Souls-like, the player should be able to connect a death to something they can learn from, such as an attack timing or a decision to overcommit. A visual novel can use the uncertainty of what happens in the story without making players repeatedly earn the chance to see the next scene.',
-        'In a progression-focused RPG, gear choices and investment can give players a route through a fight they struggled with earlier. An action power fantasy can make a narrow recovery feel dramatic while still giving the player tools and time to pull it off.',
-        'During playtesting, ask people what they believe caused the failure and what they plan to try next. A player who identifies a better response is having a different experience from someone who describes the same loss as a wall and has no idea how to proceed.'
-      ]}),
-    topic('control-randomness', 'Control Randomness with a Shuffle Bag',
-      'Draw without replacement when extreme streaks hurt the experience.',
-      'Give the rolls a memory', [
-        'With a 25% independent critical chance, four misses in a row happen about 32% of the time. A bag with two successes and six failures still yields 25% across each complete bag. Drawing without replacement limits imbalance within that bag, although streaks can cross a refill boundary.',
-        'Bags can be nested. A word game can draw vowel versus consonant first, then draw a letter from the matching pool. A separate rare-letter pool helps control how often difficult letters appear.'
-      ],
-      'Simulate many short sequences and compare how frequently each approach produces a streak that feels bad. Choose the bag size and distribution around that result.',
-      [],
-      {heading: 'How to reason about streaks and refill rules', paragraphs: [
-        'An independent roll remembers nothing. At 25% success, eight consecutive misses still occur about 10% of the time. A shuffle bag like two red marbles and six blue guarantees two successes in each complete bag, while preserving uncertainty about their order. The next bag starts fresh, so a bad run can span the boundary.',
-        'The word-game example uses one bag to choose vowels or consonants and separate distributions to select the letter. A rarer sub-bag controls letters such as J, K, Q, X, and Z. That structure lets the designer tune at the level players notice: the availability of usable letters, the mix of vowels, and the spacing of unusual letters.',
-        'Write down when the bag is refilled and whether it persists across rounds or reloads. Simulate those rules. A bag can guarantee the long-term mix without guaranteeing that every short stretch will feel fair.'
-      ]}, 'shuffle-bag'),
-    topic('magic-find-design', 'Why Magic Find Is Hard to Design',
-      'A reward bonus can be difficult to notice and harder to value.',
-      'Make the trade-off visible', [
-        'Players receive loot at rates shaped by difficulty, clear speed, and many other factors, so a passive Magic Find bonus can be hard to notice. Once a better reward rate becomes routine, it can stop feeling special. Trading combat power for an uncertain reward adds another difficult choice.',
-        'Alternatives include rewarding progression directly, offering a choice of reward types, or giving the player one deliberate trade-off tied to a clearly identifiable reward.'
-      ],
-      'Ask players to explain what changed after they opted in. If they cannot name the gain or what they gave up, make the reward more visible or simplify the choice.',
-      [frame('magic-find-choices', 'One alternative offers a choice among reward types.'), frame('magic-find-decision', 'One visible trade-off can replace many small gear choices.')],
-      {heading: 'What Diablo III’s Sage’s Set changes', paragraphs: [
-        'Highlighting a bonus drop can help players notice Magic Find, but difficulty, clear speed, and activity type all affect what they earn. Players also get used to a higher drop rate over time. Giving up damage for a reward with uncertain value leaves them doing a comparison they may never feel confident about.',
-        'The video points to Sage’s Set as a more legible example. It doubles Death’s Breath, which is easy to identify, and occupies several equipment slots. Players can decide whether to wear the set for this specific reward instead of reconsidering a small percentage on every item.',
-        'Compare that solution with tying more rewards to progression or letting players choose between experience, gold, and item rewards. Each answers a different player need. Look at whether the intended benefit is visible, whether it stays meaningful, and whether the choice is easy to explain.'
-      ]}),
-    topic('responsive-animation', 'Use Animation Timing to Make Actions Responsive',
-      'Give immediate visual feedback while preserving the weight of the action.',
-      'Shorten the wait before the first readable pose', [
-        'Anticipation can make a swing readable, but waiting through a long wind-up after pressing attack can make the input feel sluggish. Speeding up the whole animation can also take weight out of the hit.',
-        'A Diablo III example moves directly to a clearly different silhouette when the player presses attack, then lets the swing and follow-through carry the weight. A jump can use the same principle by starting upward movement immediately.'
-      ],
-      'Record input and the first clear response. Compare an animation that speeds up everywhere with one that changes only the opening pose and timing.',
-      [frame('attack-silhouette', 'The new attack pose changes the silhouette enough to signal input immediately.'), frame('attack-timing', 'The timing comparison isolates the delay removed from the start of the action.')],
-      {heading: 'Keep the weight where the player can feel it', paragraphs: [
-        'Traditional movement often has anticipation, action, and follow-through. In a film, a preparatory movement makes the action easier to read. In a game, those frames can sit between the player\'s input and the response they expect. The Diablo III test found that speeding up the whole swing made it feel lighter while leaving the impression of a delay.',
-        'The revised attack jumps to the fully drawn-back pose as soon as the player acts. The silhouette immediately changes, while the strike and follow-through keep their timing. Removing a short opening delay made a noticeable difference without needing the whole animation to run faster.',
-        'Measure the time to the first readable response separately from the time to impact. A responsive player attack and a readable enemy wind-up do different jobs, so test those timings from each character\'s point of view.'
-      ]}),
-    topic('rpg-loot-tables', 'Design RPG Loot Tables for Change',
-      'Separate rarity odds from the items available at each rarity.',
-      'Protect drop rates during content updates', [
-        'A single weighted item table can be easy to start with. Adding a common item or disabling one in a patch changes the total weight and can inadvertently shift the chance of every rare item.',
-        'Roll the rarity first, then choose an item from its own pool. A descending cascade can check for a legendary first, then test the next tier if it fails. Later chances are conditional on earlier misses.'
-      ],
-      'Before a patch, simulate drops with and without the changed item. Compare overall rarity rates and verify that the selected rarity always has an eligible reward.',
-      [frame('loot-table', 'The weighted item table ties each entry to a range in the same roll.'), frame('loot-cascade', 'The cascade checks each rarity in turn before choosing from its pool.')],
-      {heading: 'Why adding a common item can affect legendary odds', paragraphs: [
-        'In a shared weighted table, every entry competes against the total weight. Adding three ordinary swords expands that total. Disabling one sword in a hotfix shrinks it. Even when no legendary weight changes, its actual drop rate shifts, and players may perceive the return to the original rate as a nerf.',
-        'Separate tables give the game independent controls for how often each rarity occurs and which item wins inside that rarity. With a cascade, a 2% legendary roll happens first. If the next tier has a 10% conditional chance, its overall chance is 98% × 10% = 9.8%.',
-        'Document whether percentages are conditional or overall. Test an empty or disabled pool, add a common item, and compare the distribution before and after a content change. Those cases show whether the system will behave as intended during Live Ops.'
-      ]}),
-    topic('tune-the-armor-formula', 'How to Tune the Armor Formula',
-      'Choose an armor curve from a target mitigation and believable gear values.',
-      'Solve for the curve you want', [
-        'In the formula mitigation = armor ÷ (armor + K), armor equal to K yields 50% mitigation. Start with the desired mitigation at a representative point, decide how much armor gear should contribute there, and solve for K.',
-        'If gear contributes 28 armor per level and the target is 25% mitigation, the worked example gives K = 84 per level for that simplified model. When using a level-based curve, the attacker’s level can define the comparison without reducing mitigation solely because the defender leveled up.'
-      ],
-      'Choose a standard enemy, a gear benchmark, and a target number of hits to survive. Check low, middle, and high gear values before committing to the curve.',
-      [frame('armor-tuning', 'Individual gear slots contribute different amounts to the total armor budget.')],
-      {heading: 'Work backward from the target', paragraphs: [
-        'In mitigation = armor ÷ (armor + K), rearrange to get K = armor × (1 − mitigation) ÷ mitigation, with mitigation expressed as a decimal. If the target is 25% at 28 armor, K is 84. The point of choosing readable gear values first is to make the character sheet understandable while tuning the curve separately.',
-        'A round constant such as 100 makes half damage easy to reason about at 100 armor. An RTS with small armor values can use a smaller constant. In a progression game, the curve can scale with enemy level, as in the historical World of Warcraft example discussed in the video. Basing a level term on the attacker helps avoid a character losing mitigation merely for leveling up while fighting the same opponent.',
-        'Test beside a same-level foe, a stronger foe, and an early enemy the player returns to later. Those cases reveal whether the curve supports the intended feeling of progression.'
-      ]}),
-    topic('math-behind-armor', 'The Math Behind Armor and Survivability',
-      'Compare effective health when percentage mitigation looks like diminishing returns.',
-      'Measure what the player can survive', [
-        'Flat reduction affects fast and slow attacks differently. Subtracting 10 damage per hit can erase a series of 10-damage hits while barely changing a slow 100-damage hit. A straight linear mitigation percentage instead grows disproportionately in value near 100%.',
-        'The curve armor ÷ (armor + K) slows the growth of the displayed percentage, but effective health against that damage scales as base health × (1 + armor ÷ K). Equal armor gains add equal effective health when the other values stay fixed.'
-      ],
-      'Compare two attacks with equal damage per second and different hit frequencies. Then graph effective health as armor rises so you can evaluate survival alongside the displayed percentage.',
-      [frame('armor-flat', 'Flat reduction hits its limit when attack damage becomes too small.'), frame('armor-survival', 'The table compares mitigation percentages with the number of hits the player can survive.')],
-      {heading: 'What changes when you measure hits survived', paragraphs: [
-        'Take a character with 1,000 health facing 100-damage hits and use K = 100. With no armor, 10 hits consume the health pool. At 100 armor, half the damage gets through, so it takes 20 hits. At 200 armor, about a third gets through, so the same pool lasts about 30 hits. Displayed mitigation grows from 0% to 50% to about 67%, while survivability gains remain even in this example.',
-        'A flat subtraction can make attack speed decisive because the reduction applies to every hit. A direct percentage-per-point rule can reach immunity or require a hard cap. With the armor curve, a steady increase in effective health is easier to evaluate across repeated attacks, but actual time to defeat still depends on healing, burst, hit rounding, and which damage types armor covers.'
       ]})
   ]},
   {title: 'Encounter Design', entries: [
