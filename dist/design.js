@@ -5,6 +5,7 @@ import {playerTypeArticles} from './design-player-types.js';
 import {multiplayerBalance} from './design-multiplayer-balance.js';
 import {liveOps} from './design-live-ops.js';
 import {matsuno} from './design-matsuno.js';
+import {renderMatsunoBody} from './design-matsuno-interactions.js';
 import {shuffleBagDemo} from './shufflebag-demo.js';
 import {lootTableDemo} from './loot-table-demo.js';
 import {armorDemo} from './armor-demo.js';
@@ -94,7 +95,7 @@ function renderArticle(article, backLink) {
     <h1>${escape(article.title)}</h1>
     ${fullArticleSlugs.has(article.slug)
       ? `<section class="source-reading" data-library-article="${escape(article.slug)}" aria-busy="true"><p role="status">Loading article…</p></section>`
-      : renderArticleSummary(article, sample)}
+      : article === matsuno ? renderMatsunoBody() : renderArticleSummary(article, sample)}
   </article>`;
 }
 

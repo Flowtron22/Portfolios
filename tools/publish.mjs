@@ -18,7 +18,8 @@ for (const slug of publicArticles) {
   const {images} = await import(`../dist/library-articles/${slug}.js`);
   for (const image of images) publicImages.add(image);
 }
-for (const {sections} of designArticles) {
+for (const {sections = [], assets = []} of designArticles) {
+  for (const asset of assets) publicImages.add(asset);
   for (const section of sections) {
     for (const {src, original} of section.figures ?? []) {
       for (const image of [src, original]) {

@@ -4,6 +4,7 @@ import {initLootTableDemo} from './loot-table-demo.js';
 import {initArmorDemo} from './armor-demo.js';
 import {initArmorSurvivalDemo} from './armor-survival-demo.js';
 import {initGameFeelDemo} from './game-feel-demo.js';
+import {initMatsunoArticle} from './design-matsuno-interactions.js';
 import {artworks} from './art.js';
 import {artCards,artViewer,initArtViewer} from './art-gallery.js';
 import {pandora} from './pandora.js';
@@ -166,6 +167,7 @@ async function render(){cleanup?.();cleanup=null;const [route]=(location.hash.sl
     initArmorDemo(main);
     initArmorSurvivalDemo(main);
     initGameFeelDemo(main);
+    initMatsunoArticle(main);
   }
     if (page === 'home') {
     const host = document.getElementById('scene');
