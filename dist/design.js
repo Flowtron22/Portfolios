@@ -181,7 +181,8 @@ function renderArticle(article, backLink) {
 }
 
 function renderArticleSummary(article, deck, sample) {
-  return `${article.source ? `<aside class="design-source"><p>Reading notes · ${escape(article.source.author)} / ${escape(article.source.publication)} · ${escape(article.source.date)}</p><a class="button primary" href="${escape(article.source.url)}" target="_blank" rel="noopener noreferrer">Read complete original article</a><p>Full text, examples, references and interactive polls are available at the source.</p></aside>` : ''}<p class="design-intro">${escape(article.summary)}</p>
+  return `<p class="design-intro">${escape(article.summary)}</p>
+    ${article.source ? `<p class="design-source">Informed by ${escape(article.source.author)} · ${escape(article.source.publication)} · ${escape(article.source.date)}</p>` : ''}
     ${article.download ? `<p class="design-intro"><a class="button primary" href="${escape(article.download.src)}" download>${escape(article.download.label)}</a></p>` : ''}
     ${deck ? renderPresentation(deck) : ''}
     ${sample ? `<div class="library-sample">${renderFigure(sample)}</div>` : ''}
