@@ -121,7 +121,7 @@ export const candlesanGroups = [
       {heading: 'What changes when you measure hits survived', paragraphs: [
         'Take a character with 1,000 health facing 100-damage hits and use K = 100. With no armor, 10 hits consume the health pool. At 100 armor, half the damage gets through, so it takes 20 hits. At 200 armor, about a third gets through, so the same pool lasts about 30 hits. Displayed mitigation grows from 0% to 50% to about 67%, while survivability gains remain even in this example.',
         'A flat subtraction can make attack speed decisive because the reduction applies to every hit. A direct percentage-per-point rule can reach immunity or require a hard cap. With the armor curve, a steady increase in effective health is easier to evaluate across repeated attacks, but actual time to defeat still depends on healing, burst, hit rounding, and which damage types armor covers.'
-      ]})
+      ]}, {demo: 'armor-survival'})
   ]},
   {title: 'Design Practice', entries: [
     topic('good-ideas-wrong-game', 'When a Good Idea Doesn’t Fit the Game',

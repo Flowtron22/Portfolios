@@ -2,6 +2,7 @@ import {libraryEntryCount,libraryPage,loadLibraryArticle} from './design.js';
 import {initShuffleBagDemo} from './shufflebag-demo.js';
 import {initLootTableDemo} from './loot-table-demo.js';
 import {initArmorDemo} from './armor-demo.js';
+import {initArmorSurvivalDemo} from './armor-survival-demo.js';
 import {artworks} from './art.js';
 import {artCards,artViewer,initArtViewer} from './art-gallery.js';
 import {pandora} from './pandora.js';
@@ -162,6 +163,7 @@ async function render(){cleanup?.();cleanup=null;const [route]=(location.hash.sl
     initShuffleBagDemo(main);
     initLootTableDemo(main);
     initArmorDemo(main);
+    initArmorSurvivalDemo(main);
   }
     if (page === 'home') {
     const host = document.getElementById('scene');

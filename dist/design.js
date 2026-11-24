@@ -7,6 +7,7 @@ import {liveOps} from './design-live-ops.js';
 import {shuffleBagDemo} from './shufflebag-demo.js';
 import {lootTableDemo} from './loot-table-demo.js';
 import {armorDemo} from './armor-demo.js';
+import {armorSurvivalDemo} from './armor-survival-demo.js';
 
 const additionalDesignArticles = [multiplayerBalance, liveOps];
 export const designArticles = [...playerTypeArticles, ...additionalDesignArticles];
@@ -62,7 +63,13 @@ function libraryCard(collection, article, grouped) {
 function collectionIndex(key, {title, groups}) {
   return `<div class="solo-page-heading"><h1>${escape(title)}</h1></div>
     ${groups.map(group => {
-      const cards = `<ul class="design-articles">${group.entries.map(article => libraryCard(key, article, Boolean(group.title))).join('')}</ul>`;
+      const simulations = [];
+      const articles = [];
+      for (const article of group.entries) {
+        (article.sections?.some(section => section.demo) ? simulations : articles).push(article);
+      }
+      const cards = (simulations.length ? `<ul class="design-articles design-simulation-cards" aria-label="Interactive simulations">${simulations.map(article => libraryCard(key, article, Boolean(group.title))).join('')}</ul>` : '')
+        + (articles.length ? `<ul class="design-articles">${articles.map(article => libraryCard(key, article, Boolean(group.title))).join('')}</ul>` : '');
       return group.title ? `<section class="library-group${group.featured ? ' library-featured' : ''}"><h2>${escape(group.title)}</h2>${cards}</section>` : cards;
     }).join('')}`;
 }
@@ -102,6 +109,7 @@ function renderArticleSummary(article, sample) {
       ${section.demo === 'shuffle-bag' ? shuffleBagDemo() : ''}
       ${section.demo === 'loot-table' ? lootTableDemo() : ''}
       ${section.demo === 'armor' ? armorDemo() : ''}
+      ${section.demo === 'armor-survival' ? armorSurvivalDemo() : ''}
     </section>`).join('')}`;
 }
 
