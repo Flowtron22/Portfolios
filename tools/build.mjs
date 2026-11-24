@@ -25,6 +25,7 @@ for(const art of artworks){for(const file of [art.image,art.thumbnail])await fs.
 await fs.access('dist/art-gallery.js');
 await fs.access('dist/design.js');
 for (const article of designArticles) {
+  if (article.cover) await fs.access('dist/' + article.cover);
   for (const asset of article.assets ?? []) await fs.access('dist/' + asset);
   for (const section of article.sections ?? []) {
     for (const figure of section.figures || []) await fs.access('dist/' + figure.src);

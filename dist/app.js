@@ -5,6 +5,7 @@ import {initArmorDemo} from './armor-demo.js';
 import {initArmorSurvivalDemo} from './armor-survival-demo.js';
 import {initGameFeelDemo} from './game-feel-demo.js';
 import {initMatsunoArticle} from './design-matsuno-interactions.js';
+import {gameplaySystems} from './candlesan.js';
 import {artworks} from './art.js';
 import {artCards,artViewer,initArtViewer} from './art-gallery.js';
 import {pandora} from './pandora.js';
@@ -105,6 +106,12 @@ function solo(section = 'art', subsection, slug) {
   </nav>`;
 
   if (active === 'library') {
+    if (subsection === 'candlesan' && (!slug || gameplaySystems.some(article => article.slug === slug))) {
+      const destination = slug ? `#/solo/library/${slug}` : '#/solo/library';
+      history.replaceState(history.state, '', destination);
+      subsection = slug;
+      slug = undefined;
+    }
     return `<section class="page-content solo-page">${tabs}${libraryPage(subsection, slug)}</section>`;
   }
 

@@ -421,3 +421,6 @@ export const candlesanGroups = [
       ]})
   ]}
 ];
+
+export const gameplaySystems = candlesanGroups[0].entries.filter(article =>
+  article.sections.some(section => section.demo));

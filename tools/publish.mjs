@@ -5,6 +5,7 @@ import {publishedLibraryCollections} from '../dist/library-content.js';
 import {fullLibrarySections} from '../dist/library-article-index.js';
 import {librarySamples} from '../dist/library-samples.js';
 import {designArticles} from '../dist/design.js';
+import {gameplaySystems} from '../dist/candlesan.js';
 
 const source = fileURLToPath(new URL('../dist/', import.meta.url));
 const output = fileURLToPath(new URL('../public-dist', import.meta.url));
@@ -18,12 +19,13 @@ for (const slug of publicArticles) {
   const {images} = await import(`../dist/library-articles/${slug}.js`);
   for (const image of images) publicImages.add(image);
 }
-for (const {sections = [], assets = []} of designArticles) {
+for (const {sections = [], assets = [], cover} of designArticles) {
+  if (cover) publicImages.add(cover);
   for (const asset of assets) publicImages.add(asset);
   for (const section of sections) {
     for (const {src, original} of section.figures ?? []) {
       for (const image of [src, original]) {
-        if (image?.startsWith('assets/design/') && !image.endsWith('.pdf')) publicImages.add(image);
+        if (image?.startsWith('assets/') && !image.endsWith('.pdf')) publicImages.add(image);
       }
     }
   }
@@ -31,6 +33,7 @@ for (const {sections = [], assets = []} of designArticles) {
 
 const replacedModules = new Map([
   ['library-content.js', ['publishedLibraryCollections', publishedLibraryCollections]],
+  ['candlesan.js', ['gameplaySystems', gameplaySystems]],
   ['library-article-index.js', ['fullLibrarySections', publicSections]],
   ['library-samples.js', ['librarySamples', publicSamples]]
 ]);
@@ -38,7 +41,7 @@ const retiredModules = new Set([
   'cookie-content.js', 'cookie-samples.js', 'design-decks.js', 'design-original.js',
   'design-topic-figures.js', 'design-topics.js'
 ]);
-const filteredImageFolders = ['assets/design', 'assets/library', 'assets/library-inline', 'assets/concept-inline'];
+const filteredImageFolders = ['assets/design', 'assets/library', 'assets/library-inline', 'assets/concept-inline', 'assets/candlesan'];
 
 await fs.rm(output, {recursive: true, force: true});
 await fs.cp(source, output, {recursive: true, filter(file) {

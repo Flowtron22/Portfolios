@@ -5,6 +5,7 @@ import {playerTypeArticles} from './design-player-types.js';
 import {multiplayerBalance} from './design-multiplayer-balance.js';
 import {liveOps} from './design-live-ops.js';
 import {matsuno} from './design-matsuno.js';
+import {gameplaySystems} from './candlesan.js';
 import {renderMatsunoBody} from './design-matsuno-interactions.js';
 import {shuffleBagDemo} from './shufflebag-demo.js';
 import {lootTableDemo} from './loot-table-demo.js';
@@ -13,7 +14,7 @@ import {armorSurvivalDemo} from './armor-survival-demo.js';
 import {gameFeelDemo} from './game-feel-demo.js';
 
 const additionalDesignArticles = [matsuno, multiplayerBalance, liveOps];
-export const designArticles = [...playerTypeArticles, ...additionalDesignArticles];
+export const designArticles = [...playerTypeArticles, ...gameplaySystems, ...additionalDesignArticles];
 const fullArticleSlugs = new Set(Object.keys(publishedLibraryCollections).flatMap(key => fullLibrarySections[key] ?? []));
 
 const escape=text=>String(text??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
@@ -33,6 +34,7 @@ const articleLink = (collection, slug) => `${collectionLink(collection)}/${encod
 const collections = {
   design: {title: 'Design', groups: [
     {title: 'Player types & motivation', featured: true, entries: playerTypeArticles},
+    {title: 'Gameplay Systems', entries: gameplaySystems},
     {title: 'Design articles', entries: additionalDesignArticles}
   ]},
   ...publishedLibraryCollections

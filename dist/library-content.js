@@ -222,6 +222,5 @@ export const libraryCollections = {
 };
 
 export const publishedLibraryCollections = {
-  candlesan: libraryCollections.candlesan,
   goodies: libraryCollections.goodies
 };
