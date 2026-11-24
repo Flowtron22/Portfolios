@@ -27,9 +27,9 @@ await fs.access('dist/art-gallery.js');
 await fs.access('dist/design.js');
 for (const article of designArticles) {
   const deck = designDecks[article.number];
-  if (!deck?.slides.length) throw new Error(`Missing presentation for Topic ${article.number}`);
-  await fs.access('dist/' + deck.pdf);
-  for (const slide of deck.slides) await fs.access('dist/' + slide.thumbnail);
+  if (!article.source && !deck?.slides.length) throw new Error(`Missing presentation for Topic ${article.number}`);
+  if (deck) await fs.access('dist/' + deck.pdf);
+  for (const slide of deck?.slides || []) await fs.access('dist/' + slide.thumbnail);
   for (const section of article.sections) {
     for (const figure of section.figures || []) await fs.access('dist/' + figure.src);
   }

@@ -70,3 +70,9 @@ Further curation removed the portrait sculpt, stylized girl sculpt and single-vi
 The Design tab beside Art and Games is available at `#/solo/design`. `dist/design.js` holds the article catalogue and renders subject-grouped listings and individual readers at `#/solo/design/<slug>`. Entries support a title, subject, content type, summary and sections with paragraphs, bullets or numbered steps. Text is escaped before rendering. The catalogue is intentionally empty until the user supplies approved source documents; no sample articles are published.
 
 The top gallery row now prioritizes the painted Mastra bust, unpainted Mastra bust and Davy Jones sculpt. A responsive masonry grid preserves this order across the top and keeps images uncropped. The granny sculpt uses the newly supplied original PNG.
+
+## Player types and motivation
+
+The Design library begins with three attributed Skeleton Code Machine reading-note entries: The 8 Kinds of Fun, Bartle Taxonomy of Player Types, and What Type of Gamer Are You? They share the first desktop row and stack on phones. Existing Design articles follow in their previous order.
+
+`dist/design-player-types.js` contains concise paraphrased notes with author, publication, date and complete-original links. These notes do not reproduce the full articles. All 13 editorial source images are stored under `dist/assets/design/player-types/`; dimensions, credits and original-image links are recorded in `dist/design-player-type-figures.js`. Images remain uncropped. Full text, examples, references and polls remain available through the source links.

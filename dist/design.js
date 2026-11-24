@@ -3,6 +3,7 @@ import {librarySamples} from './library-samples.js';
 import {fullLibrarySections} from './library-article-index.js';
 import {designDecks} from './design-decks.js';
 import {designTopics} from './design-topics.js';
+import {playerTypeArticles} from './design-player-types.js';
 
 const fullArticleSlugs = new Set(Object.values(fullLibrarySections).flat());
 
@@ -10,6 +11,7 @@ const mapSlides = 'assets/design/multiplayer-maps';
 const mapSlide = (number, alt, caption) => ({src: `${mapSlides}/slide-${number}.jpg`, alt, caption});
 
 export const designArticles = [
+  ...playerTypeArticles,
   {
     number: '21',
     slug: 'tips-for-building-multiplayer-maps',
@@ -85,9 +87,9 @@ export const designArticles = [
 
 const escape=text=>String(text??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 
-function renderFigure({src, alt, caption, width = 1400, height = 788}) {
+function renderFigure({src, original, alt, caption, width = 1400, height = 788}) {
   return `<figure class="design-slide">
-    <a href="${escape(src)}" target="_blank" rel="noopener noreferrer" aria-label="Open image full size. ${escape(alt)}">
+    <a href="${escape(original || src)}" target="_blank" rel="noopener noreferrer" aria-label="Open image full size. ${escape(alt)}">
       <img src="${escape(src)}" alt="${escape(alt)}" width="${width}" height="${height}"${height > width ? ' data-portrait' : ''} loading="lazy" decoding="async">
     </a>
     ${caption ? `<figcaption>${escape(caption)}</figcaption>` : ''}
@@ -115,7 +117,10 @@ const libraryRoot = '#/solo/library';
 const collectionLink = collection => collection === 'design' ? libraryRoot : `${libraryRoot}/${collection}`;
 const articleLink = (collection, slug) => `${collectionLink(collection)}/${encodeURIComponent(slug)}`;
 const collections = {
-  design: {title: 'Design', groups: [{entries: [...designArticles].sort((a, b) => Number(a.number) - Number(b.number))}]},
+  design: {title: 'Design', groups: [
+    {title: 'Player types & motivation', featured: true, entries: playerTypeArticles},
+    {title: 'Design articles', entries: designArticles.filter(article => !article.source).sort((a, b) => Number(a.number) - Number(b.number))}
+  ]},
   ...libraryCollections
 };
 
@@ -148,7 +153,7 @@ function collectionIndex(key, {title, groups}) {
   return `<div class="solo-page-heading"><h1>${escape(title)}</h1></div>
     ${groups.map(group => {
       const cards = `<ul class="design-articles">${group.entries.map(article => libraryCard(key, article, Boolean(group.title))).join('')}</ul>`;
-      return group.title ? `<section class="library-group"><h2>${escape(group.title)}</h2>${cards}</section>` : cards;
+      return group.title ? `<section class="library-group${group.featured ? ' library-featured' : ''}"><h2>${escape(group.title)}</h2>${cards}</section>` : cards;
     }).join('')}`;
 }
 
@@ -176,7 +181,7 @@ function renderArticle(article, backLink) {
 }
 
 function renderArticleSummary(article, deck, sample) {
-  return `<p class="design-intro">${escape(article.summary)}</p>
+  return `${article.source ? `<aside class="design-source"><p>Reading notes · ${escape(article.source.author)} / ${escape(article.source.publication)} · ${escape(article.source.date)}</p><a class="button primary" href="${escape(article.source.url)}" target="_blank" rel="noopener noreferrer">Read complete original article</a><p>Full text, examples, references and interactive polls are available at the source.</p></aside>` : ''}<p class="design-intro">${escape(article.summary)}</p>
     ${article.download ? `<p class="design-intro"><a class="button primary" href="${escape(article.download.src)}" download>${escape(article.download.label)}</a></p>` : ''}
     ${deck ? renderPresentation(deck) : ''}
     ${sample ? `<div class="library-sample">${renderFigure(sample)}</div>` : ''}
