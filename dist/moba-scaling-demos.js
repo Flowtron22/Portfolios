@@ -1,3 +1,5 @@
+import {yomiPayoffs} from './design-yomi.js';
+
 const number = new Intl.NumberFormat('en', {maximumFractionDigits: 2});
 const fmt = value => number.format(value);
 const colors = ['#a54a32', '#22706a', '#645491', '#735c28', '#465f85', '#785071'];
@@ -232,8 +234,27 @@ const diminishingModels = {
   }
 };
 
-export const mobaPanels = {...scalingPanels, ...diminishingPanels};
-const models = {...scalingModels, ...diminishingModels};
+const yomiProfiles = {
+  'Attack-heavy (50%, 40%, 10%)': [.5, .4, .1],
+  'Block-heavy (20%, 70%, 10%)': [.2, .7, .1],
+  'Throw-heavy (20%, 20%, 60%)': [.2, .2, .6],
+  'Equilibrium (⅓, ½, ⅙)': [1/3, 1/2, 1/6]
+};
+const yomiPanel = panel('yomiPayoff',
+  controls(select('profile', 'Opponent mix: attack, block, throw', Object.keys(yomiProfiles))) +
+  metrics({attack:'Attack EV', block:'Block EV', throw:'Throw EV'}));
+
+function yomiPayoff(_panel, read) {
+  const probabilities = yomiProfiles[read('profile')];
+  const [attack, block, throwValue] = yomiPayoffs.map(row => {
+    const expected = row.reduce((total, payoff, index) => total + payoff * probabilities[index], 0);
+    return signed(Math.abs(expected) < 1e-9 ? 0 : expected);
+  });
+  return {attack, block, throw: throwValue};
+}
+
+export const mobaPanels = {...scalingPanels, ...diminishingPanels, 'yomi-payoff': yomiPanel};
+const models = {...scalingModels, ...diminishingModels, yomiPayoff};
 
 export function initMobaScaling(container) {
   for (const panel of container.querySelectorAll('[data-moba]')) {

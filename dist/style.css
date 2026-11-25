@@ -436,6 +436,12 @@
 .source-table td{border:1px solid var(--line);padding:12px;vertical-align:top;overflow-wrap:anywhere}
 .source-table td > :first-child{margin-top:0}
 .source-table td > :last-child{margin-bottom:0}
+.design-table{overflow-x:auto;margin-block:20px}
+.design-table table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.design-table caption{text-align:left;padding-block:0 10px;color:var(--muted)}
+.design-table th,.design-table td{padding:8px 12px;border:1px solid var(--line);text-align:center}
+.design-table th{background:var(--panel)}
+.design-table th:first-child{text-align:left}
 @media (max-width:600px){.source-table td{padding:6px}.source-reading .source-figure{display:block}}
 .cube-menu-stage.cube-face-hover{cursor:pointer}
 .cube-menu-stage.cube-dragging{cursor:grabbing}

@@ -8,6 +8,7 @@ import {matsuno} from './design-matsuno.js';
 import {matsunoMethod} from './design-matsuno-method.js';
 import {mobaScaling} from './design-moba-scaling.js';
 import {diminishReturns} from './design-diminish-returns.js';
+import {yomi} from './design-yomi.js';
 import {mobaPanels} from './moba-scaling-demos.js';
 import {gameplaySystems as existingGameplaySystems} from './candlesan.js';
 import {renderMatsunoBody} from './design-matsuno-interactions.js';
@@ -17,7 +18,7 @@ import {armorDemo} from './armor-demo.js';
 import {armorSurvivalDemo} from './armor-survival-demo.js';
 import {gameFeelDemo} from './game-feel-demo.js';
 
-const gameplaySystems = [...existingGameplaySystems, mobaScaling, diminishReturns];
+const gameplaySystems = [yomi, ...existingGameplaySystems, mobaScaling, diminishReturns];
 const additionalDesignArticles = [matsuno, matsunoMethod, multiplayerBalance, liveOps];
 export const designArticles = [...playerTypeArticles, ...gameplaySystems, ...additionalDesignArticles];
 const fullArticleSlugs = new Set(Object.keys(publishedLibraryCollections).flatMap(key => fullLibrarySections[key] ?? []));
@@ -106,6 +107,17 @@ function renderArticle(article, backLink) {
   </article>`;
 }
 
+function renderDesignTable({caption, columns, rows}) {
+  const cell = value => escape(typeof value === 'number' && value > 0 ? `+${value}` : value);
+  return `<div class="design-table" role="region" aria-label="${escape(caption)}" tabindex="0">
+    <table>
+      <caption>${escape(caption)}</caption>
+      <thead><tr>${columns.map(label => `<th scope="col">${escape(label)}</th>`).join('')}</tr></thead>
+      <tbody>${rows.map(([label, ...values]) => `<tr><th scope="row">${escape(label)}</th>${values.map(value => `<td>${cell(value)}</td>`).join('')}</tr>`).join('')}</tbody>
+    </table>
+  </div>`;
+}
+
 function renderArticleSummary(article, sample) {
   return `<p class="design-intro">${escape(article.summary)}</p>
     ${article.download ? `<p class="design-intro"><a class="button primary" href="${escape(article.download.src)}" download>${escape(article.download.label)}</a></p>` : ''}
@@ -115,6 +127,7 @@ function renderArticleSummary(article, sample) {
       ${(section.paragraphs || []).map(p => `<p>${escape(p)}</p>`).join('')}
       ${section.bullets?.length ? `<ul>${section.bullets.map(p => `<li>${escape(p)}</li>`).join('')}</ul>` : ''}
       ${section.steps?.length ? `<ol${section.start ? ` start="${escape(section.start)}"` : ''}>${section.steps.map(p => `<li>${escape(p)}</li>`).join('')}</ol>` : ''}
+      ${section.table ? renderDesignTable(section.table) : ''}
       ${section.figures?.length ? `<div class="design-slides">${section.figures.map(renderFigure).join('')}</div>` : ''}
       ${section.references?.map(({label, href}) =>
         `<p><a class="design-reference" href="${escape(href)}">${escape(label)}</a></p>`).join('') ?? ''}
