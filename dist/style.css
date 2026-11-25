@@ -346,6 +346,13 @@
 .design-simulation-cards + .design-articles{margin-top:18px}
 .design-simulation-cards .design-card-preview{aspect-ratio:4/3;object-fit:cover;object-position:center 23%}
 .awang-progression-player{display:block;width:100%;height:clamp(620px,90svh,850px);border:1px solid var(--line);background:#171b17}
+@media(min-width:960px){
+  .awang-progression-player{
+    --player-width:min(90vw,1440px);
+    width:var(--player-width);
+    margin-inline:calc((100% - var(--player-width))/2);
+  }
+}
 @media(max-width:700px){.design-articles.design-simulation-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .design-card-copy{display:block;padding:16px 18px 18px}
 .design-card-copy h2{font-size:21px;font-weight:500;line-height:1.22;margin:8px 0}
