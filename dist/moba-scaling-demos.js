@@ -248,7 +248,8 @@ function yomiPayoff(_panel, read) {
   const probabilities = yomiProfiles[read('profile')];
   const [attack, block, throwValue] = yomiPayoffs.map(row => {
     const expected = row.reduce((total, payoff, index) => total + payoff * probabilities[index], 0);
-    return signed(Math.abs(expected) < 1e-9 ? 0 : expected);
+    if (Math.abs(expected) < 1e-9) return '0';
+    return expected > 0 ? signed(expected) : fmt(expected);
   });
   return {attack, block, throw: throwValue};
 }
