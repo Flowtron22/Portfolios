@@ -4,7 +4,7 @@ import {createScene as createPuzzle} from './scene.js';
 const destinations = [
   {label: 'ART', href: '#/solo/art', material: 4, accent: '#d6ef8d', tint: '#4c6130', rotation: 0},
   {label: 'GAMES', href: '#/solo/games', material: 0, accent: '#9ddffb', tint: '#274c65', rotation: -Math.PI / 2},
-  {label: 'LIBRARY', href: '#/solo/library', material: 2, accent: '#f6d799', tint: '#655036', rotation: 0},
+  {label: 'DESIGN', href: '#/solo/library', material: 2, accent: '#f6d799', tint: '#655036', rotation: 0},
   {label: 'CV', href: '#/cv', material: 1, accent: '#f1b49e', tint: '#634134', rotation: Math.PI / 2},
   {label: 'CONTACT', href: '#/contact', material: 5, accent: '#c4b7ff', tint: '#453c6a', rotation: Math.PI}
 ];
@@ -50,7 +50,7 @@ function drawIcon(ctx, label) {
       ctx.moveTo(304, 157);
       ctx.lineTo(304, 158);
       break;
-    case 'LIBRARY':
+    case 'DESIGN':
       for (const x of [196, 237, 278]) ctx.roundRect(x, 118, 34, 102, 4);
       ctx.moveTo(182, 220);
       ctx.lineTo(330, 220);

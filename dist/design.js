@@ -19,7 +19,15 @@ import {armorSurvivalDemo} from './armor-survival-demo.js';
 import {gameFeelDemo} from './game-feel-demo.js';
 import {awangProgression, awangProgressionDemo} from './design-awang-progression.js';
 
-const gameplaySystems = [yomi, awangProgression, ...existingGameplaySystems, mobaScaling, diminishReturns];
+const isGameFeel = article => article.slug === 'slow-motion-game-feel';
+const gameplaySystems = [
+  awangProgression,
+  yomi,
+  ...existingGameplaySystems.filter(article => !isGameFeel(article)),
+  mobaScaling,
+  diminishReturns,
+  ...existingGameplaySystems.filter(isGameFeel)
+];
 const additionalDesignArticles = [matsuno, matsunoMethod, multiplayerBalance, liveOps];
 export const designArticles = [...playerTypeArticles, ...gameplaySystems, ...additionalDesignArticles];
 const fullArticleSlugs = new Set(Object.keys(publishedLibraryCollections).flatMap(key => fullLibrarySections[key] ?? []));
@@ -51,7 +59,7 @@ export const libraryEntryCount = Object.values(collections).reduce((count, {grou
   count + groups.reduce((total, {entries}) => total + entries.length, 0), 0);
 
 function libraryTabs(active) {
-  return `<nav class="library-sections" aria-label="Library sections">
+  return `<nav class="library-sections" aria-label="Design sections">
     ${Object.entries(collections).map(([key, {title}]) =>
       `<a href="${collectionLink(key)}"${active === key ? ' aria-current="page"' : ''}>${escape(title)}</a>`).join('')}
   </nav>`;
@@ -92,15 +100,16 @@ export function libraryPage(sectionOrSlug, entrySlug) {
   const slug = isCollection ? entrySlug : sectionOrSlug;
   const collection = collections[key];
   const article = slug ? collection.groups.flatMap(group => group.entries).find(article => article.slug === slug) : null;
-  const content = slug ? renderArticle(article, collectionLink(key)) : collectionIndex(key, collection);
+  const content = slug ? renderArticle(article, collectionLink(key), collection.title) : collectionIndex(key, collection);
   return libraryTabs(key) + content;
 }
 
-function renderArticle(article, backLink) {
-  if (!article) return `<div class="solo-page-heading"><h1>Article not found</h1><a class="text-link" href="${backLink}">Back to library</a></div>`;
+function renderArticle(article, backLink, collectionTitle) {
+  const backLabel = `Back to ${escape(collectionTitle)}`;
+  if (!article) return `<div class="solo-page-heading"><h1>Article not found</h1><a class="text-link" href="${backLink}">${backLabel}</a></div>`;
   const sample = librarySamples[article.slug];
   return `<article class="design-reading">
-    <a class="breadcrumb" href="${backLink}">Back to library</a>
+    <a class="breadcrumb" href="${backLink}">${backLabel}</a>
     <h1>${escape(article.title)}</h1>
     ${fullArticleSlugs.has(article.slug)
       ? `<section class="source-reading" data-library-article="${escape(article.slug)}" aria-busy="true"><p role="status">Loading article…</p></section>`
