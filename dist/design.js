@@ -17,8 +17,9 @@ import {lootTableDemo} from './loot-table-demo.js';
 import {armorDemo} from './armor-demo.js';
 import {armorSurvivalDemo} from './armor-survival-demo.js';
 import {gameFeelDemo} from './game-feel-demo.js';
+import {awangProgression, awangProgressionDemo} from './design-awang-progression.js';
 
-const gameplaySystems = [yomi, ...existingGameplaySystems, mobaScaling, diminishReturns];
+const gameplaySystems = [yomi, awangProgression, ...existingGameplaySystems, mobaScaling, diminishReturns];
 const additionalDesignArticles = [matsuno, matsunoMethod, multiplayerBalance, liveOps];
 export const designArticles = [...playerTypeArticles, ...gameplaySystems, ...additionalDesignArticles];
 const fullArticleSlugs = new Set(Object.keys(publishedLibraryCollections).flatMap(key => fullLibrarySections[key] ?? []));
@@ -136,6 +137,7 @@ function renderArticleSummary(article, sample) {
       ${section.demo === 'armor' ? armorDemo() : ''}
       ${section.demo === 'armor-survival' ? armorSurvivalDemo() : ''}
       ${section.demo === 'game-feel' ? gameFeelDemo() : ''}
+      ${section.demo === 'awang-progression' ? awangProgressionDemo() : ''}
       ${mobaPanels[section.demo] ?? ''}
     </section>`).join('')}`;
 }
