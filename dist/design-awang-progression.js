@@ -1,35 +1,32 @@
 export const awangProgression = {
   slug: 'machination-roguelite-progression-model',
   title: 'Machination = Roguelite Progression Model',
-  cover: 'assets/design/awang-progression-model.png',
-  summary: 'Run Awang’s expedition through Alam Sela and see how room rewards, weapon power and health affect the chance of clearing a run.',
+  cover: 'assets/design/dungeon-survival-resource-loop.png',
+  summary: 'Simulate a roguelite loop where clearing rooms earns roots, roots become herb mutations, and 15 clears secure victory.',
   sections: [
     {
       heading: 'Run the model',
       paragraphs: [
-        'Press Play to preview the opening rounds and watch the Room Number chart. Open the full diagram to explore the longer run and compare weapon power, health and win ratio.'
+        'Press Play and follow the Room Progress chart. Each cleared encounter advances the run and drops roots from the Root Garden.'
       ],
       demo: 'awang-progression'
     },
     {
-      heading: 'Read the results',
+      heading: 'Follow the resources',
       bullets: [
-        'Room Number shows how far Awang progresses through combat, recovery and trader encounters.',
-        'Weapon Build Power tracks the gains from rewards such as herb mutations and weapon upgrades.',
-        'Awang Health shows how damage and recovery add up over the run. Win Ratio measures completed runs as a share of total attempts.'
-      ],
-      paragraphs: [
-        'This simulation uses working balance values. It helps compare how rewards and recovery affect a run through the final boss.'
+        'Each clear adds one point to Room Progress and drops three to five roots.',
+        'Herb Synthesis consumes two roots to produce one Herb Mutation.',
+        'Victory triggers when Room Progress reaches 15.'
       ]
     }
   ]
 };
 
 export function awangProgressionDemo() {
-  const diagramId = '838e0842e89111f189880abc5ce0dcc9';
+  const diagramId = 'c46443f2e8b011f189880abc5ce0dcc9';
   const player = `https://my.machinations.io/e/diagram/${diagramId}?hosted=1&amp;diagram=1&amp;description=0&amp;theme=dark&amp;fit=auto`;
-  const diagram = `https://machinations.io/community/diagrams/${diagramId}`;
-  return `<iframe class="awang-progression-player" src="${player}" title="Awang roguelite progression simulation"
+  const diagram = `https://my.machinations.io/d/dungeon-survival-resource-loop/${diagramId}`;
+  return `<iframe class="awang-progression-player" src="${player}" title="Dungeon Survival Resource Loop simulation"
     loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="fullscreen" allowfullscreen></iframe>
     <p><a class="design-reference" href="${diagram}" target="_blank" rel="noopener noreferrer">Open full diagram in Machinations</a></p>`;
 }
