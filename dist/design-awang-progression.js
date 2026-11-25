@@ -31,7 +31,7 @@ export const awangProgression = {
 
 export function awangProgressionDemo() {
   const diagramId = '66987240e8c211f189880abc5ce0dcc9';
-  const player = `https://my.machinations.io/e/diagram/${diagramId}?hosted=1&amp;diagram=1&amp;description=0&amp;theme=dark&amp;fit=auto`;
+  const player = `https://my.machinations.io/e/diagram/${diagramId}?diagram=1&amp;description=0&amp;theme=dark&amp;fit=auto`;
   const diagram = `https://my.machinations.io/d/roguelike-run-risk-reward-death/${diagramId}`;
   return `<iframe class="awang-progression-player" src="${player}" title="Roguelike run risk, reward and death simulation"
     loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="fullscreen" allowfullscreen></iframe>
